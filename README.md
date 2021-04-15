@@ -1,5 +1,5 @@
 # RunningWithMom
 
-WebPage : Recording Running in Morning with Mom
+WebPage : Remote running record in Morning with my Mom
 
 Stacks : React, Typescript
