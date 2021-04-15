@@ -13,9 +13,8 @@ export const InputInfo = () => {
 
   return (
     <>
-    <ArticleView name={name} age={age}/>
+    {/* <ArticleView name={name} age={age}/> */}
     <div style={{
-      marginTop: 60,
       display: 'flex',
       flexDirection: 'column',
       alignItems: 'center',

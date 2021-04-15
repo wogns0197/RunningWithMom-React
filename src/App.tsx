@@ -1,6 +1,5 @@
 import './App.css';
 
-import { Counter } from './pages/Counter';
 import Dashboard from './components/Dashboard'
 import { InputInfo } from './pages/Input';
 import React from 'react';
