@@ -1,19 +1,19 @@
 import '../css/Dashboard.css';
 
-import React, { ReactElement, useContext, useEffect } from 'react';
+import React, { FC, ReactElement } from 'react';
+import {Record, Strength, Weather} from '../types/index';
 
-import { RecordContext } from '../App';
 import RecordsRenderer from '../components/RecordsRenderer';
 
-// import {Record, Strength, Weather} from '../types/index';
+type Props = {
+  recordList: Record[]
+}
 
-
-const Dashboard = (): ReactElement => {
-  const recordsCotext = useContext(RecordContext);
+const Dashboard: FC<Props> = ({ recordList }) => {
   return (
     <div className="dashmain">
       <div className="record">
-        {recordsCotext.map(el =>
+        {recordList.map(el =>
           (<RecordsRenderer props={el} />)
         )}
       </div>

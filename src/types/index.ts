@@ -13,14 +13,6 @@ export enum Weather {
   SNOW = 'SNOW',
 }
 
-export const WeatherOptions = {
-  RAIN :'rain',
-  SUNNY : 'sunny',
-  CLOUD : 'cloud',
-  FOGGY : 'foggy',
-  WIND : 'wind',
-  SNOW : 'snow',
-}
 export interface Record {
   year: number,
   month: number,
@@ -29,6 +21,7 @@ export interface Record {
   records: number,
   weather: Weather,
   strength: Strength,
+  memo?: string,
 };
 
 // export function stringToEnum<T>(targetEnum: T, str: string): T[keyof T]{
