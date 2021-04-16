@@ -8,12 +8,11 @@ type Props = {
 }
 
 const Records: FC<Props> = ({ props }) => {
-  const { year, month, day } = props.today;
-  const { weather, goal, records, strength } = props;
+  const { year, month, day, weather, goal, records, strength } = props;
   return (
     <div className="column">
       <div className="today">
-        {year}년 {month}월 {day}일  
+        {year}년 {month}월 {day}일
       </div>
       <div className="details" style={{marginLeft:'40px'}}>
         목표 : {goal} 기록 : {records}

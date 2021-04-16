@@ -1,26 +1,36 @@
 export enum Strength {
-  HARD = 'hard',
-  NORMAL = 'normal',
-  EASY = 'easy',
+  HARD = 'HARD',
+  NORMAL = 'NORMAL',
+  EASY = 'EASY',
 }
 
 export enum Weather {
-  RAIN = 'rain',
-  SUNNY = 'sunny',
-  CLOUD = 'cloud',
-  FOGGY = 'foggy',
-  WIND = 'wind',
-  SNOW = 'snow',
+  RAIN = 'RAIN',
+  SUNNY = 'SUNNY',
+  CLOUD = 'CLOUD',
+  FOGGY = 'FOGGY',
+  WIND = 'WIND',
+  SNOW = 'SNOW',
 }
 
+export const WeatherOptions = {
+  RAIN :'rain',
+  SUNNY : 'sunny',
+  CLOUD : 'cloud',
+  FOGGY : 'foggy',
+  WIND : 'wind',
+  SNOW : 'snow',
+}
 export interface Record {
-  today: {
-    year: number,
-    month: number,
-    day: number,
-  },  
+  year: number,
+  month: number,
+  day: number,
   goal?: number,
   records: number,
   weather: Weather,
   strength: Strength,
 };
+
+// export function stringToEnum<T>(targetEnum: T, str: string): T[keyof T]{
+//   return targetEnum[str];
+// };

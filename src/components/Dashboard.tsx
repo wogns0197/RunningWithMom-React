@@ -1,27 +1,21 @@
 import '../css/Dashboard.css';
 
-import React, { ReactElement } from 'react';
-import {Record, Strength, Weather} from '../types/index';
+import React, { ReactElement, useContext, useEffect } from 'react';
 
+import { RecordContext } from '../App';
 import RecordsRenderer from '../components/RecordsRenderer';
 
+// import {Record, Strength, Weather} from '../types/index';
+
+
 const Dashboard = (): ReactElement => {
-  const obj: Record = {
-    today: {
-      year: 2021,
-      month: 4,
-      day: 16,
-    },
-    goal: 100,
-    records: 70,
-    weather: Weather.SUNNY,    
-    strength : Strength.NORMAL,
-  };
-  
+  const recordsCotext = useContext(RecordContext);
   return (
     <div className="dashmain">
       <div className="record">
-        <RecordsRenderer props={obj}/>
+        {recordsCotext.map(el =>
+          (<RecordsRenderer props={el} />)
+        )}
       </div>
     </div>
   );
