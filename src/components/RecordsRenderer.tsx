@@ -1,7 +1,19 @@
-import '../css/RecordsRenderer.css'
+import React, { FC } from 'react';
 
-import React, { FC, ReactElement } from 'react';
-import { Record, Strength, Weather } from '../types/index';
+import { Record } from '../types/index';
+import styled from 'styled-components';
+
+const Column = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+  width: 100%;
+  height: 40px;
+  border-bottom: 1px solid white;
+  color: white;
+  background-color: rgb(25, 12, 65);
+`;
 
 type Props = {
   props: Record,
@@ -9,8 +21,9 @@ type Props = {
 
 const Records: FC<Props> = ({ props }) => {
   const { year, month, day, weather, goal, records, memo, strength } = props;
+  
   return (
-    <div className="column">
+    <Column>
       <div className="today">
         {year}년 {month}월 {day}일
       </div>
@@ -20,7 +33,7 @@ const Records: FC<Props> = ({ props }) => {
       <div className="conditions" style={{marginLeft:'40px'}}>
         날씨 : {weather} 강도 : {strength}
       </div>
-    </div>
+    </Column>    
   );
 };
 

@@ -1,11 +1,33 @@
-import React, { FC, useContext, useState } from 'react';
+import React, { FC, useState } from 'react';
 import { Record, Strength, Weather } from '../types/index';
+
+import styled from 'styled-components';
 
 type Props = {
   recordList: Record[],
   setRecordList: (input: Record[]) => void,
   setIsSubmit: (isSubmit: boolean) => void,
 }
+
+const SubmitButton = styled.button`
+  background-color: ${({ theme }) => theme.colors.seagreen};
+  color: ${({ theme }) => theme.colors.white};
+  border: 2px solid ${({theme}) => theme.colors.green};
+  border-radius: 5px;
+  margin-top: 20px;
+  width: 100px;
+  height: 30px;  
+  font-weight: bold;
+  font-size: 14pt;
+`;
+
+const StyledInput = styled.input`
+  border: 3px solid ${({ theme }) => theme.colors.green};
+  border-radius: 5px;
+  margin: 10px;
+  height: 40px;
+  text-align: center;
+`;
 
 export const InputInfo: FC<Props> = ({recordList, setRecordList, setIsSubmit}) => {
   
@@ -26,21 +48,29 @@ export const InputInfo: FC<Props> = ({recordList, setRecordList, setIsSubmit}) =
       }}>
         {year}년 {month}월 {day}일
       <form action="">
-        <input
-          type='number'
+        <StyledInput
+          style={{
+            width: '50px',
+            fontWeight: 'bold'
+          }}
+          type='text'
           name='goal'
           placeholder="목표치"
-          value={goal}
+          value={goal || undefined}
           onChange={(e) => setName(parseInt(e.target.value))}          
         />
-        <input
-          type='number'
+        <StyledInput
+          style={{
+            width: '50px',
+            fontWeight: 'bold'
+          }}
+          type='text'
           name='records'
           placeholder="활동량"
-          value={records}
+          value={records || undefined}
           onChange={(e) => setAge(parseInt(e.target.value))}
         />
-        <input
+        <StyledInput
           type='text'
           name='memo'
           placeholder='memo'
@@ -68,7 +98,7 @@ export const InputInfo: FC<Props> = ({recordList, setRecordList, setIsSubmit}) =
           )}
         </select>
       </form>
-        <button
+        <SubmitButton
           className="but_summit"
           onClick={() => {
             const input: Record = {
@@ -82,9 +112,9 @@ export const InputInfo: FC<Props> = ({recordList, setRecordList, setIsSubmit}) =
               strength: strength,
             };
             setIsSubmit(true);
-            setRecordList([input]);
+            setRecordList([...recordList,input]);
           }}
-        />
+        >등록</SubmitButton>
     </div>
     </>
   );

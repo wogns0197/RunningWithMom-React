@@ -3,11 +3,3 @@ main {
   height: 100vh;
   /* background-color: rgb(191, 227, 241); */
 }
-.but_summit {
-  border: 3px solid #1e90ff;
-  background-color: #00bfff;
-  border-radius: 5px;
-  margin-top: 20px;
-  width: 100px;
-  height: 30px;
-}

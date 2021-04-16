@@ -1,10 +1,12 @@
 import './App.css';
 
-import React, { useEffect, useState } from 'react';
-import {Record, Strength, Weather} from './types/index';
+import React, { useState } from 'react';
 
 import Dashboard from './components/Dashboard'
 import { InputInfo } from './components/Input';
+import { Record } from './types/index';
+import { ThemeProvider } from "styled-components";
+import theme from './style/theme';
 
 function App() {
   document.title = "RUNNER";
@@ -18,12 +20,14 @@ function App() {
   
   return (
     <main>
-      <Dashboard recordList={recordList}/>
-      <InputInfo
-        recordList={recordList}
-        setRecordList={setRecordList}
-        setIsSubmit={setIsSubmit}
-      />
+      <ThemeProvider theme={theme}>
+        <Dashboard recordList={recordList}/>
+        <InputInfo
+          recordList={recordList}
+          setRecordList={setRecordList}
+          setIsSubmit={setIsSubmit}
+        />
+      </ThemeProvider>      
     </main>
     
   );
