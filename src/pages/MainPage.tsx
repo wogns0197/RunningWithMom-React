@@ -1,21 +1,27 @@
-import { BrowserRouter, Link, Route, Switch }from 'react-router-dom'
-import { GIF_RUNNING, ICON_FAVICON, ICON_MENU } from '../assets/Images';
+import { GIF_RUNNING, ICON_BACK, ICON_FAVICON } from '../assets/Images';
+import { Link, Route, RouteComponentProps, Switch }from 'react-router-dom'
+import React, { useState } from 'react';
 
+import { HamburgerMenu } from '../uis/HamburgerMenu';
 import MainDashBoard from '../pages/MainDashBoard';
-import React from 'react';
+import MenuModal from '../uis/MenuModal';
 import styled from 'styled-components';
+import theme from '../style/theme';
 
 const Main = styled.div`
+  overflow: hidden;
   display: flex;
   flex-direction: column;
   align-items: center;
   width: 100%;
+  height: 100vh;
 `;
 
 const Header = styled.div`
   width: 100vw;
   height: 60px;
-  background-color: ${({ theme }) => theme.colors.white};
+  /* background-color: ${({ theme }) => theme.colors.white}; */
+  background-color: ${({ theme }) => theme.colors.bisque};
   color : ${({ theme }) => theme.colors.pastelgreen};
   display:flex;
   justify-content: space-between;
@@ -50,49 +56,44 @@ const RouteButton = styled.button`
   width: 100px;
   height: 40px;
   margin: 10px;
-
+  transition-duration: .3s;
+  
   &:hover{
-    background-color: ${({theme}) => theme.hexToRgba(theme.colors.white, 0.4)};
+    transition-duration: .3s;
+    background-color: ${({theme}) => theme.hexToRgba(theme.colors.darkgreen, 0.2)};
   }
-`;
-
-const MainView = (): React.ReactElement => {
-  return (
-    <MainCont>
-      <RunningGIF src={GIF_RUNNING} />
-      <div style={{display:'flex'}}>
-        <Link to='/Dashboard'>
-            <RouteButton>기록하기</RouteButton>
-        </Link>
-        <Link to='/Dashboard'>
-            <RouteButton>기록보기</RouteButton>
-        </Link>
-      </div>      
-    </MainCont>
-  );
-}
-
-const MainPage = (): React.ReactElement => {
+`
+const MainPage = ({ history }: RouteComponentProps): React.ReactElement => {
+  const [toggleMenu, setToggleMenu] = useState<boolean>(false);
+  console.log(toggleMenu);
   return (
     <Main>
+      <MenuModal istoggle={toggleMenu}/>
       <Header>
         <HeaderIcon src={ICON_FAVICON} />
-        <div
-          // onClick={ }
-          style={{
+        <div style={{
             fontSize: '30pt',
             cursor: 'pointer',
-        }}>R U N N E R</div>
-        <HeaderIcon src={ICON_MENU} style={{width:'30px', height:'30px', filter:'inver(100%)'}}/>
+            }}>          
+            R U N N E R
+        </div>
+        <HamburgerMenu
+          barColor={theme.colors.forestgreen}
+          setToggle={setToggleMenu}
+          isToggled={toggleMenu}
+        />
       </Header>
-      
-      <BrowserRouter>        
-        <Switch>
-          <Route path='/' exact component={MainView} />
-          <Route path='/Dashboard' exact component={MainDashBoard} />
-        </Switch>
-      </BrowserRouter>
-      
+      <MainCont>
+        <RunningGIF src={GIF_RUNNING} />
+        <div style={{display:'flex'}}>
+          <Link to='/Dashboard'>
+              <RouteButton>기록하기</RouteButton>
+          </Link>
+          <Link to='/Dashboard'>
+              <RouteButton>기록보기</RouteButton>
+          </Link>
+        </div>      
+      </MainCont>
     </Main>    
   );
 }

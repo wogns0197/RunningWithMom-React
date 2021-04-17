@@ -5,7 +5,6 @@ import styled, { ThemeContext }  from 'styled-components'
 
 import {Record} from '../types/index';
 import RecordsRenderer from '../components/RecordsRenderer';
-import { useContext } from 'react-dom/node_modules/@types/react';
 
 const DashBoardMain = styled.div`
   width: 100%;

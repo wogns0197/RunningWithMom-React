@@ -11,7 +11,7 @@ export function hexToRgba ( input:string , opacity:number ){
       if ( str.length === 1 ) str = str + str;       
       arr[ x ] = parseInt( str, 16 ); 
   }); 
-  return "rgb(" + rgb?.join(", ") + opacity + ")"; 
+  return "rgba(" + rgb?.join(", ") + ", " + opacity + ")"; 
 } 
 
 const colors = {
@@ -25,6 +25,7 @@ const colors = {
   darkseagreen:	'#8FBC8F',
   pastelgreen: 'rgba(121, 206, 159, 0.6)',
 
+  bisque: '#FFE4C4',
 
 }
 

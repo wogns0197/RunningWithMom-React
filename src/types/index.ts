@@ -24,6 +24,10 @@ export interface Record {
   memo?: string,
 };
 
+// export interface RouterProps {
+//   history: History;
+// }
+
 // export function stringToEnum<T>(targetEnum: T, str: string): T[keyof T]{
 //   return targetEnum[str];
 // };
