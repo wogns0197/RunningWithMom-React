@@ -1,6 +1,7 @@
 import React, { FC, useState } from 'react';
 import { Record, Strength, Weather } from '../types/index';
 
+import RunningGage from '../uis/RunningGage';
 import styled from 'styled-components';
 
 type Props = {
@@ -22,6 +23,16 @@ const SubmitButton = styled.button`
 `;
 
 const StyledInput = styled.input`
+  color: ${({ theme }) => theme.colors.seagreen};
+  border: 3px solid ${({ theme }) => theme.colors.green};  
+  border-radius: 5px;
+  margin: 10px;
+  height: 40px;
+  text-align: center;
+`;
+
+const StyledSelect = styled.select`
+  color: ${({ theme }) => theme.colors.seagreen};
   border: 3px solid ${({ theme }) => theme.colors.green};
   border-radius: 5px;
   margin: 10px;
@@ -32,7 +43,7 @@ const StyledInput = styled.input`
 export const InputInfo: FC<Props> = ({recordList, setRecordList, setIsSubmit}) => {
   
   const today = new Date();
-  const [ year, month, day ] = [ today.getFullYear(),today.getMonth()+1,today.getDate() ];
+  const [year, month, day] = [today.getFullYear(), today.getMonth()+1, today.getDate()];
   const [goal, setName] = useState<number>(0);
   const [records, setAge] = useState<number>(0);
   const [memo, setMemo] = useState<string>('');
@@ -40,7 +51,7 @@ export const InputInfo: FC<Props> = ({recordList, setRecordList, setIsSubmit}) =
   const [strength, setStrength] = useState<Strength>(Strength.NORMAL);
 
   return (
-    <>
+    <>    
     <div style={{
       display: 'flex',
       flexDirection: 'column',
@@ -48,10 +59,12 @@ export const InputInfo: FC<Props> = ({recordList, setRecordList, setIsSubmit}) =
       }}>
         {year}년 {month}월 {day}일
       <form action="">
+        <RunningGage goal={goal} record={records} />
         <StyledInput
           style={{
-            width: '50px',
-            fontWeight: 'bold'
+            width: '60px',
+            fontWeight: 'bold',
+            fontSize: '16pt',
           }}
           type='text'
           name='goal'
@@ -61,8 +74,9 @@ export const InputInfo: FC<Props> = ({recordList, setRecordList, setIsSubmit}) =
         />
         <StyledInput
           style={{
-            width: '50px',
-            fontWeight: 'bold'
+            width: '60px',
+            fontWeight: 'bold',
+            fontSize: '16pt',
           }}
           type='text'
           name='records'
@@ -77,7 +91,7 @@ export const InputInfo: FC<Props> = ({recordList, setRecordList, setIsSubmit}) =
           value={memo}
           onChange={(e) => setMemo(e.target.value)}
         />
-        <select
+        <StyledSelect
           name='weather'
           onChange={(e) =>
             setWeather(Weather[e.target.value as Weather])
@@ -86,17 +100,17 @@ export const InputInfo: FC<Props> = ({recordList, setRecordList, setIsSubmit}) =
           {Object.keys(Weather).map(el =>
             <option value={el}>{el}</option>
           )}
-        </select>
-          <select
-            name='strength'
-            onChange={(e) =>
-              setStrength(Strength[e.target.value as Strength])
+        </StyledSelect>
+        <StyledSelect
+          name='strength'
+          onChange={(e) =>
+            setStrength(Strength[e.target.value as Strength])
           }>
           <option value=''>강도</option>
           {Object.keys(Strength).map(el =>
             <option value={el}>{el}</option>
           )}
-        </select>
+        </StyledSelect>
       </form>
         <SubmitButton
           className="but_summit"
