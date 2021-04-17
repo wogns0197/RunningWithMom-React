@@ -8,7 +8,9 @@ import { ThemeProvider } from "styled-components";
 import reportWebVitals from './reportWebVitals';
 import theme from './style/theme';
 
+document.title = "RUNNER";
 ReactDOM.render(
+  
   <React.StrictMode>
     <ThemeProvider theme={theme}>
       <MainPage />
