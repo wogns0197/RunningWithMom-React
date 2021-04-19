@@ -1,7 +1,8 @@
 import React, { FC, useState } from 'react';
 import { Record, Strength, Weather } from '../types/index';
-import store, { getData } from '../store/Store';
+import { useDispatch, useSelector } from 'react-redux';
 
+import { RootState } from '../store/Store';
 import RunningGage from '../uis/RunningGage';
 import styled from 'styled-components';
 
@@ -51,6 +52,8 @@ export const InputInfo: FC<Props> = ({recordList, setRecordList, setIsSubmit}) =
   const [weather, setWeather] = useState<Weather>(Weather.SUNNY);
   const [strength, setStrength] = useState<Strength>(Strength.NORMAL);
 
+  const dispatch = useDispatch();
+  const storeData = useSelector((state: RootState) => state.reducer);
   return (
     <>    
     <div style={{
@@ -117,6 +120,7 @@ export const InputInfo: FC<Props> = ({recordList, setRecordList, setIsSubmit}) =
           className="but_summit"
           onClick={() => {
             const input: Record = {
+              key: 0,
               year: year,
               month: month,
               day: day,
@@ -131,7 +135,7 @@ export const InputInfo: FC<Props> = ({recordList, setRecordList, setIsSubmit}) =
           }}
         >등록</SubmitButton>
         <SubmitButton
-          onClick={() => store.dispatch(getData())}
+          onClick={() => console.log(storeData)}
         >TMP</SubmitButton>
     </div>
     </>
