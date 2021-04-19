@@ -1,5 +1,6 @@
 import React, { FC, useState } from 'react';
 import { Record, Strength, Weather } from '../types/index';
+import store, { getData } from '../store/Store';
 
 import RunningGage from '../uis/RunningGage';
 import styled from 'styled-components';
@@ -129,6 +130,9 @@ export const InputInfo: FC<Props> = ({recordList, setRecordList, setIsSubmit}) =
             setRecordList([...recordList,input]);
           }}
         >등록</SubmitButton>
+        <SubmitButton
+          onClick={() => store.dispatch(getData())}
+        >TMP</SubmitButton>
     </div>
     </>
   );
