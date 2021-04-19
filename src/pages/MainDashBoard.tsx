@@ -11,7 +11,7 @@ const Main = styled.div`
 
 function MainDashBoard() {
   document.title = "RUNNER";
-  const [recordList, setRecordList] = useState<Record[]>([]);
+  const recordList: Record[] =[];
   const [isSubmit, setIsSubmit] = useState<boolean>(false);
   if (isSubmit) {
     console.log(recordList);
@@ -20,10 +20,9 @@ function MainDashBoard() {
   
   return (
     <Main>
-      <Dashboard recordList={recordList}/>
+      <Dashboard />
       <InputInfo
         recordList={recordList}
-        setRecordList={setRecordList}
         setIsSubmit={setIsSubmit}
       />    
     </Main>

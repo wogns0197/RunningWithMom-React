@@ -1,14 +1,13 @@
 import React, { FC, useState } from 'react';
 import { Record, Strength, Weather } from '../types/index';
+import { RootState, inputData } from '../store/Store';
 import { useDispatch, useSelector } from 'react-redux';
 
-import { RootState } from '../store/Store';
 import RunningGage from '../uis/RunningGage';
 import styled from 'styled-components';
 
 type Props = {
-  recordList: Record[],
-  setRecordList: (input: Record[]) => void,
+  recordList: Record[],  
   setIsSubmit: (isSubmit: boolean) => void,
 }
 
@@ -42,7 +41,7 @@ const StyledSelect = styled.select`
   text-align: center;
 `;
 
-export const InputInfo: FC<Props> = ({recordList, setRecordList, setIsSubmit}) => {
+export const InputInfo: FC<Props> = ({recordList, setIsSubmit}) => {
   
   const today = new Date();
   const [year, month, day] = [today.getFullYear(), today.getMonth()+1, today.getDate()];
@@ -131,7 +130,8 @@ export const InputInfo: FC<Props> = ({recordList, setRecordList, setIsSubmit}) =
               strength: strength,
             };
             setIsSubmit(true);
-            setRecordList([...recordList,input]);
+            // setRecordList([...recordList,input]);
+            dispatch(inputData(input));
           }}
         >등록</SubmitButton>
         <SubmitButton

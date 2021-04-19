@@ -21,10 +21,9 @@ function App() {
   return (
     <main>
       <ThemeProvider theme={theme}>
-        <Dashboard recordList={recordList}/>
+        <Dashboard />
         <InputInfo
           recordList={recordList}
-          setRecordList={setRecordList}
           setIsSubmit={setIsSubmit}
         />
       </ThemeProvider>      

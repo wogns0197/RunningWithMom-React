@@ -1,10 +1,11 @@
 import '../css/Dashboard.css';
 
 import React, { FC } from 'react';
-import styled, { ThemeContext }  from 'styled-components'
 
-import {Record} from '../types/index';
 import RecordsRenderer from '../components/RecordsRenderer';
+import { RootState } from '../store/Store';
+import styled from 'styled-components'
+import { useSelector } from 'react-redux';
 
 const DashBoardMain = styled.div`
   width: 100%;
@@ -12,12 +13,12 @@ const DashBoardMain = styled.div`
   background-color: ${({theme}) => theme.colors.pastelgreen};
 `;
 
-type Props = {
-  recordList: Record[]
-}
+// type Props = {
+//   recordList: Record[]
+// }
 
-const Dashboard: FC<Props> = ({ recordList }) => {
-  
+const Dashboard: FC = () => {
+  const recordList = useSelector((state: RootState) => state.reducer);
   return (
     <DashBoardMain>
       <div className="record">
