@@ -21,10 +21,7 @@ function MainDashBoard() {
   return (
     <Main>
       <Dashboard />
-      <InputInfo
-        recordList={recordList}
-        setIsSubmit={setIsSubmit}
-      />    
+      <InputInfo />    
     </Main>
     
   );

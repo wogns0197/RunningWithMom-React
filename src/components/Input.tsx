@@ -6,10 +6,9 @@ import { useDispatch, useSelector } from 'react-redux';
 import RunningGage from '../uis/RunningGage';
 import styled from 'styled-components';
 
-type Props = {
-  recordList: Record[],  
-  setIsSubmit: (isSubmit: boolean) => void,
-}
+// type Props = {  
+//   setIsSubmit: (isSubmit: boolean) => void,
+// }
 
 const SubmitButton = styled.button`
   background-color: ${({ theme }) => theme.colors.seagreen};
@@ -41,7 +40,7 @@ const StyledSelect = styled.select`
   text-align: center;
 `;
 
-export const InputInfo: FC<Props> = ({recordList, setIsSubmit}) => {
+export const InputInfo: FC = () => {
   
   const today = new Date();
   const [year, month, day] = [today.getFullYear(), today.getMonth()+1, today.getDate()];
@@ -129,7 +128,7 @@ export const InputInfo: FC<Props> = ({recordList, setIsSubmit}) => {
               weather: weather,
               strength: strength,
             };
-            setIsSubmit(true);
+            // setIsSubmit(true);
             // setRecordList([...recordList,input]);
             dispatch(inputData(input));
           }}
