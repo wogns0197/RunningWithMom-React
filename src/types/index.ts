@@ -14,11 +14,11 @@ export enum Weather {
 }
 
 export interface Record {
-  key: number,
+  key: String[],
   year: number,
   month: number,
   day: number,
-  goal?: number,
+  goal: number,
   records: number,
   weather: Weather,
   strength: Strength,

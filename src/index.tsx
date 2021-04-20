@@ -2,6 +2,7 @@ import './index.css';
 
 import { BrowserRouter, Route, Switch }from 'react-router-dom'
 
+import MainChart from './pages/MainChart';
 import MainDashBoard from './pages/MainDashBoard';
 import MainPage from './pages/MainPage';
 import { Provider } from 'react-redux';
@@ -21,7 +22,8 @@ ReactDOM.render(
         <BrowserRouter>        
         <Switch>
           <Route path='/' exact component={MainPage} />
-          <Route path='/Dashboard' exact component={MainDashBoard} />
+          <Route path='/Dashboard' component={MainDashBoard} />
+          <Route path='/MainChart' component={MainChart} />
         </Switch>
         </BrowserRouter>
       </ThemeProvider>

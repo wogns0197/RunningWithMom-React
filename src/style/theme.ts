@@ -26,7 +26,8 @@ const colors = {
   pastelgreen: 'rgba(121, 206, 159, 0.6)',
 
   bisque: '#FFE4C4',
-
+  gray: '#999999',
+  
 }
 
 const theme = {

@@ -6,14 +6,22 @@ import styled from 'styled-components';
 
 const Column = styled.div`
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   justify-content: space-around;
   align-items: center;
-  width: 100%;
-  height: 40px;
-  border-bottom: 1px solid white;
-  color: white;
-  background-color: rgb(25, 12, 65);
+  margin: 0 5px 0 5px;
+  width: 200px;
+  height: 300px;
+  border: 1px solid ${({ theme }) => theme.colors.darkseagreen};
+  border-radius: 10px;
+  /* color: white; */
+  background-color: ${({ theme }) => theme.colors.white};
+  cursor: pointer;
+`;
+
+const Content = styled.div`
+  display: flex;
+  justify-content: center;
 `;
 
 type Props = {
@@ -25,16 +33,17 @@ const Records: FC<Props> = ({ props }) => {
   
   return (
     <Column>
-      <div className="today">
+      <Content>
         {year}년 {month}월 {day}일
-      </div>
-      <RunningGage goal={goal!} record={records}/>
-      <div className="details" style={{marginLeft:'40px'}}>
-        목표 : {goal} 기록 : {records} 메모 : {memo}
-      </div>
-      <div className="conditions" style={{marginLeft:'40px'}}>
-        날씨 : {weather} 강도 : {strength}
-      </div>
+      </Content>
+      <RunningGage goal={goal} record={records}/>
+      <Content>
+        목표 : {goal} 기록 : {records}
+         {/* 메모 : {memo} */}
+      </Content>
+      <Content>
+        날씨:{weather} 강도:{strength}
+      </Content>
     </Column>    
   );
 };

@@ -23,6 +23,10 @@ const Header = styled.div`
   /* background-color: ${({ theme }) => theme.colors.white}; */
   background-color: ${({ theme }) => theme.colors.bisque};
   color : ${({ theme }) => theme.colors.pastelgreen};
+  text-shadow: -1px 0 ${({ theme }) => theme.colors.darkseagreen},
+    0 1px ${({ theme }) => theme.colors.darkseagreen},
+    1px 0 ${({ theme }) => theme.colors.darkseagreen},
+    0 -1px ${({ theme }) => theme.colors.darkseagreen};
   display:flex;
   justify-content: space-between;
   align-items: center;
@@ -89,7 +93,7 @@ const MainPage = ({ history }: RouteComponentProps): React.ReactElement => {
           <Link to='/Dashboard'>
               <RouteButton>기록하기</RouteButton>
           </Link>
-          <Link to='/Dashboard'>
+          <Link to='/MainChart'>
               <RouteButton>기록보기</RouteButton>
           </Link>
         </div>      

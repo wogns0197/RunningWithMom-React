@@ -22,17 +22,57 @@ export const getData: ActionFunc = (data) => ({ type: GET_DATA, data});
 const editData: ActionFunc = (data) => ({ type: EDIT_DATA, data });
 const removeData: ActionFunc = (data) => ({ type: REMOVE_DATA, data});
 
-// export type DataState = {
-//   data: Record[]
-// };
-
-const initialState: Record[] = [
+const initialState: Record[] = [ // DUMMY DATA
   {
-    key: 1,
+    key: ['2021', '4', '21', '오후 4:30:55'],
+    year: 2021,
+    month: 4,
+    day: 21,
+    goal: 100,
+    records: 80,
+    weather: Weather.CLOUD,
+    strength: Strength.NORMAL,
+    memo: "!!",
+  },
+  {
+    key: ['2021', '4', '20', '오후 4:30:55'],
+    year: 2021,
+    month: 4,
+    day: 20,
+    goal: 50,
+    records: 20,
+    weather: Weather.CLOUD,
+    strength: Strength.NORMAL,
+    memo: "!!",
+  },
+  {
+    key: ['2021', '4', '19', '오후 4:30:55'],
     year: 2021,
     month: 4,
     day: 19,
+    goal: 90,
+    records: 20,
+    weather: Weather.CLOUD,
+    strength: Strength.NORMAL,
+    memo: "!!",
+  },
+  {
+    key: ['2021', '4', '18', '오후 4:30:55'],
+    year: 2021,
+    month: 4,
+    day: 18,
     goal: 100,
+    records: 0,
+    weather: Weather.CLOUD,
+    strength: Strength.NORMAL,
+    memo: "!!",
+  },
+  {
+    key: ['2021', '4', '17', '오후 4:30:55'],
+    year: 2021,
+    month: 4,
+    day: 17,
+    goal: 80,
     records: 80,
     weather: Weather.CLOUD,
     strength: Strength.NORMAL,

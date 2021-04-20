@@ -11,8 +11,8 @@ import styled from 'styled-components';
 // }
 const Cont = styled.div`
   margin-top: 50px;
-  height: 400px;
-  width: 50vw;
+  height: 300px;
+  width: 70vw;
   border: 3px solid ${({ theme }) => theme.colors.pastelgreen};
   border-radius: 10px;
 `;
@@ -37,9 +37,16 @@ const StyledInput = styled.input`
   color: ${({ theme }) => theme.colors.seagreen};
   border: 3px solid ${({ theme }) => theme.colors.green};  
   border-radius: 5px;
-  margin: 10px;
+  /* margin: 10px; */
   height: 40px;
-  text-align: center;
+  text-align: center;  
+  &:focus {
+    outline: none;
+  }
+  &::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
 `;
 
 const StyledSelect = styled.select`
@@ -49,6 +56,7 @@ const StyledSelect = styled.select`
   margin: 10px;
   height: 40px;
   text-align: center;
+  
 `;
 
 const SubmitButton = styled.button`
@@ -66,8 +74,8 @@ export const InputInfo: FC = () => {
   
   const today = new Date();
   const [year, month, day] = [today.getFullYear(), today.getMonth()+1, today.getDate()];
-  const [goal, setName] = useState<number>(0);
-  const [records, setAge] = useState<number>(0);
+  const [goal, setGoal] = useState<number>(0);
+  const [records, setRecords] = useState<number>(0);
   const [memo, setMemo] = useState<string>('');
   const [weather, setWeather] = useState<Weather>(Weather.SUNNY);
   const [strength, setStrength] = useState<Strength>(Strength.NORMAL);
@@ -91,26 +99,39 @@ export const InputInfo: FC = () => {
               width: '60px',
               fontWeight: 'bold',
               fontSize: '16pt',
+              borderRight: 'none',
+              borderTopRightRadius: '0',
+              borderBottomRightRadius: '0',              
             }}
-            type='text'
-            name='goal'
-            placeholder="목표치"
-            value={goal || undefined}
-            onChange={(e) => setName(parseInt(e.target.value))}          
+            type='number'
+            name='records'
+            placeholder="활동량"
+            value={records || undefined}
+            onChange={(e) =>
+              parseInt(e.target.value) <= 100 ?
+              setRecords(parseInt(e.target.value)) : setRecords(0)}
           />
           <StyledInput
             style={{
               width: '60px',
               fontWeight: 'bold',
               fontSize: '16pt',
+              borderLeft: 'none',
+              borderTopLeftRadius: '0',
+              borderBottomLeftRadius: '0',
             }}
-            type='text'
-            name='records'
-            placeholder="활동량"
-            value={records || undefined}
-            onChange={(e) => setAge(parseInt(e.target.value))}
-          />
+            type='number'
+            name='goal'
+            placeholder="목표치"
+            value={goal || undefined}
+            onChange={(e) =>
+              parseInt(e.target.value) <= 100 ?
+              setGoal(parseInt(e.target.value)) : setGoal(0)}
+          />          
           <StyledInput
+            style={{
+              margin: '10px',
+            }}
             type='text'
             name='memo'
             placeholder='memo'
@@ -142,7 +163,7 @@ export const InputInfo: FC = () => {
             className="but_summit"
             onClick={() => {
               const input: Record = {
-                key: 0,
+                key: today.toLocaleString().split(". "),
                 year: year,
                 month: month,
                 day: day,

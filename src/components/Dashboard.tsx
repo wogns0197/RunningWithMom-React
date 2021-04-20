@@ -1,5 +1,3 @@
-import '../css/Dashboard.css';
-
 import React, { FC } from 'react';
 
 import RecordsRenderer from '../components/RecordsRenderer';
@@ -9,24 +7,22 @@ import { useSelector } from 'react-redux';
 
 const DashBoardMain = styled.div`
   width: 100%;
-  height: 30vh;
+  height: 50vh;
   background-color: ${({ theme }) => theme.colors.pastelgreen};
-  overflow-y: scroll;
+  overflow-x: scroll;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: row-reverse;
 `;
 
-// type Props = {
-//   recordList: Record[]
-// }
-
 const Dashboard: FC = () => {
-  const recordList = useSelector((state: RootState) => state.reducer);
+  const storeData = useSelector((state: RootState) => state.reducer);
   return (
-    <DashBoardMain>
-      <div className="record">
-        {recordList.map(el =>
-          (<RecordsRenderer props={el} />)
-        )}
-      </div>
+    <DashBoardMain>      
+      {storeData.map(el =>
+        (<RecordsRenderer props={el} />)
+      )}    
     </DashBoardMain>
   );
 }
