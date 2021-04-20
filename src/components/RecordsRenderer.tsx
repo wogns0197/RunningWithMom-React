@@ -1,6 +1,7 @@
 import React, { FC } from 'react';
 
 import { Record } from '../types/index';
+import RunningGage from '../uis/RunningGage';
 import styled from 'styled-components';
 
 const Column = styled.div`
@@ -27,6 +28,7 @@ const Records: FC<Props> = ({ props }) => {
       <div className="today">
         {year}년 {month}월 {day}일
       </div>
+      <RunningGage goal={goal!} record={records}/>
       <div className="details" style={{marginLeft:'40px'}}>
         목표 : {goal} 기록 : {records} 메모 : {memo}
       </div>

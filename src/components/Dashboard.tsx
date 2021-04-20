@@ -10,7 +10,8 @@ import { useSelector } from 'react-redux';
 const DashBoardMain = styled.div`
   width: 100%;
   height: 30vh;
-  background-color: ${({theme}) => theme.colors.pastelgreen};
+  background-color: ${({ theme }) => theme.colors.pastelgreen};
+  overflow-y: scroll;
 `;
 
 // type Props = {

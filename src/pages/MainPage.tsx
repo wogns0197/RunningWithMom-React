@@ -9,7 +9,7 @@ import styled from 'styled-components';
 import theme from '../style/theme';
 
 const Main = styled.div`
-  overflow: hidden;
+  position: fixed;
   display: flex;
   flex-direction: column;
   align-items: center;
