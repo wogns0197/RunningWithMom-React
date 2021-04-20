@@ -25,6 +25,13 @@ export interface Record {
   memo?: string,
 };
 
+export type CharDataType = {
+  id: string | number,
+  title?: React.ReactNode,
+  ranges: number[],
+  measures: number[],
+  markers?: number[],
+};
 // export interface RouterProps {
 //   history: History;
 // }

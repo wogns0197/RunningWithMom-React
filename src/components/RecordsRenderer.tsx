@@ -11,6 +11,7 @@ const Column = styled.div`
   align-items: center;
   margin: 0 5px 0 5px;
   width: 200px;
+  min-width: 200px;
   height: 300px;
   border: 1px solid ${({ theme }) => theme.colors.darkseagreen};
   border-radius: 10px;
