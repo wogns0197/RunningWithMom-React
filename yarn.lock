@@ -1497,6 +1497,18 @@
     react-motion "^0.5.2"
     recompose "^0.30.0"
 
+"@nivo/bullet@0.67.0":
+  version "0.67.0"
+  resolved "https://registry.yarnpkg.com/@nivo/bullet/-/bullet-0.67.0.tgz#ecebd07ceab4ba07cb13debd7aea16e53cfcd75b"
+  integrity sha512-10hqJK/F6N5tE7MD571sTleBV1hN7Twyg9hcCyOtOr8qj7JSHvczK4XvVW9+q7b1MmS7SQbYH1whEH4Bb/83Lg==
+  dependencies:
+    "@nivo/axes" "0.67.0"
+    "@nivo/colors" "0.67.0"
+    "@nivo/legends" "0.67.0"
+    "@nivo/tooltip" "0.67.0"
+    d3-scale "^3.0.0"
+    react-spring "9.0.0-rc.3"
+
 "@nivo/colors@0.67.0":
   version "0.67.0"
   resolved "https://registry.yarnpkg.com/@nivo/colors/-/colors-0.67.0.tgz#5a2adc4b55406466efb8bbafecc08249e4e94e69"
