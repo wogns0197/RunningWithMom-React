@@ -19,7 +19,9 @@ const Column = styled.div`
   /* color: white; */
   background-color: ${({ theme }) => theme.colors.white};
   cursor: pointer;
-  box-shadow: 1px 0px 20px #5d5d5d;
+  box-shadow: 1px 0px 20px #90aa97;
+  transition-duration: .4s;
+  transition-timing-function: ease-in-out;
 `;
 
 const Content = styled.div`
@@ -31,12 +33,13 @@ type Props = {
   props: Record,
   idx: number,
   arrLength: number,
+  focus: number,
 }
-// 0 1 2 3 4 
-const Records: FC<Props> = ({ props, idx, arrLength }) => {
+
+const Records: FC<Props> = ({ props, idx, arrLength, focus }) => {
   const { year, month, day, weather, goal, records, memo, strength } = props;
   // console.log(idx, Math.floor(arrLength/2)+1);  
-  const pivot = Math.floor(arrLength / 2);
+  const pivot = Math.floor(arrLength / 2) + focus;
   return (
     <Column
       style={idx === pivot ? {

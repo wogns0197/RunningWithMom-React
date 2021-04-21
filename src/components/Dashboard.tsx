@@ -1,4 +1,4 @@
-import React, { FC } from 'react';
+import React, { FC, useState } from 'react';
 
 import { Record } from '../types/index';
 import RecordsRenderer from '../components/RecordsRenderer';
@@ -10,11 +10,20 @@ const DashBoardMain = styled.div`
   width: 100%;
   height: 50vh;
   background-color: ${({ theme }) => theme.colors.pastelgreen};
-  overflow: scroll hidden;
+  overflow: hidden;
   display: flex;
   justify-content: center;
   align-items: center;
-  flex-direction: column;
+  flex-direction: column;  
+`;
+
+const Cont = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: row;
+  transition-duration: .2s;
+  transition-timing-function: ease-in-out;
 `;
 
 const MoveButton = styled.button`
@@ -24,26 +33,28 @@ const MoveButton = styled.button`
 `;
 
 const Dashboard: FC = () => {
-  
   const storeData = useSelector((state: RootState) => state.reducer);
-  console.log(document.body.getBoundingClientRect());
+  const [moveLeft, setMoveLeft] = useState<number>(0);
+
   return (
     <DashBoardMain>
-      <div style={{
-        display: 'flex',
-        justifyContent: 'center',
-        alignItems: 'center',
-        flexDirection: 'row',
+      <Cont style={{        
+        marginRight: moveLeft * 400 + 'px',        
       }}>        
-        {
-          
+        {          
           storeData.map((el, idx) => {
-          return (<RecordsRenderer props={el} idx={idx} arrLength={storeData.length}/>);
+            return (
+              <RecordsRenderer
+                props={el}
+                idx={idx}
+                arrLength={storeData.length}
+                focus={moveLeft}
+              />);
         })}
-      </div>
+      </Cont>
       <div style={{display:'flex'}}>
-        <MoveButton />
-        <MoveButton />
+        <MoveButton onClick={()=>setMoveLeft(moveLeft+1)}/>
+        <MoveButton onClick={()=>setMoveLeft(moveLeft-1)}/>
       </div>
     </DashBoardMain>
   );
