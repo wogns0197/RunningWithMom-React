@@ -3,6 +3,7 @@ import React, { FC } from 'react';
 import { Record } from '../types/index';
 import RunningGage from '../uis/RunningGage';
 import styled from 'styled-components';
+import theme from '../style/theme';
 
 const Column = styled.div`
   /* position: absolute; */
@@ -10,7 +11,7 @@ const Column = styled.div`
   flex-direction: column;
   justify-content: space-around;
   align-items: center;
-  margin: 10px 5px 0 5px;
+  margin: 0 5px 0 5px;
   width: 200px;
   min-width: 200px;
   height: 300px;
@@ -39,15 +40,15 @@ type Props = {
 const Records: FC<Props> = ({ props, idx, arrLength, focus }) => {
   const { year, month, day, weather, goal, records, memo, strength } = props;
   // console.log(idx, Math.floor(arrLength/2)+1);  
-  const pivot = Math.floor(arrLength / 2) + focus;
+  const pivot = Math.floor(arrLength / 2) - focus;
   return (
     <Column
       style={idx === pivot ? {
         zIndex:999,
-        border: '1px solid red',
+        border: '5px solid'+ theme.colors.darkseagreen,
         width: '250px',
         height: '350px',        
-      } : ({}
+      } : ({opacity:'.9'}
       // idx < pivot ?
       // {
       //   left: (idx+pivot+1) * (100) + 'px',
