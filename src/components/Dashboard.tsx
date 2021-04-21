@@ -45,20 +45,20 @@ const Dashboard: FC = () => {
   
   return (
     <DashBoardMain>
-      <Cont style={{        
-        marginLeft: moveLeft * 400 + 'px',        
-      }}>        
-        {          
-          storeData.map((el, idx) => {
-            return (
-              <RecordsRenderer
-                props={el}
-                idx={idx}
-                arrLength={storeData.length}
-                focus={moveLeft}
-              />);
-        })}
-      </Cont>
+      <div style={ storeData.length%2===0 ?{marginLeft:'212px'}:{}}>
+        <Cont style={{marginLeft: moveLeft * 420 + 'px',}}>        
+          {          
+            storeData.map((el, idx) => {
+              return (
+                <RecordsRenderer
+                  props={el}
+                  idx={idx}
+                  arrLength={storeData.length}
+                  focus={moveLeft}
+                />);
+          })}
+        </Cont>
+      </div>
       <div style={{ display: 'flex', position: 'absolute', bottom:'-10px', filter:'invert(100%)'}}>
         <MoveButton src={ICON_BACK} onClick={()=>setMoveLeft(moveLeft+1)}/>
         <MoveButton src={ICON_BACK} style={{ transform: 'rotate(180deg)' }} onClick={()=>setMoveLeft(moveLeft-1)}/>

@@ -48,7 +48,7 @@ type Props = {
 const Records: FC<Props> = ({ props, idx, arrLength, focus }) => {
   const { year, month, day, weather, goal, records, memo, strength } = props;
   // console.log(idx, Math.floor(arrLength/2)+1);  
-  const pivot = Math.floor(arrLength / 2) - focus;
+  const pivot = arrLength%2 ===0 ? Math.floor(arrLength / 2) -1 -focus : Math.floor(arrLength / 2) - focus;
   return (
     <Column
       style={idx === pivot ? {
