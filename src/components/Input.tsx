@@ -4,6 +4,7 @@ import { RootState, inputData } from '../store/Store';
 import { useDispatch, useSelector } from 'react-redux';
 
 import RunningGage from '../uis/RunningGage';
+import SelectWeather from '../uis/SelectWeather';
 import styled from 'styled-components';
 
 // type Props = {  
@@ -79,9 +80,10 @@ export const InputInfo: FC = () => {
   const [memo, setMemo] = useState<string>('');
   const [weather, setWeather] = useState<Weather>(Weather.SUNNY);
   const [strength, setStrength] = useState<Strength>(Strength.NORMAL);
-
+  
   const dispatch = useDispatch();
   const storeData = useSelector((state: RootState) => state.reducer);
+
   return (
     <Cont>
       <div style={{
@@ -138,6 +140,7 @@ export const InputInfo: FC = () => {
             value={memo}
             onChange={(e) => setMemo(e.target.value)}
           />
+          <SelectWeather setWeather={()=>setWeather}/>
           <StyledSelect
             name='weather'
             onChange={(e) =>
@@ -173,8 +176,7 @@ export const InputInfo: FC = () => {
                 weather: weather,
                 strength: strength,
               };
-              // setIsSubmit(true);
-              // setRecordList([...recordList,input]);
+              
               dispatch(inputData(input));
             }}
           >등록</SubmitButton>          

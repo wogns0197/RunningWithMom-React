@@ -2,7 +2,7 @@ export enum Strength {
   HARD = 'HARD',
   NORMAL = 'NORMAL',
   EASY = 'EASY',
-}
+};
 
 export enum Weather {
   RAIN = 'RAIN',
@@ -11,7 +11,7 @@ export enum Weather {
   FOGGY = 'FOGGY',
   WIND = 'WIND',
   SNOW = 'SNOW',
-}
+};
 
 export interface Record {
   key: String[],
@@ -33,11 +33,6 @@ export type CharDataType = {
   markers?: number[],
 };
 
-export const strengthColor = {
-  HARD: 'tomato',
-  NORMAL: 'darkseagreen',
-  EASY: 'skyblue',
-}
 
 // export interface RouterProps {
 //   history: History;
