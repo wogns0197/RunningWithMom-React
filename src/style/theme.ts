@@ -12,7 +12,7 @@ export function hexToRgba ( input:string , opacity:number ){
       arr[ x ] = parseInt( str, 16 ); 
   }); 
   return "rgba(" + rgb?.join(", ") + ", " + opacity + ")"; 
-} 
+}
 
 const colors = {
   white: '#ffffff',
@@ -27,12 +27,20 @@ const colors = {
 
   bisque: '#FFE4C4',
   gray: '#999999',
+  tomato: '#FF6347',
+  skyblue: '#87CEEB',
   
+}
+const strengthColor = {
+  HARD: colors.tomato,
+  NORMAL: colors.darkseagreen,
+  EASY: colors.skyblue,
 }
 
 const theme = {
   colors,
   hexToRgba,
+  strengthColor,
 }
 
 export default theme;

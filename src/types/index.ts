@@ -32,6 +32,13 @@ export type CharDataType = {
   measures: number[],
   markers?: number[],
 };
+
+export const strengthColor = {
+  HARD: 'tomato',
+  NORMAL: 'darkseagreen',
+  EASY: 'skyblue',
+}
+
 // export interface RouterProps {
 //   history: History;
 // }

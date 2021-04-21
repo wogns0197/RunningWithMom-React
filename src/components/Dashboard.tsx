@@ -39,7 +39,7 @@ const MoveButton = styled.img`
 const Dashboard: FC = () => {
   const storeData = useSelector((state: RootState) => state.reducer);
   const [moveLeft, setMoveLeft] = useState<number>(0);
-
+  
   return (
     <DashBoardMain>
       <Cont style={{        

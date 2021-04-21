@@ -1,7 +1,9 @@
 import React, { FC } from 'react';
 
+import { ICON_WEATHER } from '../assets/Images';
 import { Record } from '../types/index';
 import RunningGage from '../uis/RunningGage';
+import StrengthUI from '../uis/StrengthUI';
 import styled from 'styled-components';
 import theme from '../style/theme';
 
@@ -29,6 +31,11 @@ const Content = styled.div`
   display: flex;
   justify-content: center;
 `;
+
+const DetailIcon = styled.img`
+  width: 50px;
+  height: 50px;
+`
 
 type Props = {
   props: Record,
@@ -66,9 +73,10 @@ const Records: FC<Props> = ({ props, idx, arrLength, focus }) => {
          {/* 메모 : {memo} */}
       </Content>
       <Content>
-        날씨:{weather} 강도:{strength}
+        <DetailIcon src={ICON_WEATHER[weather]}/>
+        <StrengthUI color={theme.strengthColor[strength]}/>
       </Content>
-    </Column>    
+    </Column>
   );
 };
 

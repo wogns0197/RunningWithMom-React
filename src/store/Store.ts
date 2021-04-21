@@ -31,7 +31,7 @@ const initialState: Record[] = [ // DUMMY DATA
     goal: 100,
     records: 80,
     weather: Weather.CLOUD,
-    strength: Strength.NORMAL,
+    strength: Strength.EASY,
     memo: "!!",
   },
   {
@@ -41,8 +41,8 @@ const initialState: Record[] = [ // DUMMY DATA
     day: 20,
     goal: 30,
     records: 20,
-    weather: Weather.CLOUD,
-    strength: Strength.NORMAL,
+    weather: Weather.SNOW,
+    strength: Strength.HARD,
     memo: "!!",
   },
   {
@@ -52,7 +52,7 @@ const initialState: Record[] = [ // DUMMY DATA
     day: 19,
     goal: 90,
     records: 20,
-    weather: Weather.CLOUD,
+    weather: Weather.SUNNY,
     strength: Strength.NORMAL,
     memo: "!!",
   },
@@ -63,8 +63,8 @@ const initialState: Record[] = [ // DUMMY DATA
     day: 18,
     goal: 100,
     records: 0,
-    weather: Weather.CLOUD,
-    strength: Strength.NORMAL,
+    weather: Weather.SUNNY,
+    strength: Strength.EASY,
     memo: "!!",
   },
   {
@@ -74,7 +74,7 @@ const initialState: Record[] = [ // DUMMY DATA
     day: 17,
     goal: 50,
     records: 80,
-    weather: Weather.CLOUD,
+    weather: Weather.FOGGY,
     strength: Strength.NORMAL,
     memo: "!!",
   }
