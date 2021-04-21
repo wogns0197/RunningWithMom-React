@@ -28,6 +28,7 @@ const Column = styled.div`
 `;
 
 const Content = styled.div`
+  width: 100%;
   display: flex;
   justify-content: center;
 `;
@@ -72,7 +73,7 @@ const Records: FC<Props> = ({ props, idx, arrLength, focus }) => {
         목표 : {goal} 기록 : {records}
          {/* 메모 : {memo} */}
       </Content>
-      <Content>
+      <Content style={{justifyContent:'space-evenly'}}>
         <DetailIcon src={ICON_WEATHER[weather]}/>
         <StrengthUI color={theme.strengthColor[strength]}/>
       </Content>

@@ -34,6 +34,9 @@ const MoveButton = styled.img`
   margin: 20px;
   width: 30px;
   height: 30px;
+  border-radius: 100%;
+  background-color: rgba(255, 255, 255, 0.2);
+  cursor: pointer;
 `;
 
 const Dashboard: FC = () => {
