@@ -1,4 +1,4 @@
-import { GIF_RUNNING, ICON_BACK, ICON_FAVICON } from '../assets/Images';
+import { GIF_RUNNING, ICON_FAVICON } from '../assets/Images';
 import { Link, Route, RouteComponentProps, Switch }from 'react-router-dom'
 import React, { useState } from 'react';
 
@@ -69,7 +69,7 @@ const RouteButton = styled.button`
 `
 const MainPage = ({ history }: RouteComponentProps): React.ReactElement => {
   const [toggleMenu, setToggleMenu] = useState<boolean>(false);
-  console.log(toggleMenu);
+  
   return (
     <Main>
       <MenuModal istoggle={toggleMenu}/>

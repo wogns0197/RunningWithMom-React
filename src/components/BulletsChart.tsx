@@ -45,7 +45,7 @@ const MyResponsiveBullet = (data : CharDataType[], dataLength: number) => (
     spacing={46}
     titleAlign="middle"
     titleOffsetX={0}
-    titleOffsetY={440}
+    titleOffsetY={450}
     measureSize={0.2}
     rangeColors="greens"
     measureColors="set2"
