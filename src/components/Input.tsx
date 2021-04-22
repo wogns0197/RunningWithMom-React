@@ -4,7 +4,8 @@ import { RootState, inputData } from '../store/Store';
 import { useDispatch, useSelector } from 'react-redux';
 
 import RunningGage from '../uis/RunningGage';
-import SelectWeather from '../uis/SelectWeather';
+import { SelectStrength } from '../uis/SelectStrength';
+import { SelectWeather } from '../uis/SelectWeather';
 import styled from 'styled-components';
 
 // type Props = {  
@@ -140,18 +141,9 @@ export const InputInfo: FC = () => {
             value={memo}
             onChange={(e) => setMemo(e.target.value)}
           />
-          <SelectWeather setWeather={()=>setWeather}/>
-          <StyledSelect
-            name='weather'
-            onChange={(e) =>
-              setWeather(Weather[e.target.value as Weather])
-          }>
-            <option value=''>날씨</option>
-            {Object.values(Weather).map(el =>
-              <option value={el}>{el}</option>
-            )}
-          </StyledSelect>
-          <StyledSelect
+          <SelectWeather setWeather={setWeather} />
+          <SelectStrength setStrength={setStrength} />
+          {/* <StyledSelect
             name='strength'
             onChange={(e) =>
               setStrength(Strength[e.target.value as Strength])
@@ -160,7 +152,7 @@ export const InputInfo: FC = () => {
             {Object.keys(Strength).map(el =>
               <option value={el}>{el}</option>
             )}
-          </StyledSelect>
+          </StyledSelect> */}
         </form>
           <SubmitButton
             className="but_summit"

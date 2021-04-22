@@ -28,23 +28,26 @@ function getKeyByValue(object: any, value: string) {
   return Object.keys(object).find(key => object[key] === value);
 }
 
-const SelectWeather: FC<Props> = ({ setWeather }) => {
+export const SelectWeather: FC<Props> = ({ setWeather }) => {
   const [selectedIdx, setSelectedIdx] = useState<number>(0);
   
   return (
     <Cont>
-      {Object.values(ICON_WEATHER).map((el, idx) =>
+      {Object.keys(ICON_WEATHER).map((el, idx) =>
         idx === selectedIdx ?
-          <Img src={el}
+          <Img src={ICON_WEATHER[el]}
             onClick={() => {
               setSelectedIdx(idx);
-              // setWeather(ICON_WEATHER[el]);
+              setWeather(el as Weather);
             }}
             style={{ backgroundColor: theme.colors.bisque }}
           />
           :
-          <Img src={el}
-            onClick={() => setSelectedIdx(idx)}
+          <Img src={ICON_WEATHER[el]}
+            onClick={() => {
+              setSelectedIdx(idx);
+              setWeather(el as Weather);
+            }}
           />
       )}      
     </Cont>
@@ -52,4 +55,3 @@ const SelectWeather: FC<Props> = ({ setWeather }) => {
   );
 }
 
-export default SelectWeather;

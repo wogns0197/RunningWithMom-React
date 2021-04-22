@@ -11,7 +11,7 @@ import runningGIF from '../assets/runningGIF.gif';
 export const ICON_FAVICON = favicon;
 export const GIF_RUNNING = runningGIF;
 export const ICON_BACK = back;
-export const ICON_WEATHER = {
+export const ICON_WEATHER: { [key: string]: string} = {
   SUNNY: IC_SUNNY,
   CLOUD: IC_CLOUD,
   SNOW: IC_SNOW,
