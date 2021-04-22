@@ -23,7 +23,8 @@ const colors = {
   mediumseagreen: '#3CB371',
   lightgreen: '#90EE90',
   darkseagreen:	'#8FBC8F',
-  pastelgreen: 'rgba(121, 206, 159, 0.6)',
+  pastelgreen: 'rgba(121, 206, 159, 0.5)',
+  pastelgreen_select: 'rgba(121, 206, 159, 0.3)',
 
   bisque: '#FFE4C4',
   gray: '#999999',

@@ -13,7 +13,7 @@ const Cont = styled.div`
   width: 240px;
   display: flex;
   justify-content: space-evenly;
-  border: 3px solid ${({ theme }) => theme.colors.bisque};
+  border: 3px solid ${({ theme }) => theme.colors.mediumseagreen};
   border-radius: 5px;
 `;
 
@@ -23,10 +23,6 @@ const Img = styled.img`
   cursor: pointer;
   transition-duration: .4s;
 `;
-
-function getKeyByValue(object: any, value: string) {
-  return Object.keys(object).find(key => object[key] === value);
-}
 
 export const SelectWeather: FC<Props> = ({ setWeather }) => {
   const [selectedIdx, setSelectedIdx] = useState<number>(0);
@@ -40,7 +36,7 @@ export const SelectWeather: FC<Props> = ({ setWeather }) => {
               setSelectedIdx(idx);
               setWeather(el as Weather);
             }}
-            style={{ backgroundColor: theme.colors.bisque }}
+            style={{ backgroundColor: theme.colors.pastelgreen_select }}
           />
           :
           <Img src={ICON_WEATHER[el]}

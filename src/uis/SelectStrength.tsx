@@ -1,7 +1,8 @@
-import React, { FC } from 'react';
+import React, { FC, useState } from 'react';
 import styled, {css} from 'styled-components';
 
 import { Strength } from '../types/index';
+import theme from '../style/theme';
 
 type Props = {
   setStrength: (el: Strength) => void,
@@ -12,14 +13,17 @@ const Flex = css`
   justify-content: center;
   align-items: center;
   cursor: pointer;
-  font-weight: bold
+  font-weight: bold;
+  transition-duration: .4s;
 `;
 
 const Cont = styled.div`
+  margin-top: 10px;
   width: 240px;
+  height: 40px;
   display: flex;
   justify-content: space-around;
-  border: 3px solid ${({ theme }) => theme.colors.bisque};
+  border: 3px solid ${({ theme }) => theme.colors.mediumseagreen};
   border-radius: 5px;
 `;
 
@@ -41,15 +45,26 @@ const Hard = styled.div`
   ${Flex};
   width: 80px;
   height: 40px;
-  color: ${({theme}) => theme.colors.tomato};
+  color: ${({ theme }) => theme.colors.tomato};  
 `;
 
 export const SelectStrength: FC<Props> = () => {
+  const [selectedStrength, setSelectedStrength] = useState<Strength>(Strength.EASY);
+  
   return (
     <Cont>
-      <Easy>EASY</Easy>
-      <Normal>NORMAL</Normal>
-      <Hard>HARD</Hard>
+      <Easy
+        onClick={() => setSelectedStrength(Strength.EASY)}
+        style={selectedStrength === 'EASY' ? { backgroundColor: theme.colors.pastelgreen_select } : {}}
+      >EASY</Easy>
+      <Normal
+        onClick={() => setSelectedStrength(Strength.NORMAL)}
+        style={selectedStrength === 'NORMAL' ? { backgroundColor: theme.colors.pastelgreen_select } : {}}
+      >NORMAL</Normal>
+      <Hard
+        onClick={() => setSelectedStrength(Strength.HARD)}
+        style={selectedStrength === 'HARD' ? { backgroundColor: theme.colors.pastelgreen_select } : {}}
+      >HARD</Hard>
     </Cont>
   );
 }
