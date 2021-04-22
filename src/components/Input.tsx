@@ -142,17 +142,7 @@ export const InputInfo: FC = () => {
             onChange={(e) => setMemo(e.target.value)}
           />
           <SelectWeather setWeather={setWeather} />
-          <SelectStrength setStrength={setStrength} />
-          {/* <StyledSelect
-            name='strength'
-            onChange={(e) =>
-              setStrength(Strength[e.target.value as Strength])
-            }>
-            <option value=''>강도</option>
-            {Object.keys(Strength).map(el =>
-              <option value={el}>{el}</option>
-            )}
-          </StyledSelect> */}
+          <SelectStrength setStrength={setStrength} />          
         </form>
           <SubmitButton
             className="but_summit"

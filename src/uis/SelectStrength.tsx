@@ -48,21 +48,30 @@ const Hard = styled.div`
   color: ${({ theme }) => theme.colors.tomato};  
 `;
 
-export const SelectStrength: FC<Props> = () => {
+export const SelectStrength: FC<Props> = ({setStrength}) => {
   const [selectedStrength, setSelectedStrength] = useState<Strength>(Strength.EASY);
   
   return (
     <Cont>
       <Easy
-        onClick={() => setSelectedStrength(Strength.EASY)}
+        onClick={() => {
+          setSelectedStrength(Strength.EASY);
+          setStrength(Strength.EASY);
+        }}
         style={selectedStrength === 'EASY' ? { backgroundColor: theme.colors.pastelgreen_select } : {}}
       >EASY</Easy>
       <Normal
-        onClick={() => setSelectedStrength(Strength.NORMAL)}
+        onClick={() => {
+          setSelectedStrength(Strength.NORMAL);
+          setStrength(Strength.NORMAL);
+        }}
         style={selectedStrength === 'NORMAL' ? { backgroundColor: theme.colors.pastelgreen_select } : {}}
       >NORMAL</Normal>
       <Hard
-        onClick={() => setSelectedStrength(Strength.HARD)}
+        onClick={() => {
+          setSelectedStrength(Strength.HARD);
+          setStrength(Strength.HARD);
+        }}
         style={selectedStrength === 'HARD' ? { backgroundColor: theme.colors.pastelgreen_select } : {}}
       >HARD</Hard>
     </Cont>
