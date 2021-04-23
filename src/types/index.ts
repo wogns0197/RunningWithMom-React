@@ -27,11 +27,15 @@ export interface Record {
   weather: Weather,
   strength: Strength,
   memo?: string,
-};
+}
+
+;
 
 export interface IsMobile {
   isMobile: boolean,
 };
+
+;
 
 export type ChartDataType = {
   id: string | number,
@@ -44,7 +48,13 @@ export type ChartDataType = {
 export interface CalendarDatum {
   day: string
   value: number
+<<<<<<< HEAD
 };
+=======
+}
+
+;
+>>>>>>> 11c65571d6ec7fef63415f1bad2657844ae7de0f
 
 export interface CalendarDayData {
   date: Date
@@ -55,6 +65,8 @@ export interface CalendarDayData {
   x: number
   y: number
 };
+
+;
 
 
 // export interface RouterProps {
