@@ -49,8 +49,17 @@ const MobileMove = styled.div`
 const Dashboard: FC = () => {
   const storeData = useSelector((state: RootState) => state.reducer);
   const [moveLeft, setMoveLeft] = useState<number>(0);
-  const moveCard = (isLeft: number) => { (isLeft * moveLeft) < storeData.length / 2 - 1 && setMoveLeft(moveLeft + isLeft) }
-  const isMobile = useMediaQuery({query : "(max-width:500px)"});
+  const moveCard = (isLeft: number) => {
+    storeData.length % 2 !== 0 ?
+      (isLeft * moveLeft) < storeData.length / 2 - 1 && setMoveLeft(moveLeft + isLeft) : (
+        isLeft === 1 ?
+          (isLeft * moveLeft) < storeData.length / 2 - 1 && setMoveLeft(moveLeft + isLeft) :
+          (isLeft * moveLeft) < storeData.length / 2 && setMoveLeft(moveLeft + isLeft) 
+      )
+  }
+  const isMobile = useMediaQuery({ query: "(max-width:500px)" });
+  
+
   return (
     <DashBoardMain style={isMobile ? { height: '40vh' } : {}}>
       <div style={ storeData.length%2===0 ?{marginLeft:'212px'}:{}}>
