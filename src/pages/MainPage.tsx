@@ -1,9 +1,9 @@
+/* eslint-disable @typescript-eslint/no-shadow */
 import { GIF_RUNNING, ICON_FAVICON } from '../assets/Images';
-import { Link, Route, RouteComponentProps, Switch }from 'react-router-dom'
+import { Link, RouteComponentProps }from 'react-router-dom';
 import React, { useState } from 'react';
 
 import { HamburgerMenu } from '../uis/HamburgerMenu';
-import MainDashBoard from '../pages/MainDashBoard';
 import MenuModal from '../uis/MenuModal';
 import styled from 'styled-components';
 import theme from '../style/theme';
@@ -20,7 +20,7 @@ const Main = styled.div`
 const Header = styled.div`
   width: 100vw;
   height: 60px;
-  /* background-color: ${({ theme }) => theme.colors.white}; */
+  // eslint-disable-next-line @typescript-eslint/no-shadow  
   background-color: ${({ theme }) => theme.colors.bisque};
   color : ${({ theme }) => theme.colors.pastelgreen};
   text-shadow: -1px 0 ${({ theme }) => theme.colors.darkseagreen},
@@ -67,6 +67,8 @@ const RouteButton = styled.button`
     background-color: ${({theme}) => theme.hexToRgba(theme.colors.darkgreen, 0.2)};
   }
 `
+;
+
 const MainPage = ({ history }: RouteComponentProps): React.ReactElement => {
   const [toggleMenu, setToggleMenu] = useState<boolean>(false);
   
@@ -90,16 +92,16 @@ const MainPage = ({ history }: RouteComponentProps): React.ReactElement => {
       <MainCont>
         <RunningGIF src={GIF_RUNNING} />
         <div style={{display:'flex'}}>
-          <Link to='/Dashboard'>
+          <Link to="/Dashboard">
               <RouteButton>기록하기</RouteButton>
           </Link>
-          <Link to='/MainChart'>
+          <Link to="/MainChart">
               <RouteButton>기록보기</RouteButton>
           </Link>
         </div>      
       </MainCont>
     </Main>    
   );
-}
+};
 
 export default MainPage;

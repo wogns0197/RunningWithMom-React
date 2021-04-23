@@ -13,12 +13,12 @@ export const ICON_FAVICON = favicon;
 export const GIF_RUNNING = runningGIF;
 export const ICON_BACK = back;
 export const IC_ARROW = arrow;
-export const ICON_WEATHER: { [key: string]: string} = {
+export const ICON_WEATHER: { [key: string]: string } = {
   SUNNY: IC_SUNNY,
   CLOUD: IC_CLOUD,
   SNOW: IC_SNOW,
   WIND: IC_WIND,
   RAIN: IC_RAIN,
   FOGGY: IC_FOGGY,
-}
+};
 // export const ICON_MENU = menu;

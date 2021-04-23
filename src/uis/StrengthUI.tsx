@@ -1,7 +1,6 @@
 import React, { FC } from 'react';
 
 import styled from 'styled-components';
-import theme from '../style/theme';
 
 const Cont = styled.div`
   margin-top: 8px;
@@ -15,6 +14,7 @@ const Cont = styled.div`
 `;
 
 const [w1, w2, w3] = ['5px', '15px', '30px'];
+
 const Bar = styled.div`  
   height: 5px;
   border-radius: 5px;  
@@ -36,6 +36,6 @@ const StrengthUI: FC<Props> = ({ color }) => {
       <Bar style={{ width: w1, backgroundColor: color}} />
     </Cont>    
   );
-}
+};
 
 export default StrengthUI;

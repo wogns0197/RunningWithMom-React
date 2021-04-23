@@ -2,7 +2,7 @@ import React, { FC, useState } from 'react';
 
 import { ICON_WEATHER } from '../assets/Images';
 import { Weather } from '../types/index';
-import styled from 'styled-components'
+import styled from 'styled-components';
 import theme from '../style/theme';
 
 type Props = {  
@@ -47,10 +47,10 @@ export const SelectWeather: FC<Props> = ({ setWeather }) => {
               setSelectedIdx(idx);
               setWeather(el as Weather);
             }}
-          />
+          />,
       )}      
     </Cont>
     
   );
-}
+};
 

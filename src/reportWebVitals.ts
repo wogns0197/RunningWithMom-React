@@ -1,7 +1,8 @@
 import { ReportHandler } from 'web-vitals';
 
+// eslint-disable-next-line @typescript-eslint/explicit-function-return-type
 const reportWebVitals = (onPerfEntry?: ReportHandler) => {
-  if (onPerfEntry && onPerfEntry instanceof Function) {
+  if (onPerfEntry && onPerfEntry instanceof Function) 
     import('web-vitals').then(({ getCLS, getFID, getFCP, getLCP, getTTFB }) => {
       getCLS(onPerfEntry);
       getFID(onPerfEntry);
@@ -9,7 +10,7 @@ const reportWebVitals = (onPerfEntry?: ReportHandler) => {
       getLCP(onPerfEntry);
       getTTFB(onPerfEntry);
     });
-  }
+  
 };
 
 export default reportWebVitals;

@@ -1,26 +1,29 @@
-import { Strength, Weather } from '../types/index';
+import { Record, Strength, Weather } from '../types/index';
 import { combineReducers, createStore } from 'redux';
 
-import { Record } from '../types/index';
-
-type ReduxType = 
-  | ReturnType<typeof inputData>
-  | ReturnType<typeof getData>
-  | ReturnType<typeof editData>
-  | ReturnType<typeof removeData>
+// type ReduxType = 
+//   ReturnType<typeof inputData>
+//   | ReturnType<typeof getData>
+//   | ReturnType<typeof editData>
+//   | ReturnType<typeof removeData>
+// ;
+type ReduxType = {
+  type: 'INPUT_DATA';
+  data: Record;
+} 
 ;
 
-type ActionFunc = (data: Record, idx?: number) => ({ type: string, data: Record });
+// type ActionFunc = (data: Record, idx?: number) => ({ type: string, data: Record });
 
 const INPUT_DATA = 'INPUT_DATA';
 const GET_DATA = 'GET_DATA';
 const EDIT_DATA = 'EDIT_DATA';
-const REMOVE_DATA = 'REMOVE_DATA' // not usual
+const REMOVE_DATA = 'REMOVE_DATA'; // not usual
 
-export const inputData: ActionFunc = (data) => ({ type: INPUT_DATA , data });
-export const getData: ActionFunc = (data) => ({ type: GET_DATA, data});
-const editData: ActionFunc = (data) => ({ type: EDIT_DATA, data });
-const removeData: ActionFunc = (data) => ({ type: REMOVE_DATA, data});
+export const inputData = (data?: Record): ReduxType => ({ type: INPUT_DATA, data });
+// const getData = (data) => ({ type: GET_DATA, data});
+// const editData = (data) => ({ type: EDIT_DATA, data });
+// const removeData = (data) => ({ type: REMOVE_DATA, data});
 
 const initialState: Record[] = [ // DUMMY DATA
   {
@@ -77,28 +80,30 @@ const initialState: Record[] = [ // DUMMY DATA
     weather: Weather.FOGGY,
     strength: Strength.NORMAL,
     memo: "!!",
-  }
+  },
 ];
 
-const reducer = (
-  state: Record[] = initialState,
-  action: ReduxType): Record[] => {
+const reducer = ( 
+  action: ReduxType,
+  state: Record[] = initialState): Record[] => {
   switch (action.type) {
     case (INPUT_DATA):
       return [ ...state, action.data ];
-    case (GET_DATA):
-      return state;
-    case (EDIT_DATA):
-      return state;
-    case (REMOVE_DATA):
-      return state;
+    // case (GET_DATA):
+    //   return state;
+    // case (EDIT_DATA):
+    //   return state;
+    // case (REMOVE_DATA):
+    //   return state;
     default:
       return state;
   }
 };
+
 const rootReducer = combineReducers({
   reducer,
 });
+
 const store = createStore(rootReducer);
 
 export type RootState = ReturnType<typeof rootReducer>;

@@ -2,7 +2,9 @@ export enum Strength {
   HARD = 'HARD',
   NORMAL = 'NORMAL',
   EASY = 'EASY',
-};
+}
+
+;
 
 export enum Weather {
   RAIN = 'RAIN',
@@ -11,7 +13,9 @@ export enum Weather {
   FOGGY = 'FOGGY',
   WIND = 'WIND',
   SNOW = 'SNOW',
-};
+}
+
+;
 
 export interface Record {
   key: string[],
@@ -23,11 +27,15 @@ export interface Record {
   weather: Weather,
   strength: Strength,
   memo?: string,
-};
+}
+
+;
 
 export interface IsMobile {
   isMobile: boolean,
 }
+
+;
 
 export type ChartDataType = {
   id: string | number,
@@ -41,6 +49,9 @@ export interface CalendarDatum {
   day: string
   value: number
 }
+
+;
+
 export interface CalendarDayData {
   date: Date
   day: string
@@ -50,6 +61,8 @@ export interface CalendarDayData {
   x: number
   y: number
 }
+
+;
 
 
 // export interface RouterProps {
