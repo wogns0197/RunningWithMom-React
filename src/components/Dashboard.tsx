@@ -60,8 +60,20 @@ const Dashboard: FC = () => {
         </Cont>
       </div>
       <div style={{ display: 'flex', position: 'absolute', bottom:'-10px', filter:'invert(100%)'}}>
-        <MoveButton src={ICON_BACK} onClick={()=>setMoveLeft(moveLeft+1)}/>
-        <MoveButton src={ICON_BACK} style={{ transform: 'rotate(180deg)' }} onClick={()=>setMoveLeft(moveLeft-1)}/>
+        <MoveButton
+          src={ICON_BACK}
+          onClick={() =>
+            moveLeft<storeData.length/2 - 1 ?
+            setMoveLeft(moveLeft + 1) : null  
+          } />
+        <MoveButton
+          src={ICON_BACK}
+          onClick={() =>
+            -moveLeft<storeData.length/2 - 1 ?
+            setMoveLeft(moveLeft - 1): null
+          }
+          style={{ transform: 'rotate(180deg)' }}
+          />
       </div>
     </DashBoardMain>
   );
