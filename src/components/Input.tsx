@@ -77,9 +77,7 @@ export const InputInfo: FC = () => {
   const [weather, setWeather] = useState<Weather>(Weather.SUNNY);
   const [strength, setStrength] = useState<Strength>(Strength.NORMAL);
   const dispatch = useDispatch();
-  const isMobile = useMediaQuery({
-    query : "(max-width:500px)"
-  });
+  const isMobile = useMediaQuery({query : "(max-width:500px)"});
   
   return (
     <Cont>      
