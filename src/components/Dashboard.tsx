@@ -47,6 +47,7 @@ const MobileMove = styled.div`
 
 
 const Dashboard: FC = () => {
+  const isMobile = useMediaQuery({ query: "(max-width:500px)" });
   const storeData = useSelector((state: RootState) => state.reducer);
   const [moveLeft, setMoveLeft] = useState<number>(0);
   const moveCard = (isLeft: number) => {
@@ -57,7 +58,7 @@ const Dashboard: FC = () => {
           (isLeft * moveLeft) < storeData.length / 2 && setMoveLeft(moveLeft + isLeft) 
       )
   }
-  const isMobile = useMediaQuery({ query: "(max-width:500px)" });
+  
   
 
   return (

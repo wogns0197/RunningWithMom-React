@@ -25,6 +25,10 @@ export interface Record {
   memo?: string,
 };
 
+export interface IsMobile {
+  isMobile: boolean,
+}
+
 export type ChartDataType = {
   id: string | number,
   title?: React.ReactNode,

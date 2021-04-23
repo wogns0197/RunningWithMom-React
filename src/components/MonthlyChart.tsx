@@ -1,10 +1,10 @@
-import { CalendarDatum, CalendarDayData } from '../types/index';
 import React, { FC } from 'react';
 
 import { Calendar } from '@nivo/calendar'
+import { CalendarDatum } from '../types/index';
 import { Record } from '../types/index';
-import styled from 'styled-components'
-import theme from '../style/theme';
+import styled from 'styled-components';
+import { useMediaQuery } from "react-responsive";
 
 const Cont = styled.div`
   width: 600px;
@@ -12,11 +12,12 @@ const Cont = styled.div`
   border: 2px solid ${({ theme }) => theme.colors.darkseagreen};
   border-radius: 10px;
   margin: 5px;
+  overflow-x: scroll;
 `;
 
 const CalendarChart = (data: CalendarDatum[] ) => (
   <Calendar
-    width={600}
+    width={1000}
     height={300}
     data={data}
     from="2021-04-01"
@@ -51,8 +52,10 @@ type Props = {
   storeData: Record[];
 }
 
-const MonthlyChart: FC<Props> = ({ storeData }) => {  
+const MonthlyChart: FC<Props> = ({ storeData }) => {
+  const isMobile = useMediaQuery({query : "(max-width:500px)"}) || undefined;
   const parsedData: CalendarDatum[] = [];
+
   storeData.map(el => {    
     const parsingData = {
       day: el.key[1].length === 1 ? el.key[0] + '-0' + el.key[1] + '-' + el.key[2] :
@@ -62,10 +65,9 @@ const MonthlyChart: FC<Props> = ({ storeData }) => {
     parsedData.push(parsingData);
     return parsedData;
   });
-  // console.log(parsedData[0]);
   
   return (
-    <Cont>      
+    <Cont style={isMobile && {width:'100%'}}>
       {CalendarChart(parsedData)}
     </Cont>
     

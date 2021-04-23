@@ -1,13 +1,19 @@
+import { ChartDataType, IsMobile } from '../types/index';
 import React, { FC, useState } from 'react';
+import styled, {css} from 'styled-components'
 
 import { Bullet } from '@nivo/bullet';
-import { ChartDataType } from '../types/index';
 import { IC_ARROW } from '../assets/Images';
 import { Record } from '../types/index';
-import styled from 'styled-components'
+import { useMediaQuery } from "react-responsive";
 
 const Cont = styled.div`
-  width: 300px;
+  ${(props: IsMobile) => props.isMobile ?
+  css`
+    width: 95%;
+  ` : css`
+    width: 500px;
+  `}
   height: 320px;
   border: 2px solid ${({ theme }) => theme.colors.darkseagreen};
   border-radius: 10px;
@@ -68,6 +74,7 @@ type Props = {
 }
 
 const BulletsChart: FC<Props> = ({ storeData }) => {
+  const isMobile = useMediaQuery({query : "(max-width:500px)"});
   const [month, setMonth] = useState<number>(4);
   const parsedData: ChartDataType[] = [];
 
@@ -85,7 +92,7 @@ const BulletsChart: FC<Props> = ({ storeData }) => {
   });
   
   return (
-    <Cont>
+    <Cont isMobile={isMobile}>
       <Header>
         <MonthMove
           src={IC_ARROW}

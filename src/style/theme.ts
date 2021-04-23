@@ -39,10 +39,15 @@ const strengthColor = {
   EASY: colors.skyblue,
 }
 
+const Flex = {
+  display: 'flex',
+}
+
 const theme = {
   colors,
   hexToRgba,
   strengthColor,
+  Flex,
 }
 
 export default theme;
