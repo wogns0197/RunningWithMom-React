@@ -2,10 +2,11 @@ import { Mobile, PC } from '../style/MediaQuery';
 import React, { FC, useState } from 'react';
 
 import { ICON_BACK } from '../assets/Images';
+import { Record } from '../types/index';
 import RecordsRenderer from '../components/RecordsRenderer';
 import { RootState } from '../store/Store';
-import styled from 'styled-components'
-import { useMediaQuery } from "react-responsive"
+import styled from 'styled-components';
+import { useMediaQuery } from "react-responsive";
 import { useSelector } from 'react-redux';
 
 const DashBoardMain = styled.div`
@@ -43,30 +44,31 @@ const MobileMove = styled.div`
   width: 100px;
   height: 100%;
   z-index: 999;
-`
+`;
 
 
 const Dashboard: FC = () => {
   const isMobile = useMediaQuery({ query: "(max-width:500px)" });
   const storeData = useSelector((state: RootState) => state.reducer);
   const [moveLeft, setMoveLeft] = useState<number>(0);
-  const moveCard = (isLeft: number) => {
+
+  const moveCard = (isLeft: number): void => {
     storeData.length % 2 !== 0 ?
       (isLeft * moveLeft) < storeData.length / 2 - 1 && setMoveLeft(moveLeft + isLeft) : (
         isLeft === 1 ?
           (isLeft * moveLeft) < storeData.length / 2 - 1 && setMoveLeft(moveLeft + isLeft) :
-          (isLeft * moveLeft) < storeData.length / 2 && setMoveLeft(moveLeft + isLeft) 
-      )
-  }
+          (isLeft * moveLeft) < storeData.length / 2 && setMoveLeft(moveLeft + isLeft)
+      );
+  };
   
   
 
   return (
     <DashBoardMain style={isMobile ? { height: '40vh' } : {}}>
       <div style={ storeData.length%2===0 ?{marginLeft:'212px'}:{}}>
-        <Cont style={{marginLeft: moveLeft * 420 + 'px',}}>        
+        <Cont style={{marginLeft: moveLeft * 420 + 'px'}}>        
           {          
-            storeData.map((el, idx) => {
+            storeData.map((el: Record, idx: number) => {
               return (
                 <RecordsRenderer
                   props={el}
@@ -97,4 +99,6 @@ const Dashboard: FC = () => {
     </DashBoardMain>
   );
 }
+;
+
 export default Dashboard;

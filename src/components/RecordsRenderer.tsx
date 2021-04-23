@@ -6,11 +6,11 @@ import { Record } from '../types/index';
 import RunningGage from '../uis/RunningGage';
 import StrengthUI from '../uis/StrengthUI';
 import theme from '../style/theme';
-import { useMediaQuery } from "react-responsive"
+import { useMediaQuery } from "react-responsive";
 
 const Flex = css`
   display: flex;
-`
+`;
 
 const Cont = styled.div`
   ${Flex};
@@ -51,6 +51,8 @@ const Date = styled.div`
   transition-duration: .4s;
   transition-timing-function: ease-in-out;
 `
+;
+
 const RecordbyGoal = styled.div`
   width: 130px;
   height: 50px;
@@ -67,18 +69,18 @@ const Column = styled.div`
   border-top-left-radius: 3px;
   border-top-right-radius: 3px;
   overflow: hidden;
-`
+`;
 
 const RecGoal = styled.div`
   ${Flex};
   font-size: 16pt;
-  color: ${({theme}) => theme.colors.darkgreen};
-`
+  color: ${({ theme }) => theme.colors.darkgreen};
+`;
 
 const DetailIcon = styled.img`
   width: 50px;
   height: 50px;
-`
+`;
 
 type Props = {
   props: Record,
@@ -89,9 +91,10 @@ type Props = {
 
 const Records: FC<Props> = ({ props, idx, arrLength, focus }) => {
   const { year, month, day, weather, goal, records, memo, strength } = props;
-  const pivot = arrLength % 2 === 0 ? Math.floor(arrLength / 2) - 1 - focus : Math.floor(arrLength / 2) - focus;  
+  const pivot = arrLength % 2 === 0 ? Math.floor(arrLength / 2) - 1 - focus : Math.floor(arrLength / 2) - focus;
+  
   const isMobile = useMediaQuery({
-    query : "(max-width:767px)"
+    query : "(max-width:767px)",
   });  
   
   return (
@@ -131,7 +134,7 @@ const Records: FC<Props> = ({ props, idx, arrLength, focus }) => {
                 marginLeft:'2px',
                 marginTop: '8px',
                 fontWeight: 300,
-                fontSize: '8pt'
+                fontSize: '8pt',
               }}>km</div>
           </RecGoal>
           <div
@@ -149,7 +152,7 @@ const Records: FC<Props> = ({ props, idx, arrLength, focus }) => {
                 marginLeft:'2px',
                 marginTop: '8px',
                 fontWeight: 300,
-                fontSize: '8pt'
+                fontSize: '8pt',
               }}>km</div>
           </RecGoal>
         </Column>        

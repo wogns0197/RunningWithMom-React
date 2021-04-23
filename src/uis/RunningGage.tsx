@@ -14,11 +14,13 @@ const StyledBar = styled.div`
   width: 130px;
   height: 20px;
 `;
+
 const GoalBar = styled.div`
   position: absolute;
   height: 100%;
   background-color: ${({theme}) => theme.hexToRgba(theme.colors.mediumgreen, .4)};
 `;
+
 const RecordBar = styled.div`
   position: absolute;
   height: 100%;
@@ -27,7 +29,8 @@ const RecordBar = styled.div`
 
 const RunningGage: FC<Props> = ({ goal, record }) => {
   const goalwidth = goal%1 === 0 ? goal + '0%' : parseInt(goal*10 +'') + '.0%';
-  const recordwidth = record%1 ===0 ? record + '0%' : parseInt(record*10 +'') + '.0%';  
+  const recordwidth = record%1 ===0 ? record + '0%' : parseInt(record*10 +'') + '.0%';
+  
   return (
     <StyledBar>
       <GoalBar
@@ -38,6 +41,6 @@ const RunningGage: FC<Props> = ({ goal, record }) => {
       />
     </StyledBar>
   );
-}
+};
 
 export default RunningGage;

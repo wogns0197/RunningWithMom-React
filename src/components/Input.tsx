@@ -1,12 +1,13 @@
 import React, { FC, useState } from 'react';
 import { Record, Strength, Weather } from '../types/index';
 
+import { IC_ARROW } from '../assets/Images';
 import { SelectStrength } from '../uis/SelectStrength';
 import { SelectWeather } from '../uis/SelectWeather';
 import { inputData } from '../store/Store';
 import styled from 'styled-components';
 import { useDispatch } from 'react-redux';
-import { useMediaQuery } from "react-responsive"
+import { useMediaQuery } from "react-responsive";
 
 const Cont = styled.div`
   margin-top: 20px;
@@ -36,7 +37,7 @@ const Form = styled.form`
   display: flex;
   flex-direction: column;  
   align-items: center;
-`
+`;
 
 const StyledInput = styled.input`
   color: ${({ theme }) => theme.colors.seagreen};
@@ -54,6 +55,13 @@ const StyledInput = styled.input`
   }
 `;
 
+const MonthMove = styled.img`
+  width: 20px;
+  height: 20px;
+  margin: 0 20px 0 20px;
+  filter: invert(100%);
+  cursor: pointer;
+`;
 
 const SubmitButton = styled.button`
   background-color: ${({ theme }) => theme.colors.seagreen};
@@ -67,10 +75,13 @@ const SubmitButton = styled.button`
   font-size: 14pt;
 `;
 
+const getLastDate = (year: number, month: number): number => {
+  return new Date(year, month, 0).getDate();
+};
 
 export const InputInfo: FC = () => {
   const today = new Date();
-  const [year, month, day] = [today.getFullYear(), today.getMonth()+1, today.getDate()];
+  const [year, month, [day,setDay] ] = [today.getFullYear(), today.getMonth()+1, useState<number>(today.getDate())];
   const [goal, setGoal] = useState<number>(0);
   const [records, setRecords] = useState<number>(0);
   const [memo, setMemo] = useState<string>('');
@@ -87,11 +98,22 @@ export const InputInfo: FC = () => {
         alignItems: 'center',
         width: isMobile ? '100vw' : '40vw',
       }}>
-        <TodayText>          
+        <TodayText>
+          <MonthMove
+            src={IC_ARROW}
+            onClick={() => {
+              setDay(day - 1);
+            }}
+          />
           {year}년 {month}월 {day}일
+          <MonthMove
+            src={IC_ARROW}
+            style={{ transform: 'rotate(180deg)' }}
+            onClick={() => setDay(day+1)}
+          />
         </TodayText>
-        <Form>
-          {/* <RunningGage goal={goal} record={records} /> */}
+        
+        <Form>          
           <div style={{marginTop:'10px'}}>
             <StyledInput
               style={{
@@ -100,10 +122,10 @@ export const InputInfo: FC = () => {
                 fontSize: '16pt',
                 borderRight: 'none',
                 borderTopRightRadius: '0',
-                borderBottomRightRadius: '0',              
+                borderBottomRightRadius: '0',
               }}
-              type='number'
-              name='records'
+              type="number"
+              name="records"
               placeholder="활동량"
               value={records || undefined}
               onChange={(e) =>
@@ -119,8 +141,8 @@ export const InputInfo: FC = () => {
                 borderTopLeftRadius: '0',
                 borderBottomLeftRadius: '0',
               }}
-              type='number'
-              name='goal'
+              type="number"
+              name="goal"
               placeholder="목표치"
               value={goal || undefined}
               onChange={(e) =>
@@ -131,11 +153,11 @@ export const InputInfo: FC = () => {
           <StyledInput
             style={{
               margin: '10px',
-              width: '160px'
+              width: '160px',
             }}
-            type='text'
-            name='memo'
-            placeholder='memo'
+            type="text"
+            name="memo"
+            placeholder="memo"
             value={memo}
             onChange={(e) => setMemo(e.target.value)}
           />
@@ -164,4 +186,4 @@ export const InputInfo: FC = () => {
     </Cont>
   );
   
-}
+};

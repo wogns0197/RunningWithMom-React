@@ -1,6 +1,6 @@
 import React, { FC } from 'react';
 
-import { Link }from 'react-router-dom'
+import { Link }from 'react-router-dom';
 import styled from 'styled-components';
 
 const MenuTab = styled.div`  
@@ -29,18 +29,18 @@ const MenuModal: FC<Props> = ({istoggle}) => {
   return (
     <MenuTab style={{
       // display: istoggle ? 'inline' : 'none',
-      right: istoggle ? '0' :'-200px'
+      right: istoggle ? '0' :'-200px',
     }}>
       <Menu style={{ marginTop: '100px' }}>MY PAGE</Menu>
-      <Link style={{textDecoration:'none'}} to='/Dashboard'>
+      <Link style={{textDecoration:'none'}} to="/Dashboard">
         <Menu>RECORD</Menu>
       </Link>
-      <Link style={{textDecoration:'none'}} to='/MainChart'>
+      <Link style={{textDecoration:'none'}} to="/MainChart">
         <Menu>VIEW</Menu>
       </Link>
       <Menu>INFORMAION</Menu>
     </MenuTab>
   );
-}
+};
 
 export default MenuModal;

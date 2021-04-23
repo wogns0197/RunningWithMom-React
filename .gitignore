@@ -1,1 +1,5 @@
 node_modules
+.eslintignore
+.eslintrc.js
+.prettierrc.js
+esl.js

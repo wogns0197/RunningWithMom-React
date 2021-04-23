@@ -1,10 +1,9 @@
-import { ChartDataType, IsMobile } from '../types/index';
-import React, { FC, useState } from 'react';
-import styled, {css} from 'styled-components'
+import { ChartDataType, IsMobile, Record } from '../types/index';
+import React, {FC, ReactElement, useState} from 'react';
+import styled, {css} from 'styled-components';
 
 import { Bullet } from '@nivo/bullet';
 import { IC_ARROW } from '../assets/Images';
-import { Record } from '../types/index';
 import { useMediaQuery } from "react-responsive";
 
 const Cont = styled.div`
@@ -12,7 +11,7 @@ const Cont = styled.div`
   css`
     width: 95%;
   ` : css`
-    width: 500px;
+    width: 600px;
   `}
   height: 320px;
   border: 2px solid ${({ theme }) => theme.colors.darkseagreen};
@@ -20,7 +19,7 @@ const Cont = styled.div`
   margin: 5px;
 `;
 
-const Header = styled.div`
+export const Header = styled.div`
   width: 100%;
   height: 50px;
   background-color: ${({ theme }) => theme.colors.pastelgreen};
@@ -36,7 +35,7 @@ const Header = styled.div`
   font-weight: bold;
 `;
 
-const Chart = styled.div`
+export const Chart = styled.div`
   width: 100%;
   height: 100%;
   overflow-x: scroll;
@@ -50,7 +49,7 @@ const MonthMove = styled.img`
   cursor: pointer;
 `;
 
-const BulletChart = (data : ChartDataType[], dataLength: number) => (
+const BulletChart = (data : ChartDataType[], dataLength: number): ReactElement => (
   <Bullet
     width={50 + dataLength*50}
     height={280}
@@ -78,7 +77,7 @@ const BulletsChart: FC<Props> = ({ storeData }) => {
   const [month, setMonth] = useState<number>(4);
   const parsedData: ChartDataType[] = [];
 
-  storeData.map(el => {
+  storeData.map((el) => {
     if (parseInt(el.key[1]) === month) {
       const parsingData = {
         id: el.month + '/' + el.day,
@@ -86,8 +85,10 @@ const BulletsChart: FC<Props> = ({ storeData }) => {
         measures: [el.records],
         markers: [el.goal],
       };
+
       parsedData.push(parsingData);      
     }
+
     return parsedData;
   });
   
@@ -116,6 +117,6 @@ const BulletsChart: FC<Props> = ({ storeData }) => {
       </Chart>      
     </Cont>
   );
-}
+};
 
 export default BulletsChart;

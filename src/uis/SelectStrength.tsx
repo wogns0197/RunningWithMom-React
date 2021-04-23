@@ -76,4 +76,4 @@ export const SelectStrength: FC<Props> = ({setStrength}) => {
       >HARD</Hard>
     </Cont>
   );
-}
+};

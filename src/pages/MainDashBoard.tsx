@@ -1,8 +1,8 @@
-import React, { useState } from 'react';
+import React, { ReactElement } from 'react';
 
-import Dashboard from '../components/Dashboard'
+import Dashboard from '../components/Dashboard';
 import { InputInfo } from '../components/Input';
-import styled from 'styled-components'
+import styled from 'styled-components';
 
 const Main = styled.div`
   width: 100%;
@@ -11,8 +11,8 @@ const Main = styled.div`
   align-items: center;
 `;
 
-function MainDashBoard() {
-  document.title = "RUNNER";  
+const MainDashBoard = (): ReactElement => {
+  document.title = "RUNNER";
   
   return (
     <Main>
@@ -20,6 +20,6 @@ function MainDashBoard() {
       <InputInfo />
     </Main>
   );
-}
+};
 
 export default MainDashBoard;

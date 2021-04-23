@@ -1,26 +1,32 @@
-import { Strength, Weather } from '../types/index';
+import { Record, Strength, Weather } from '../types/index';
 import { combineReducers, createStore } from 'redux';
 
-import { Record } from '../types/index';
-
 type ReduxType = 
-  | ReturnType<typeof inputData>
+  ReturnType<typeof inputData>
   | ReturnType<typeof getData>
   | ReturnType<typeof editData>
   | ReturnType<typeof removeData>
 ;
+type ActionFunc = {
+  type: 'INPUT_DATA' | 'GET_DATA' | 'EDIT_DATA' | 'REMOVE_DATA',
+  data: Record,
+};
 
-type ActionFunc = (data: Record, idx?: number) => ({ type: string, data: Record });
+// type ActionFunc = (data: Record, idx?: number) => ({ type: string, data: Record });
 
 const INPUT_DATA = 'INPUT_DATA';
 const GET_DATA = 'GET_DATA';
 const EDIT_DATA = 'EDIT_DATA';
-const REMOVE_DATA = 'REMOVE_DATA' // not usual
+const REMOVE_DATA = 'REMOVE_DATA'; // not usual
 
-export const inputData: ActionFunc = (data) => ({ type: INPUT_DATA , data });
-export const getData: ActionFunc = (data) => ({ type: GET_DATA, data});
-const editData: ActionFunc = (data) => ({ type: EDIT_DATA, data });
-const removeData: ActionFunc = (data) => ({ type: REMOVE_DATA, data});
+// export const inputData = (data: Record): ReduxType => ({ type: INPUT_DATA, data });
+export const inputData = (data: Record): ActionFunc => ({
+  type: INPUT_DATA,
+  data: data,
+});
+const getData = (data: Record): ActionFunc => ({ type: GET_DATA, data});
+const editData = (data: Record): ActionFunc => ({ type: EDIT_DATA, data });
+const removeData = (data: Record): ActionFunc => ({ type: REMOVE_DATA, data});
 
 const initialState: Record[] = [ // DUMMY DATA
   {
@@ -77,12 +83,14 @@ const initialState: Record[] = [ // DUMMY DATA
     weather: Weather.FOGGY,
     strength: Strength.NORMAL,
     memo: "!!",
-  }
+  },
 ];
 
 const reducer = (
   state: Record[] = initialState,
-  action: ReduxType): Record[] => {
+  action: ReduxType
+  ): Record[] => {
+
   switch (action.type) {
     case (INPUT_DATA):
       return [ ...state, action.data ];
@@ -96,9 +104,11 @@ const reducer = (
       return state;
   }
 };
+
 const rootReducer = combineReducers({
   reducer,
 });
+
 const store = createStore(rootReducer);
 
 export type RootState = ReturnType<typeof rootReducer>;

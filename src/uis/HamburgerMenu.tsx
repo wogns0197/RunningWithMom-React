@@ -62,4 +62,4 @@ export const HamburgerMenu: FC<Props> = ({ barColor, setToggle, isToggled }) => 
     
     </Hamburger>
   );
-}
+};

@@ -3,14 +3,17 @@ export enum ThemeType {
   DARK = 'DARK',
 }
 
-export function hexToRgba ( input:string , opacity:number ){ 
+export function hexToRgba( input:string , opacity:number ): string { 
   
   const hex = input.trim().replace( "#", "" );   
   const rgb = hex.match( /[a-f\d]{2}/gi );
-  rgb?.forEach(function (str:string, x:number, arr:any){           
-      if ( str.length === 1 ) str = str + str;       
+
+  rgb?.forEach(function(str:string, x:number, arr:any){           
+      if ( str.length === 1 ) str = str + str;
+       
       arr[ x ] = parseInt( str, 16 ); 
-  }); 
+  });
+ 
   return "rgba(" + rgb?.join(", ") + ", " + opacity + ")"; 
 }
 
@@ -33,21 +36,23 @@ const colors = {
   skyblue: '#87CEEB',
   
 }
+;
+
 const strengthColor = {
   HARD: colors.tomato,
   NORMAL: colors.darkseagreen,
   EASY: colors.skyblue,
-}
+};
 
 const Flex = {
   display: 'flex',
-}
+};
 
 const theme = {
   colors,
   hexToRgba,
   strengthColor,
   Flex,
-}
+};
 
 export default theme;
