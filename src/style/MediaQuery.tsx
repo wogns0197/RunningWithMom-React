@@ -4,14 +4,14 @@ import { useMediaQuery } from "react-responsive"
 
 const Mobile: FC = ({ children }) => {
   const isMobile = useMediaQuery({
-    query : "(max-width:767px)"
+    query : "(max-width:500px)"
   });
   return <React.Fragment>{isMobile && children}</React.Fragment>
 }
 
 const PC :FC = ({children}) => {
   const isPc = useMediaQuery({
-    query : "(min-width:768px) "
+    query : "(min-width:501px) "
   });
   return <React.Fragment>{isPc && children}</React.Fragment>
 }

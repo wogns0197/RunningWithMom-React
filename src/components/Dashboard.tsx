@@ -2,11 +2,10 @@ import { Mobile, PC } from '../style/MediaQuery';
 import React, { FC, useState } from 'react';
 
 import { ICON_BACK } from '../assets/Images';
-import { Record } from '../types/index';
 import RecordsRenderer from '../components/RecordsRenderer';
 import { RootState } from '../store/Store';
 import styled from 'styled-components'
-import { transform } from 'typescript';
+import { useMediaQuery } from "react-responsive"
 import { useSelector } from 'react-redux';
 
 const DashBoardMain = styled.div`
@@ -22,7 +21,6 @@ const DashBoardMain = styled.div`
 `;
 
 const Cont = styled.div`
-  margin-top: -50px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -32,7 +30,6 @@ const Cont = styled.div`
 `;
 
 const MoveButton = styled.img`
-  /* position: absolute; */
   margin: 20px;
   width: 30px;
   height: 30px;
@@ -41,12 +38,21 @@ const MoveButton = styled.img`
   cursor: pointer;
 `;
 
+const MobileMove = styled.div`
+  position: absolute;
+  width: 100px;
+  height: 100%;
+  z-index: 999;
+`
+
+
 const Dashboard: FC = () => {
   const storeData = useSelector((state: RootState) => state.reducer);
   const [moveLeft, setMoveLeft] = useState<number>(0);
-  
+  const moveCard = (isLeft: number) => { (isLeft * moveLeft) < storeData.length / 2 - 1 && setMoveLeft(moveLeft + isLeft) }
+  const isMobile = useMediaQuery({query : "(max-width:500px)"});
   return (
-    <DashBoardMain>
+    <DashBoardMain style={isMobile ? { height: '40vh' } : {}}>
       <div style={ storeData.length%2===0 ?{marginLeft:'212px'}:{}}>
         <Cont style={{marginLeft: moveLeft * 420 + 'px',}}>        
           {          
@@ -61,20 +67,23 @@ const Dashboard: FC = () => {
           })}
         </Cont>
       </div>
-      <div style={{ display: 'flex', position: 'absolute', bottom: '-10px', filter: 'invert(100%)' }}>        
-        <MoveButton
-          src={ICON_BACK}
-          onClick={() =>
-            moveLeft<storeData.length/2 - 1 && setMoveLeft(moveLeft + 1)
-        } />
-        <MoveButton
-          src={ICON_BACK}
-          onClick={() =>
-            -moveLeft<storeData.length/2 - 1 && setMoveLeft(moveLeft - 1)
-          }
-          style={{ transform: 'rotate(180deg)' }}
-        />        
-      </div>
+      <PC>
+        <div style={{ display: 'flex', position: 'absolute', bottom: '-10px', filter: 'invert(100%)' }}>        
+          <MoveButton
+            src={ICON_BACK}
+            onClick={() => moveCard(1)} />
+          <MoveButton
+            src={ICON_BACK}
+            onClick={() => moveCard(-1)}
+            style={{ transform: 'rotate(180deg)' }}
+          />        
+        </div>
+      </PC>
+      <Mobile>
+        <MobileMove style={{left:0}} onClick={() => moveCard(1)} />
+        <MobileMove style={{right:0}} onClick={() => moveCard(-1)}/>        
+      </Mobile>
+      
     </DashBoardMain>
   );
 }

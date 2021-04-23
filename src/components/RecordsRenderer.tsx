@@ -8,9 +8,12 @@ import StrengthUI from '../uis/StrengthUI';
 import theme from '../style/theme';
 import { useMediaQuery } from "react-responsive"
 
-const Cont = styled.div`
-  /* position: absolute; */
+const Flex = css`
   display: flex;
+`
+
+const Cont = styled.div`
+  ${Flex};
   flex-direction: column;
   justify-content: space-between;
   align-items: center;
@@ -30,7 +33,7 @@ const Cont = styled.div`
 
 const Content = styled.div`
   width: 100%;
-  display: flex;
+  ${Flex};
   justify-content: center;  
 `;
 
@@ -42,28 +45,34 @@ const Date = styled.div`
   margin-top: -3px;
   border-top-right-radius: 10px;
   border-top-left-radius: 10px;
-  display: flex;
+  ${Flex};
   align-items: center;
   justify-content: center;
   transition-duration: .4s;
   transition-timing-function: ease-in-out;
 `
 const RecordbyGoal = styled.div`
-  width: 80%;
+  width: 50%;
+  height: 50px;
   border: 2px solid ${({ theme }) => theme.colors.mediumgreen};
   border-radius: 5px;
-  display: flex;
+  ${Flex};
   flex-direction: column;
 `;
 
 const Column = styled.div`
-  display: flex;
+  ${Flex};
   justify-content: space-evenly;
+  align-items: center;
+  border-top-left-radius: 3px;
+  border-top-right-radius: 3px;
+  overflow: hidden;
 `
 
-const Rec = styled.div`
-`
-const Goal = styled.div`
+const RecGoal = styled.div`
+  ${Flex};
+  font-size: 16pt;
+  color: ${({theme}) => theme.colors.darkgreen};
 `
 
 const DetailIcon = styled.img`
@@ -103,13 +112,46 @@ const Records: FC<Props> = ({ props, idx, arrLength, focus }) => {
       </Date>
       <RunningGage goal={goal} record={records}/>
       <RecordbyGoal>
-        <Column style={{backgroundColor: theme.colors.darkseagreen}}>
+        <Column
+          style={{
+            backgroundColor: theme.colors.darkseagreen,
+            color: theme.colors.white,
+            height: '40%',            
+          }}>
           <div>기록</div>
           <div>목표</div>
         </Column>
-        <Column>
-          <Rec>{records} km</Rec>
-          <Goal>{goal} km</Goal>
+        <Column
+          style={{height: '60%', fontWeight:'bold'}}
+        >
+          <RecGoal>
+            {records}
+            <div
+              style={{
+                marginLeft:'2px',
+                marginTop: '5px',
+                fontWeight: 300,
+                fontSize: '8pt'
+              }}>km</div>
+          </RecGoal>
+          <div
+            style={{
+              width: '2px',
+              height: '120%',
+              backgroundColor: theme.colors.darkseagreen,
+              transform: 'rotate(20deg)',
+            }}
+          />
+          <RecGoal>
+            {goal}
+            <div
+              style={{
+                marginLeft:'2px',
+                marginTop: '5px',
+                fontWeight: 300,
+                fontSize: '8pt'
+              }}>km</div>
+          </RecGoal>
         </Column>        
          {/* 메모 : {memo} */}
       </RecordbyGoal>
