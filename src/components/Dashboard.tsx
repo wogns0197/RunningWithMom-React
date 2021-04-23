@@ -1,3 +1,4 @@
+import { Mobile, PC } from '../style/MediaQuery';
 import React, { FC, useState } from 'react';
 
 import { ICON_BACK } from '../assets/Images';
@@ -11,7 +12,7 @@ import { useSelector } from 'react-redux';
 const DashBoardMain = styled.div`
   position: relative;
   width: 100%;
-  height: 50vh;
+  height: 45vh;
   background-color: ${({ theme }) => theme.colors.pastelgreen};
   overflow: hidden;
   display: flex;
@@ -21,6 +22,7 @@ const DashBoardMain = styled.div`
 `;
 
 const Cont = styled.div`
+  margin-top: -50px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -59,21 +61,19 @@ const Dashboard: FC = () => {
           })}
         </Cont>
       </div>
-      <div style={{ display: 'flex', position: 'absolute', bottom:'-10px', filter:'invert(100%)'}}>
+      <div style={{ display: 'flex', position: 'absolute', bottom: '-10px', filter: 'invert(100%)' }}>        
         <MoveButton
           src={ICON_BACK}
           onClick={() =>
-            moveLeft<storeData.length/2 - 1 ?
-            setMoveLeft(moveLeft + 1) : null  
-          } />
+            moveLeft<storeData.length/2 - 1 && setMoveLeft(moveLeft + 1)
+        } />
         <MoveButton
           src={ICON_BACK}
           onClick={() =>
-            -moveLeft<storeData.length/2 - 1 ?
-            setMoveLeft(moveLeft - 1): null
+            -moveLeft<storeData.length/2 - 1 && setMoveLeft(moveLeft - 1)
           }
           style={{ transform: 'rotate(180deg)' }}
-          />
+        />        
       </div>
     </DashBoardMain>
   );

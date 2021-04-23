@@ -10,7 +10,8 @@ type Props = {
 }
 
 const Cont = styled.div`
-  width: 240px;
+  width: 300px;
+  height: 50px;
   display: flex;
   justify-content: space-evenly;
   border: 3px solid ${({ theme }) => theme.colors.mediumseagreen};
@@ -18,8 +19,8 @@ const Cont = styled.div`
 `;
 
 const Img = styled.img`
-  width: 40px;
-  height: 40px;
+  width: 50px;
+  height: 50px;
   cursor: pointer;
   transition-duration: .4s;
 `;
@@ -36,7 +37,9 @@ export const SelectWeather: FC<Props> = ({ setWeather }) => {
               setSelectedIdx(idx);
               setWeather(el as Weather);
             }}
-            style={{ backgroundColor: theme.colors.pastelgreen_select }}
+            style={{
+              backgroundColor: theme.colors.pastelgreen_select,
+            }}
           />
           :
           <Img src={ICON_WEATHER[el]}

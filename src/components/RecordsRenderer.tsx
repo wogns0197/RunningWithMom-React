@@ -6,6 +6,7 @@ import RunningGage from '../uis/RunningGage';
 import StrengthUI from '../uis/StrengthUI';
 import styled from 'styled-components';
 import theme from '../style/theme';
+import { useMediaQuery } from "react-responsive"
 
 const Column = styled.div`
   /* position: absolute; */
@@ -47,23 +48,22 @@ type Props = {
 
 const Records: FC<Props> = ({ props, idx, arrLength, focus }) => {
   const { year, month, day, weather, goal, records, memo, strength } = props;
-  // console.log(idx, Math.floor(arrLength/2)+1);  
-  const pivot = arrLength%2 ===0 ? Math.floor(arrLength / 2) -1 -focus : Math.floor(arrLength / 2) - focus;
+  const pivot = arrLength % 2 === 0 ? Math.floor(arrLength / 2) - 1 - focus : Math.floor(arrLength / 2) - focus;  
+  const isMobile = useMediaQuery({
+    query : "(max-width:767px)"
+  });  
+  
   return (
     <Column
       style={idx === pivot ? {
         zIndex:999,
         border: '5px solid'+ theme.colors.darkseagreen,
         width: '250px',
-        height: '350px',        
-      } : ({opacity:'.9'}
-      // idx < pivot ?
-      // {
-      //   left: (idx+pivot+1) * (100) + 'px',
-      // } : {
-      //   right: idx * (100) + 'px',
-      // }
-      )
+        height: isMobile ? '300px' : '350px',
+      } : {
+          opacity: '.9',
+          height: isMobile ? '250px' : '300px',
+      }
       }>
       <Content>
         {year}년 {month}월 {day}일
