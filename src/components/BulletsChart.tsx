@@ -55,10 +55,11 @@ const MyResponsiveBullet = (data : CharDataType[], dataLength: number) => (
     titleAlign="middle"
     titleOffsetX={0}
     titleOffsetY={450}
-    measureSize={0.2}
+    measureSize={.4}
+    markerSize={1}
     rangeColors="greens"
     measureColors="set2"
-    markerColors="accent"
+    markerColors="set1"
   />
 );
 
@@ -68,31 +69,38 @@ type Props = {
 
 const BulletsChart: FC<Props> = ({ storeData }) => {
   const [month, setMonth] = useState<number>(4);
+
   const parsedData: CharDataType[] = [];
   storeData.map(el => {
     if (parseInt(el.key[1]) === month) {
       const parsingData = {
         id: el.month + '/' + el.day,
-        ranges: [100],
+        ranges: [10],
         measures: [el.records],
         markers: [el.goal],
       };
-      parsedData.push(parsingData);
-      return parsedData;
+      parsedData.push(parsingData);      
     }
+    return parsedData;
   });
   return (
     <Cont>
       <Header>
         <MonthMove
           src={IC_ARROW}
-          onClick={() => setMonth(month - 1)}
+          onClick={() =>
+            month-1 === 0 ?
+            setMonth(12) : setMonth(month - 1)
+          }
         />
         {month}월 DATA
         <MonthMove
           src={IC_ARROW}
           style={{ transform: 'rotate(180deg)' }}
-          onClick={()=>setMonth(month+1)}
+          onClick={() =>
+            month+1 === 13 ?
+            setMonth(1) : setMonth(month + 1)
+          }
         />
       </Header>
       <Chart>

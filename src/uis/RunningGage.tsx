@@ -9,28 +9,27 @@ type Props = {
 
 const StyledBar = styled.div`
   position: relative;
-  border: 2px solid #008080;
+  border: 2px solid ${({theme}) => theme.colors.mediumgreen};
   border-radius: 5px;
-  width: 100px;
-  height: 30px;
+  width: 130px;
+  height: 20px;
 `;
 const GoalBar = styled.div`
   position: absolute;
-  width: 50%;
+  /* width: 50%; */
   height: 100%;
-  background-color: #008080;
-  opacity: .4;
+  background-color: ${({theme}) => theme.hexToRgba(theme.colors.mediumgreen, .4)};
 `;
 const RecordBar = styled.div`
   position: absolute;
-  width: 30%;
+  /* width: 30%; */
   height: 100%;
-  background-color: #008080;
+  background-color: ${({theme}) => theme.colors.mediumgreen};
 `;
 
 const RunningGage: FC<Props> = ({ goal, record }) => {
-  const goalwidth = goal + '%';
-  const recordwidth = record + '%';
+  const goalwidth = goal + '0%';
+  const recordwidth = record + '0%';
   return (
     <StyledBar>
       <GoalBar

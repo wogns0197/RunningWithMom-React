@@ -33,8 +33,8 @@ const Header = styled.div`
 `;
 
 const HeaderIcon = styled.img`
-  width: 50px;
-  margin: 0 10px 0 10px;
+  width: 40px;
+  margin: 5px -10px 0 10px;
   cursor: pointer;
 `;
 
@@ -57,8 +57,8 @@ const RouteButton = styled.button`
   color: ${({ theme }) => theme.colors.green};
   font-size: 15pt;
   font-weight: bold;
-  width: 100px;
-  height: 40px;
+  width: 150px;
+  height: 50px;
   margin: 10px;
   transition-duration: .3s;
   

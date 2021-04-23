@@ -18,6 +18,7 @@ const colors = {
   white: '#ffffff',
   green: '#008000',
   forestgreen: '#228B22',
+  mediumgreen: '#008080',
   darkgreen: '#006400',
   seagreen: '#2e8b57',
   mediumseagreen: '#3CB371',
