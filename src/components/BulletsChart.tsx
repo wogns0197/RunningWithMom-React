@@ -1,12 +1,13 @@
-import React, { FC } from 'react';
+import React, { FC, useState } from 'react';
 
 import { Bullet } from '@nivo/bullet';
 import { CharDataType } from '../types/index';
+import { IC_ARROW } from '../assets/Images';
 import { Record } from '../types/index';
 import styled from 'styled-components'
 
 const Cont = styled.div`
-  width: 500px;
+  width: 300px;
   height: 520px;
   border: 2px solid ${({ theme }) => theme.colors.darkseagreen};
   border-radius: 10px;
@@ -35,12 +36,20 @@ const Chart = styled.div`
   overflow-x: scroll;
 `;
 
+const MonthMove = styled.img`
+  width: 20px;
+  height: 20px;
+  margin: 0 20px 0 20px;
+  filter: invert(100%);
+  cursor: pointer;
+`;
+
 const MyResponsiveBullet = (data : CharDataType[], dataLength: number) => (
   <Bullet
-    width={500 + dataLength*50}
+    width={50 + dataLength*50}
     height={480}
     data={data}
-    margin={{ top: 10, right: 20, bottom: 30, left: 20 }}
+    margin={{ top: 10, right: 40, bottom: 30, left: 20 }}
     layout="vertical"
     spacing={46}
     titleAlign="middle"
@@ -58,21 +67,33 @@ type Props = {
 }
 
 const BulletsChart: FC<Props> = ({ storeData }) => {
+  const [month, setMonth] = useState<number>(4);
   const parsedData: CharDataType[] = [];
   storeData.map(el => {
-    const parsingData = {
-      id: el.month + '/' + el.day,
-      ranges: [100],
-      measures: [el.records],
-      markers: [el.goal],
-    };
-    parsedData.push(parsingData);
-    return parsedData;
+    if (parseInt(el.key[1]) === month) {
+      const parsingData = {
+        id: el.month + '/' + el.day,
+        ranges: [100],
+        measures: [el.records],
+        markers: [el.goal],
+      };
+      parsedData.push(parsingData);
+      return parsedData;
+    }
   });
   return (
     <Cont>
       <Header>
-        4월 DATA
+        <MonthMove
+          src={IC_ARROW}
+          onClick={() => setMonth(month - 1)}
+        />
+        {month}월 DATA
+        <MonthMove
+          src={IC_ARROW}
+          style={{ transform: 'rotate(180deg)' }}
+          onClick={()=>setMonth(month+1)}
+        />
       </Header>
       <Chart>
         { MyResponsiveBullet(parsedData, storeData.length)}

@@ -14,7 +14,7 @@ export enum Weather {
 };
 
 export interface Record {
-  key: String[],
+  key: string[],
   year: number,
   month: number,
   day: number,
