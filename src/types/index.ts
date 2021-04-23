@@ -48,13 +48,8 @@ export type ChartDataType = {
 export interface CalendarDatum {
   day: string
   value: number
-<<<<<<< HEAD
-};
-=======
-}
 
-;
->>>>>>> 11c65571d6ec7fef63415f1bad2657844ae7de0f
+};
 
 export interface CalendarDayData {
   date: Date
