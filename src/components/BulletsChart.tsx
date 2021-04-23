@@ -1,14 +1,14 @@
 import React, { FC, useState } from 'react';
 
 import { Bullet } from '@nivo/bullet';
-import { CharDataType } from '../types/index';
+import { ChartDataType } from '../types/index';
 import { IC_ARROW } from '../assets/Images';
 import { Record } from '../types/index';
 import styled from 'styled-components'
 
 const Cont = styled.div`
   width: 300px;
-  height: 520px;
+  height: 320px;
   border: 2px solid ${({ theme }) => theme.colors.darkseagreen};
   border-radius: 10px;
   margin: 5px;
@@ -44,17 +44,17 @@ const MonthMove = styled.img`
   cursor: pointer;
 `;
 
-const MyResponsiveBullet = (data : CharDataType[], dataLength: number) => (
+const BulletChart = (data : ChartDataType[], dataLength: number) => (
   <Bullet
     width={50 + dataLength*50}
-    height={480}
+    height={280}
     data={data}
     margin={{ top: 10, right: 40, bottom: 30, left: 20 }}
     layout="vertical"
     spacing={46}
     titleAlign="middle"
     titleOffsetX={0}
-    titleOffsetY={450}
+    titleOffsetY={250}
     measureSize={.4}
     markerSize={1}
     rangeColors="greens"
@@ -69,8 +69,8 @@ type Props = {
 
 const BulletsChart: FC<Props> = ({ storeData }) => {
   const [month, setMonth] = useState<number>(4);
+  const parsedData: ChartDataType[] = [];
 
-  const parsedData: CharDataType[] = [];
   storeData.map(el => {
     if (parseInt(el.key[1]) === month) {
       const parsingData = {
@@ -83,6 +83,7 @@ const BulletsChart: FC<Props> = ({ storeData }) => {
     }
     return parsedData;
   });
+  
   return (
     <Cont>
       <Header>
@@ -104,7 +105,7 @@ const BulletsChart: FC<Props> = ({ storeData }) => {
         />
       </Header>
       <Chart>
-        { MyResponsiveBullet(parsedData, storeData.length)}
+        { BulletChart(parsedData, storeData.length)}
       </Chart>      
     </Cont>
   );

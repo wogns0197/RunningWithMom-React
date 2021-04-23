@@ -3,7 +3,6 @@ import { Record, Strength, Weather } from '../types/index';
 
 import { SelectStrength } from '../uis/SelectStrength';
 import { SelectWeather } from '../uis/SelectWeather';
-import { inherits } from 'node:util';
 import { inputData } from '../store/Store';
 import styled from 'styled-components';
 import { useDispatch } from 'react-redux';

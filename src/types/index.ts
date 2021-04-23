@@ -25,13 +25,27 @@ export interface Record {
   memo?: string,
 };
 
-export type CharDataType = {
+export type ChartDataType = {
   id: string | number,
   title?: React.ReactNode,
   ranges: number[],
   measures: number[],
   markers?: number[],
 };
+
+export interface CalendarDatum {
+  day: string
+  value: number
+}
+export interface CalendarDayData {
+  date: Date
+  day: string
+  value?: number
+  color: string
+  size: number
+  x: number
+  y: number
+}
 
 
 // export interface RouterProps {
