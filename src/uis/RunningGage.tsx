@@ -16,20 +16,18 @@ const StyledBar = styled.div`
 `;
 const GoalBar = styled.div`
   position: absolute;
-  /* width: 50%; */
   height: 100%;
   background-color: ${({theme}) => theme.hexToRgba(theme.colors.mediumgreen, .4)};
 `;
 const RecordBar = styled.div`
   position: absolute;
-  /* width: 30%; */
   height: 100%;
   background-color: ${({theme}) => theme.colors.mediumgreen};
 `;
 
 const RunningGage: FC<Props> = ({ goal, record }) => {
-  const goalwidth = goal + '0%';
-  const recordwidth = record + '0%';
+  const goalwidth = goal%1 === 0 ? goal + '0%' : parseInt(goal*10 +'') + '.0%';
+  const recordwidth = record%1 ===0 ? record + '0%' : parseInt(record*10 +'') + '.0%';  
   return (
     <StyledBar>
       <GoalBar

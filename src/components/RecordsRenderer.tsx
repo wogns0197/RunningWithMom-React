@@ -52,7 +52,7 @@ const Date = styled.div`
   transition-timing-function: ease-in-out;
 `
 const RecordbyGoal = styled.div`
-  width: 50%;
+  width: 130px;
   height: 50px;
   border: 2px solid ${({ theme }) => theme.colors.mediumgreen};
   border-radius: 5px;
@@ -129,7 +129,7 @@ const Records: FC<Props> = ({ props, idx, arrLength, focus }) => {
             <div
               style={{
                 marginLeft:'2px',
-                marginTop: '5px',
+                marginTop: '8px',
                 fontWeight: 300,
                 fontSize: '8pt'
               }}>km</div>
@@ -147,7 +147,7 @@ const Records: FC<Props> = ({ props, idx, arrLength, focus }) => {
             <div
               style={{
                 marginLeft:'2px',
-                marginTop: '5px',
+                marginTop: '8px',
                 fontWeight: 300,
                 fontSize: '8pt'
               }}>km</div>

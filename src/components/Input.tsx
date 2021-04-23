@@ -110,8 +110,8 @@ export const InputInfo: FC = () => {
               placeholder="활동량"
               value={records || undefined}
               onChange={(e) =>
-                parseInt(e.target.value) <= 100 ?
-                setRecords(parseInt(e.target.value)) : setRecords(0)}
+                parseFloat(e.target.value) <= 10 ?
+                setRecords(parseFloat(e.target.value)) : setRecords(0)}
             />
             <StyledInput
               style={{
@@ -127,8 +127,8 @@ export const InputInfo: FC = () => {
               placeholder="목표치"
               value={goal || undefined}
               onChange={(e) =>
-                parseInt(e.target.value) <= 100 ?
-                setGoal(parseInt(e.target.value)) : setGoal(0)}
+                parseFloat(e.target.value) <= 10 ?
+                setGoal(parseFloat(e.target.value)) : setGoal(0)}
             />
           </div>
           <StyledInput
