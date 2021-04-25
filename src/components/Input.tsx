@@ -183,7 +183,7 @@ export const InputInfo: FC = () => {
             className="but_summit"
             onClick={() => {
               const input: Record = {
-                key: storeData.length,
+                key: today.toLocaleString().split(". "),
                 year: year,
                 month: month,
                 day: day,

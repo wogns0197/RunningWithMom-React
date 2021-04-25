@@ -22,7 +22,7 @@ export const removeData = (idx: number) => ({ type: REMOVE_DATA, idx});
 
 const initialState: Record[] = [ // DUMMY DATA
   {
-    key: 0,
+    key: ['2021', '4', '21', '오후 4:30:55'],
     year: 2021,
     month: 4,
     day: 21,
@@ -33,7 +33,7 @@ const initialState: Record[] = [ // DUMMY DATA
     memo: "!!",
   },
   {
-    key: 1,
+    key: ['2021', '4', '20', '오후 4:30:55'],
     year: 2021,
     month: 4,
     day: 20,
@@ -44,7 +44,7 @@ const initialState: Record[] = [ // DUMMY DATA
     memo: "!!",
   },
   {
-    key: 2,
+    key: ['2021', '4', '19', '오후 4:30:55'],
     year: 2021,
     month: 4,
     day: 19,
@@ -55,7 +55,7 @@ const initialState: Record[] = [ // DUMMY DATA
     memo: "!!",
   },
   {
-    key: 3,
+    key: ['2021', '4', '18', '오후 4:30:55'],
     year: 2021,
     month: 4,
     day: 18,
@@ -66,7 +66,7 @@ const initialState: Record[] = [ // DUMMY DATA
     memo: "!!",
   },
   {
-    key: 4,
+    key: ['2021', '4', '17', '오후 4:30:55'],
     year: 2021,
     month: 4,
     day: 17,
@@ -89,7 +89,7 @@ const reducer = (
     case (EDIT_DATA):
       return state;
     case (REMOVE_DATA):      
-      return state.splice(action.idx,1);
+      return state.filter(el => el.day !== action.idx);
     default:
       return state;
   }
