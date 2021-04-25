@@ -1,4 +1,4 @@
-import React, { FC, useState } from 'react';
+import React, { FC, useRef, useState } from 'react';
 import { Record, Strength, Weather } from '../types/index';
 
 import { IC_ARROW } from '../assets/Images';
@@ -81,14 +81,16 @@ const getLastDate = (year: number, month: number): number => {
   return new Date(year, month, 0).getDate();
 };
 
-export const InputInfo: FC = () => {  
+export const InputInfo: FC = () => {
+  // const inputRef = useRef();
   const today = new Date();
   const [year, [month, setMonth], [day,setDay] ] = [today.getFullYear(), useState<number>(today.getMonth()+1), useState<number>(today.getDate())];
   const [goal, setGoal] = useState<number>(0);
   const [records, setRecords] = useState<number>(0);
   const [memo, setMemo] = useState<string>('');
   const [weather, setWeather] = useState<Weather>(Weather.SUNNY);
-  const [strength, setStrength] = useState<Strength>(Strength.NORMAL);
+  const [strength, setStrength] = useState<Strength>(Strength.EASY);
+  const [isSubmit, setIsSubmit] = useState<boolean>(false);
   const dispatch = useDispatch();
   const isMobile = useMediaQuery({query : "(max-width:500px)"});
   const calMonth = (year: number, month: number, day: number) => {
@@ -100,7 +102,8 @@ export const InputInfo: FC = () => {
       setDay(getLastDate(year, month - 1))
       setMonth(month - 1)
     }
-  };
+  };  
+
   return (
     <Cont>      
       <div style={{
@@ -145,6 +148,7 @@ export const InputInfo: FC = () => {
                 setRecords(parseFloat(e.target.value)) : setRecords(0)}
             />
             <StyledInput
+              // ref={inputRef}
               style={{
                 width: '60px',
                 fontWeight: 'bold',
@@ -157,9 +161,10 @@ export const InputInfo: FC = () => {
               name="goal"
               placeholder="목표치"
               value={goal || undefined}
-              onChange={(e) =>
+              onChange={(e) => {
                 parseFloat(e.target.value) <= 10 ?
-                setGoal(parseFloat(e.target.value)) : setGoal(0)}
+                setGoal(parseFloat(e.target.value)) : setGoal(0)
+              }}
             />
           </div>
           <StyledInput
@@ -174,11 +179,12 @@ export const InputInfo: FC = () => {
             onChange={(e) => setMemo(e.target.value)}
           />
           <SelectWeather setWeather={setWeather} />
-          <SelectStrength setStrength={setStrength} />          
+          <SelectStrength setStrength={setStrength} />             
         </Form>
-          <SubmitButton
-            className="but_summit"
-            onClick={() => {
+        <SubmitButton
+            // onSubmit={(event) => event.preventDefault()}
+            // type="submit"            
+            onClick={() => {              
               const input: Record = {
                 key: today.toLocaleString().split(". "),
                 year: year,
@@ -189,11 +195,10 @@ export const InputInfo: FC = () => {
                 memo: memo,
                 weather: weather,
                 strength: strength,
-              };
-              
-              dispatch(inputData(input));
+            };              
+              dispatch(inputData(input));              
             }}
-          >등록</SubmitButton>          
+          >등록</SubmitButton>        
       </div>
     </Cont>
   );

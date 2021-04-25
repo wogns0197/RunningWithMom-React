@@ -81,7 +81,7 @@ const Dashboard: FC = () => {
         <Cont style={{marginLeft: moveLeft * 420 + 'px'}}>        
           {          
             storeData.map((el: Record, idx: number) => {
-              console.log(el);
+              // console.log(el);
               return (
                 <RecordsRenderer
                   props={el}
