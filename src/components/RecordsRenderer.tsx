@@ -3,14 +3,12 @@ import React, { FC } from 'react';
 import styled, {css} from 'styled-components';
 
 import { Record } from '../types/index';
-import { RootState } from '../store/Store';
 import RunningGage from '../uis/RunningGage';
 import StrengthUI from '../uis/StrengthUI';
 import { removeData } from '../store/Store';
 import theme from '../style/theme';
 import { useDispatch } from 'react-redux';
 import { useMediaQuery } from "react-responsive";
-import { useSelector } from 'react-redux';
 
 const Flex = css`
   display: flex;
@@ -106,7 +104,6 @@ type Props = {
 const Records: FC<Props> = ({ props, idx, arrLength, focus, isEdit }) => {
   const { year, month, day, weather, goal, records, memo, strength } = props;
   const pivot = arrLength % 2 === 0 ? Math.floor(arrLength / 2) - 1 - focus : Math.floor(arrLength / 2) - focus;
-  const storeData = useSelector((state: RootState) => state.reducer);
   const dispatch = useDispatch();
   const isMobile = useMediaQuery({
     query : "(max-width:767px)",

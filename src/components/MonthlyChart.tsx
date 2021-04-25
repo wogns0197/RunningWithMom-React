@@ -4,7 +4,6 @@ import React, { FC } from 'react';
 import styled, { css }from 'styled-components';
 
 import { Calendar } from '@nivo/calendar';
-import { parse } from 'node:path';
 import { useMediaQuery } from "react-responsive";
 
 const Cont = styled.div`

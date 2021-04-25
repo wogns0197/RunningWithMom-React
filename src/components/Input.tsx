@@ -2,14 +2,12 @@ import React, { FC, useState } from 'react';
 import { Record, Strength, Weather } from '../types/index';
 
 import { IC_ARROW } from '../assets/Images';
-import { RootState } from '../store/Store';
 import { SelectStrength } from '../uis/SelectStrength';
 import { SelectWeather } from '../uis/SelectWeather';
 import { inputData } from '../store/Store';
 import styled from 'styled-components';
 import { useDispatch } from 'react-redux';
 import { useMediaQuery } from "react-responsive";
-import { useSelector } from 'react-redux';
 
 const Cont = styled.div`
   margin-top: 20px;
@@ -83,8 +81,7 @@ const getLastDate = (year: number, month: number): number => {
   return new Date(year, month, 0).getDate();
 };
 
-export const InputInfo: FC = () => {
-  const storeData = useSelector((state: RootState) => state.reducer);
+export const InputInfo: FC = () => {  
   const today = new Date();
   const [year, [month, setMonth], [day,setDay] ] = [today.getFullYear(), useState<number>(today.getMonth()+1), useState<number>(today.getDate())];
   const [goal, setGoal] = useState<number>(0);
