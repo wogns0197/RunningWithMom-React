@@ -55,6 +55,7 @@ const EditButton = styled.img`
   border-radius: 7px;
   filter: invert(95%);
   cursor: pointer;
+  z-index: 999;
 `;
 
 const Dashboard: FC = () => {

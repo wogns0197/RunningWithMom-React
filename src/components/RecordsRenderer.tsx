@@ -1,4 +1,4 @@
-import { ICON_WEATHER, IC_CANCLE } from '../assets/Images';
+import { ICON_WEATHER, IC_NEGATIVE } from '../assets/Images';
 import React, { FC } from 'react';
 import styled, {css} from 'styled-components';
 
@@ -42,10 +42,11 @@ const Content = styled.div`
 
 const RemoveButton = styled.img`
   position: absolute;
-  right: 10px;
-  width: 15px;
-  height: 15px;
-  filter: invert(100%);
+  right: -10px;
+  top: -10px;
+  width: 20px;
+  height: 20px;
+  /* filter: invert(100%); */
 `
 
 const Date = styled.div`  
@@ -123,9 +124,9 @@ const Records: FC<Props> = ({ props, idx, arrLength, focus, isEdit }) => {
       }
       }>
       <Date style={idx === pivot ? { fontWeight: 'bold', fontSize: '16pt' } : {}}>
-        {isEdit && 
+        { (isEdit && idx === pivot) &&
           (<RemoveButton
-          src={IC_CANCLE}
+          src={IC_NEGATIVE}
           onClick={() => {            
             dispatch(removeData(props.key));
           }}

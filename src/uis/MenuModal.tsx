@@ -31,8 +31,8 @@ const MenuModal: FC<Props> = ({istoggle}) => {
       // display: istoggle ? 'inline' : 'none',
       right: istoggle ? '0' :'-200px',
     }}>
-      <Link style={{ textDecoration: 'none' }} to="/MyPage">
-        <Menu style={{ marginTop: '100px' }}>MY PAGE</Menu>
+      <Link style={{ textDecoration: 'none', marginTop: '100px' }} to="/MyPage">
+        <Menu>MY PAGE</Menu>
       </Link>
       <Link style={{textDecoration:'none'}} to="/Dashboard">
         <Menu>RECORD</Menu>
