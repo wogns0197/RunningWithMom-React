@@ -18,7 +18,7 @@ export const inputData = (data: Record) => ({
   data: data,
 });
 const editData = (data: Record) => ({ type: EDIT_DATA, data });
-export const removeData = (idx: number) => ({ type: REMOVE_DATA, idx});
+export const removeData = (idx: string[]) => ({ type: REMOVE_DATA, idx});
 
 const initialState: Record[] = [ // DUMMY DATA
   {
@@ -89,7 +89,7 @@ const reducer = (
     case (EDIT_DATA):
       return state;
     case (REMOVE_DATA):      
-      return state.filter(el => el.day !== action.idx);
+      return state.filter(el => JSON.stringify(el.key) !== JSON.stringify(action.idx));
     default:
       return state;
   }

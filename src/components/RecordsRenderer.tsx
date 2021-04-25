@@ -130,7 +130,7 @@ const Records: FC<Props> = ({ props, idx, arrLength, focus, isEdit }) => {
           (<RemoveButton
           src={IC_CANCLE}
           onClick={() => {            
-            dispatch(removeData(props.day));
+            dispatch(removeData(props.key));
           }}
           />)
         }
