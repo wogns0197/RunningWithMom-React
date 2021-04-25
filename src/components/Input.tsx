@@ -2,12 +2,14 @@ import React, { FC, useState } from 'react';
 import { Record, Strength, Weather } from '../types/index';
 
 import { IC_ARROW } from '../assets/Images';
+import { RootState } from '../store/Store';
 import { SelectStrength } from '../uis/SelectStrength';
 import { SelectWeather } from '../uis/SelectWeather';
 import { inputData } from '../store/Store';
 import styled from 'styled-components';
 import { useDispatch } from 'react-redux';
 import { useMediaQuery } from "react-responsive";
+import { useSelector } from 'react-redux';
 
 const Cont = styled.div`
   margin-top: 20px;
@@ -75,13 +77,16 @@ const SubmitButton = styled.button`
   font-size: 14pt;
 `;
 
+
+
 const getLastDate = (year: number, month: number): number => {
   return new Date(year, month, 0).getDate();
 };
 
 export const InputInfo: FC = () => {
+  const storeData = useSelector((state: RootState) => state.reducer);
   const today = new Date();
-  const [year, month, [day,setDay] ] = [today.getFullYear(), today.getMonth()+1, useState<number>(today.getDate())];
+  const [year, [month, setMonth], [day,setDay] ] = [today.getFullYear(), useState<number>(today.getMonth()+1), useState<number>(today.getDate())];
   const [goal, setGoal] = useState<number>(0);
   const [records, setRecords] = useState<number>(0);
   const [memo, setMemo] = useState<string>('');
@@ -89,7 +94,16 @@ export const InputInfo: FC = () => {
   const [strength, setStrength] = useState<Strength>(Strength.NORMAL);
   const dispatch = useDispatch();
   const isMobile = useMediaQuery({query : "(max-width:500px)"});
-  
+  const calMonth = (year: number, month: number, day: number) => {
+    if (getLastDate(year, month) < day + 1) {
+      setDay(1)
+      setMonth(month + 1)
+    }
+    else if (day - 1 === 0) {
+      setDay(getLastDate(year, month - 1))
+      setMonth(month - 1)
+    }
+  };
   return (
     <Cont>      
       <div style={{
@@ -101,15 +115,16 @@ export const InputInfo: FC = () => {
         <TodayText>
           <MonthMove
             src={IC_ARROW}
-            onClick={() => {
-              setDay(day - 1);
+            onClick={() => {              
+              day - 1 === 0 ? calMonth(year, month, day) : setDay(day - 1)
             }}
           />
           {year}년 {month}월 {day}일
           <MonthMove
             src={IC_ARROW}
             style={{ transform: 'rotate(180deg)' }}
-            onClick={() => setDay(day+1)}
+            onClick={() =>
+              day+1 > getLastDate(year, month) ? calMonth(year, month, day) : setDay(day + 1)}
           />
         </TodayText>
         
@@ -168,7 +183,7 @@ export const InputInfo: FC = () => {
             className="but_summit"
             onClick={() => {
               const input: Record = {
-                key: today.toLocaleString().split(". "),
+                key: storeData.length,
                 year: year,
                 month: month,
                 day: day,

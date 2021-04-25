@@ -54,7 +54,7 @@ const BulletChart = (data : ChartDataType[], dataLength: number): ReactElement =
     width={50 + dataLength*50}
     height={280}
     data={data}
-    margin={{ top: 10, right: 40, bottom: 30, left: 20 }}
+    margin={{ top: 10, right: 40, bottom: 50, left: 20 }}
     layout="vertical"
     spacing={46}
     titleAlign="middle"
@@ -78,7 +78,7 @@ const BulletsChart: FC<Props> = ({ storeData }) => {
   const parsedData: ChartDataType[] = [];
 
   storeData.map((el) => {
-    if (parseInt(el.key[1]) === month) {
+    if (el.month === month) {
       const parsingData = {
         id: el.month + '/' + el.day,
         ranges: [10],

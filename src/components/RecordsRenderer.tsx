@@ -1,11 +1,13 @@
+import { ICON_WEATHER, IC_CANCLE } from '../assets/Images';
 import React, { FC } from 'react';
 import styled, {css} from 'styled-components';
 
-import { ICON_WEATHER } from '../assets/Images';
 import { Record } from '../types/index';
 import RunningGage from '../uis/RunningGage';
 import StrengthUI from '../uis/StrengthUI';
+import { removeData } from '../store/Store';
 import theme from '../style/theme';
+import { useDispatch } from 'react-redux';
 import { useMediaQuery } from "react-responsive";
 
 const Flex = css`
@@ -14,6 +16,7 @@ const Flex = css`
 
 const Cont = styled.div`
   ${Flex};
+  position: relative;
   flex-direction: column;
   justify-content: space-between;
   align-items: center;
@@ -36,6 +39,14 @@ const Content = styled.div`
   ${Flex};
   justify-content: center;  
 `;
+
+const RemoveButton = styled.img`
+  position: absolute;
+  right: 10px;
+  width: 15px;
+  height: 15px;
+  filter: invert(100%);
+`
 
 const Date = styled.div`  
   background-color: ${({ theme }) => theme.colors.darkseagreen};
@@ -87,12 +98,13 @@ type Props = {
   idx: number,
   arrLength: number,
   focus: number,
+  isEdit: boolean,
 }
 
-const Records: FC<Props> = ({ props, idx, arrLength, focus }) => {
+const Records: FC<Props> = ({ props, idx, arrLength, focus, isEdit }) => {
   const { year, month, day, weather, goal, records, memo, strength } = props;
   const pivot = arrLength % 2 === 0 ? Math.floor(arrLength / 2) - 1 - focus : Math.floor(arrLength / 2) - focus;
-  
+  const dispatch = useDispatch();
   const isMobile = useMediaQuery({
     query : "(max-width:767px)",
   });  
@@ -110,7 +122,16 @@ const Records: FC<Props> = ({ props, idx, arrLength, focus }) => {
           width : isMobile ? '150px' : '200px',
       }
       }>
-      <Date style={ idx === pivot ? {fontWeight:'bold', fontSize:'16pt'}: {}}>
+      <Date style={idx === pivot ? { fontWeight: 'bold', fontSize: '16pt' } : {}}>
+        {isEdit && 
+          (<RemoveButton
+          src={IC_CANCLE}
+          onClick={() => {
+            // console.log(props.key);
+            dispatch(removeData(props.key));            
+          }}
+          />)
+        }
         {year}년 {month}월 {day}일
       </Date>
       <RunningGage goal={goal} record={records}/>

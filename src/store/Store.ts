@@ -2,35 +2,27 @@ import { Record, Strength, Weather } from '../types/index';
 import { combineReducers, createStore } from 'redux';
 
 type ReduxType = 
-  ReturnType<typeof inputData>
-  | ReturnType<typeof getData>
+  | ReturnType<typeof inputData>  
   | ReturnType<typeof editData>
   | ReturnType<typeof removeData>
 ;
-type ActionFunc = {
-  type: 'INPUT_DATA' | 'GET_DATA' | 'EDIT_DATA' | 'REMOVE_DATA',
-  data: Record,
-};
 
-// type ActionFunc = (data: Record, idx?: number) => ({ type: string, data: Record });
 
-const INPUT_DATA = 'INPUT_DATA';
-const GET_DATA = 'GET_DATA';
-const EDIT_DATA = 'EDIT_DATA';
-const REMOVE_DATA = 'REMOVE_DATA'; // not usual
+const INPUT_DATA = 'INPUT_DATA' as const; // as const for not being 'string', also real value
+const EDIT_DATA = 'EDIT_DATA' as const;
+const REMOVE_DATA = 'REMOVE_DATA' as const;
 
 // export const inputData = (data: Record): ReduxType => ({ type: INPUT_DATA, data });
-export const inputData = (data: Record): ActionFunc => ({
+export const inputData = (data: Record) => ({
   type: INPUT_DATA,
   data: data,
 });
-const getData = (data: Record): ActionFunc => ({ type: GET_DATA, data});
-const editData = (data: Record): ActionFunc => ({ type: EDIT_DATA, data });
-const removeData = (data: Record): ActionFunc => ({ type: REMOVE_DATA, data});
+const editData = (data: Record) => ({ type: EDIT_DATA, data });
+export const removeData = (idx: number) => ({ type: REMOVE_DATA, idx});
 
 const initialState: Record[] = [ // DUMMY DATA
   {
-    key: ['2021', '4', '21', '오후 4:30:55'],
+    key: 0,
     year: 2021,
     month: 4,
     day: 21,
@@ -41,7 +33,7 @@ const initialState: Record[] = [ // DUMMY DATA
     memo: "!!",
   },
   {
-    key: ['2021', '4', '20', '오후 4:30:55'],
+    key: 1,
     year: 2021,
     month: 4,
     day: 20,
@@ -52,7 +44,7 @@ const initialState: Record[] = [ // DUMMY DATA
     memo: "!!",
   },
   {
-    key: ['2021', '4', '19', '오후 4:30:55'],
+    key: 2,
     year: 2021,
     month: 4,
     day: 19,
@@ -63,7 +55,7 @@ const initialState: Record[] = [ // DUMMY DATA
     memo: "!!",
   },
   {
-    key: ['2021', '4', '18', '오후 4:30:55'],
+    key: 3,
     year: 2021,
     month: 4,
     day: 18,
@@ -74,7 +66,7 @@ const initialState: Record[] = [ // DUMMY DATA
     memo: "!!",
   },
   {
-    key: ['2021', '4', '17', '오후 4:30:55'],
+    key: 4,
     year: 2021,
     month: 4,
     day: 17,
@@ -93,13 +85,11 @@ const reducer = (
 
   switch (action.type) {
     case (INPUT_DATA):
-      return [ ...state, action.data ];
-    case (GET_DATA):
-      return state;
+      return [ ...state, action.data ];    
     case (EDIT_DATA):
       return state;
-    case (REMOVE_DATA):
-      return state;
+    case (REMOVE_DATA):      
+      return state.splice(action.idx,1);
     default:
       return state;
   }

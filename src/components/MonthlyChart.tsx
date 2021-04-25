@@ -4,6 +4,7 @@ import React, { FC } from 'react';
 import styled, { css }from 'styled-components';
 
 import { Calendar } from '@nivo/calendar';
+import { parse } from 'node:path';
 import { useMediaQuery } from "react-responsive";
 
 const Cont = styled.div`
@@ -59,16 +60,16 @@ const MonthlyChart: FC<Props> = ({ storeData }) => {
   const isMobile = useMediaQuery({query : "(max-width:500px)"});
   const parsedData: CalendarDatum[] = [];
 
-  storeData.map((el) => {    
+  storeData.map((el) => {
     const parsingData = {
-      day: el.key[1].length === 1 ? el.key[0] + '-0' + el.key[1] + '-' + el.key[2] :
-        el.key[0] + '-' + el.key[1] + '-' + el.key[2],
+      // 데이터 날짜 임의 수정 불가 (당일만 가능한 코드)
+      // day: el.key[1].length === 1 ? el.key[0] + '-0' + el.key[1] + '-' + el.key[2] :
+      //   el.key[0] + '-' + el.key[1] + '-' + elconsole.key[2],
+      day: el.month < 10 ? el.day < 10 ? el.year + '-0' + el.month + '-0' + el.day : el.year + '-0' + el.month + '-' + el.day :
+        el.year + '-' + el.month + '-' + el.day,
       value: el.records,
-    }
-;
-
+    };
     parsedData.push(parsingData);
-
     return parsedData;
   });
   

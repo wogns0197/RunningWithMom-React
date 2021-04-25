@@ -1,7 +1,7 @@
+import { ICON_BACK, IC_EDIT } from '../assets/Images';
 import { Mobile, PC } from '../style/MediaQuery';
 import React, { FC, useState } from 'react';
 
-import { ICON_BACK } from '../assets/Images';
 import { Record } from '../types/index';
 import RecordsRenderer from '../components/RecordsRenderer';
 import { RootState } from '../store/Store';
@@ -46,12 +46,23 @@ const MobileMove = styled.div`
   z-index: 999;
 `;
 
+const EditButton = styled.img`
+  position: absolute;
+  right: 10px;
+  bottom: 10px;
+  width: 30px;
+  height: 30px;
+  border-radius: 7px;
+  filter: invert(95%);
+  cursor: pointer;
+`;
 
 const Dashboard: FC = () => {
   const isMobile = useMediaQuery({ query: "(max-width:500px)" });
   const storeData = useSelector((state: RootState) => state.reducer);
   const [moveLeft, setMoveLeft] = useState<number>(0);
-
+  const [isEdit, setIsEdit] = useState<boolean>(false);
+  
   const moveCard = (isLeft: number): void => {
     storeData.length % 2 !== 0 ?
       (isLeft * moveLeft) < storeData.length / 2 - 1 && setMoveLeft(moveLeft + isLeft) : (
@@ -69,12 +80,14 @@ const Dashboard: FC = () => {
         <Cont style={{marginLeft: moveLeft * 420 + 'px'}}>        
           {          
             storeData.map((el: Record, idx: number) => {
+              console.log(el);
               return (
                 <RecordsRenderer
                   props={el}
                   idx={idx}
                   arrLength={storeData.length}
                   focus={moveLeft}
+                  isEdit={isEdit}
                 />);
           })}
         </Cont>
@@ -95,7 +108,7 @@ const Dashboard: FC = () => {
         <MobileMove style={{left:0}} onClick={() => moveCard(1)} />
         <MobileMove style={{right:0}} onClick={() => moveCard(-1)}/>        
       </Mobile>
-      
+    <EditButton src={IC_EDIT} onClick={() => setIsEdit(!isEdit)} />
     </DashBoardMain>
   );
 }
