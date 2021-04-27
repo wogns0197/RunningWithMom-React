@@ -10,7 +10,7 @@ Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 
 # Todo (:: doing)
 - :: Reponsive scale
-- :: Sign in / Sign up 
+- :: Sign in / Sign up (watch redundant db)
 - Login persist (local storage, redux-persist)
 - UI setting 
 - ~~Records on Calender~~
