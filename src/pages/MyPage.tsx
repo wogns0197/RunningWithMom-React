@@ -146,8 +146,9 @@ const MyPage: FC = () => {
   
   const postLogin = async (id: string, pw: string) => {
     await axios.post('http://localhost:5000/api/getLogin', { id: id, pw: pw })
-      .then(res => {
-        return res.data.length >= 1 ? true : setIsValid(true);
+      .then(async res => {
+        // return res.data.length >= 1 ? true : setIsValid(true);
+        return (res.data.length >= 1) && (res.data[0].pw === pw) ? alert("LOGIN!") : setIsValid(true);
       })
       .catch(err => {
         console.log(err);
