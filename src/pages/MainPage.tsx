@@ -27,6 +27,7 @@ const Header = styled.div`
     0 1px ${({ theme }) => theme.colors.darkseagreen},
     1px 0 ${({ theme }) => theme.colors.darkseagreen},
     0 -1px ${({ theme }) => theme.colors.darkseagreen};
+  letter-spacing: 5px;
   display:flex;
   justify-content: space-between;
   align-items: center;

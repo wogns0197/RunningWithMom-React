@@ -1,4 +1,4 @@
-import React, { FC, useRef, useState } from 'react';
+import React, { FC, useState } from 'react';
 import { Record, Strength, Weather } from '../types/index';
 
 import { IC_ARROW } from '../assets/Images';
@@ -89,8 +89,7 @@ export const InputInfo: FC = () => {
   const [records, setRecords] = useState<number>(0);
   const [memo, setMemo] = useState<string>('');
   const [weather, setWeather] = useState<Weather>(Weather.SUNNY);
-  const [strength, setStrength] = useState<Strength>(Strength.EASY);
-  const [isSubmit, setIsSubmit] = useState<boolean>(false);
+  const [strength, setStrength] = useState<Strength>(Strength.EASY);  
   const dispatch = useDispatch();
   const isMobile = useMediaQuery({query : "(max-width:500px)"});
   const calMonth = (year: number, month: number, day: number) => {
