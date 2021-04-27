@@ -1,10 +1,15 @@
-import { IsMobile, Record } from '../types/index';
+import { IsMobile, TFN } from '../types/index';
 import React, { FC, useState } from 'react';
 import styled, { css } from 'styled-components';
 
 import axios from 'axios';
 import { isNull } from 'node:util';
+import theme from '../style/theme';
 import { useMediaQuery } from "react-responsive";
+
+interface isPwValid {
+  isValid: TFN,
+};
 
 const FLEX = css`
   display: flex;
@@ -57,6 +62,16 @@ const InputName = styled.div`
   ${FLEX};
 `;
 
+const InputValid = styled.div`
+  width: 15px;
+  height: 13px;
+  background-color: ${(props: isPwValid) => props.isValid === TFN.TRUE ?
+    theme.colors.skyblue : ( props.isValid === TFN.NA ? theme.colors.white : theme.colors.tomato)};
+  /* background-color: ${({ theme }) => theme.colors.skyblue}; */
+  border-radius: 100px;
+  margin-left: 5px;
+`
+
 const StyledInput = styled.input`
   border: none;
   width: 80%;
@@ -101,6 +116,14 @@ const Invalid = styled.div`
   color: ${({ theme }) => theme.colors.tomato};
 `;
 
+const GotoSignin = styled.p`
+  color: ${({ theme }) => theme.colors.tomato};
+  opacity: 0.5;
+  font-size: 12pt;
+  text-decoration: underline;
+  cursor: pointer;
+`
+
 const getdata = async () => {
   await axios.get('http://localhost:5000/api/getdata')
     .then(res => {
@@ -115,9 +138,13 @@ const getdata = async () => {
 
 const MyPage: FC = () => {
   const isMobile = useMediaQuery({ query: "(max-width:767px)", });
-  const [id, setID] = useState<string>('');
-  const [pw, setPW] = useState<string>('');
+  const [ [id, setID], [pw, setPW], [signID, setSignID], [signPW, setSignPW], [signPW2, setSignPW2] ] =
+    [useState<string>(''), useState<string>(''), useState<string>(''), useState<string>(''), useState<string>('')];
+  
+  const [isSignin, setIsSignin] = useState<boolean>(false);
   const [isValid, setIsValid] = useState<boolean>(false);
+  const [pwValid, setPwValid] = useState<TFN>(TFN.NA);
+  
 
   const postLogin = async (id: string, pw: string) => {
     await axios.post('http://localhost:5000/api/getLogin', { id: id, pw: pw })
@@ -130,7 +157,8 @@ const MyPage: FC = () => {
   }
   
   return (
-    <Main>      
+    !isSignin ?
+    <Main>
       <Cont isMobile={isMobile}>
         <Header>LOGIN</Header>
         <InputCont>
@@ -154,7 +182,52 @@ const MyPage: FC = () => {
         {isValid && (<Invalid>등록되지 않은 ID이거나 잘못된 PW입니다.</Invalid>)}
         <Button
           onClick={() => postLogin(id, pw)}>
-          LOGIN</Button>
+          LOGIN
+        </Button>
+        <GotoSignin onClick={() => setIsSignin(!isSignin)}>sign in</GotoSignin>
+      </Cont>
+    </Main> :
+    <Main>
+      <Cont isMobile={isMobile}>
+        <Header>SIGN IN</Header>
+        <InputCont>
+          <Column isMobile={isMobile}>
+            <StyledInput
+              type='text'
+              style={{width: '100%'}}
+              placeholder="아이디"
+              value={signID}
+              onChange={e => setSignID(e.target.value)}
+            />
+          </Column>
+          <Column isMobile={isMobile}>
+            <InputValid isValid={pwValid}/>
+            <StyledInput
+              type='password'
+              style={{ width: '100%' }}
+              placeholder="비밀번호"
+              value={signPW}
+              onChange={e => setSignPW(e.target.value)}
+            />
+          </Column>
+          <Column isMobile={isMobile}>
+            <InputValid isValid={pwValid}/>
+            <StyledInput
+              type='password'
+              style={{ width: '100%' }}
+              placeholder="비밀번호 재입력"
+              value={signPW2}
+              onChange={e => {
+                setSignPW2(e.target.value);                
+              }}
+              onBlur={() => {
+                signPW === signPW2 ? setPwValid(TFN.TRUE) : setPwValid(TFN.FALSE);
+              }}
+            />
+          </Column>
+        </InputCont>
+        <Button>SIGN IN</Button>
+        <GotoSignin onClick={() => setIsSignin(!isSignin)}>login</GotoSignin>
       </Cont>
     </Main>
   );

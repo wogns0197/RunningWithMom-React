@@ -13,6 +13,12 @@ export enum Weather {
   SNOW = 'SNOW',
 };
 
+export enum TFN {
+  TRUE = 'TRUE',
+  FALSE = 'FALSE',
+  NA = 'NA',
+}
+
 export interface Record {
   key: string[],
   year: number,
