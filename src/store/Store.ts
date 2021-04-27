@@ -1,5 +1,7 @@
 import { Record, Strength, Weather } from '../types/index';
-import { combineReducers, createStore } from 'redux';
+import { applyMiddleware, combineReducers, compose, createStore } from 'redux';
+
+import thunk from 'redux-thunk';
 
 type ReduxType = 
   | ReturnType<typeof inputData>  
@@ -11,6 +13,7 @@ type ReduxType =
 const INPUT_DATA = 'INPUT_DATA' as const; // as const for not being 'string', also real value
 const EDIT_DATA = 'EDIT_DATA' as const;
 const REMOVE_DATA = 'REMOVE_DATA' as const;
+const POST_DATA = 'POST_DATA' as const;
 
 // export const inputData = (data: Record): ReduxType => ({ type: INPUT_DATA, data });
 export const inputData = (data: Record) => ({
@@ -19,6 +22,7 @@ export const inputData = (data: Record) => ({
 });
 const editData = (data: Record) => ({ type: EDIT_DATA, data });
 export const removeData = (idx: string[]) => ({ type: REMOVE_DATA, idx});
+
 
 const initialState: Record[] = [ // DUMMY DATA
   {
@@ -99,7 +103,7 @@ const rootReducer = combineReducers({
   reducer,
 });
 
-const store = createStore(rootReducer);
+const store = createStore(rootReducer, compose(applyMiddleware(thunk)));
 
 export type RootState = ReturnType<typeof rootReducer>;
 export default store;

@@ -15,14 +15,22 @@
     "@types/node": "^12.0.0",
     "@types/react-dom": "^17.0.0",
     "@types/react-responsive": "8.0.2",
+    "axios": "0.21.1",
+    "moment": "2.29.1",
+    "mongodb": "3.6.6",
+    "mongoose": "5.12.5",
+    "npm": "7.11.1",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
+    "react-file-base64": "1.0.3",
     "react-redux": "7.2.3",
     "react-responsive": "8.2.0",
     "react-router-dom": "5.2.0",
     "react-scripts": "4.0.3",
     "redux": "4.0.5",
+    "redux-thunk": "2.3.0",
     "styled-components": "5.2.3",
+    "ts-node": "9.1.1",
     "typescript": "^4.1.2",
     "web-vitals": "^1.0.1"
   },
@@ -51,6 +59,7 @@
     ]
   },
   "devDependencies": {
+    "@types/mongodb": "3.6.12",
     "@types/react": "17.0.3",
     "@types/react-router-dom": "5.1.7",
     "@types/styled-components": "5.1.9"
