@@ -60,7 +60,12 @@ export interface CalendarDayData {
   y: number
 };
 
-;
+export interface UserInfo {
+  id: string,
+  pw: string,
+  name: string,
+  age: number,  
+}
 
 
 // export interface RouterProps {

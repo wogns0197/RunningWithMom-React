@@ -1,4 +1,4 @@
-import { IsMobile, TFN } from '../types/index';
+import { IsMobile, TFN, UserInfo } from '../types/index';
 import React, { FC, useState } from 'react';
 import styled, { css } from 'styled-components';
 
@@ -124,28 +124,26 @@ const GotoSignin = styled.p`
   cursor: pointer;
 `
 
-const getdata = async () => {
-  await axios.get('http://localhost:5000/api/getdata')
+const postSignin = async (data: UserInfo) => {
+  await axios.post('http://localhost:5000/api/signin', {...data})
     .then(res => {
-      console.log(res.data);
-      return res;
+      console.log(res);
     })
     .catch(err => {
       console.log(err);
     })
-}
+};
 
 
 const MyPage: FC = () => {
   const isMobile = useMediaQuery({ query: "(max-width:767px)", });
   const [ [id, setID], [pw, setPW], [signID, setSignID], [signPW, setSignPW], [signPW2, setSignPW2] ] =
     [useState<string>(''), useState<string>(''), useState<string>(''), useState<string>(''), useState<string>('')];
-  
+  const [[name, setName], [age, setAge]] = [ useState<string>(''), useState<number>(0) ];
   const [isSignin, setIsSignin] = useState<boolean>(false);
   const [isValid, setIsValid] = useState<boolean>(false);
   const [pwValid, setPwValid] = useState<TFN>(TFN.NA);
   
-
   const postLogin = async (id: string, pw: string) => {
     await axios.post('http://localhost:5000/api/getLogin', { id: id, pw: pw })
       .then(res => {
@@ -154,8 +152,8 @@ const MyPage: FC = () => {
       .catch(err => {
         console.log(err);
       })
-  }
-  
+  };
+
   return (
     !isSignin ?
     <Main>
@@ -188,9 +186,27 @@ const MyPage: FC = () => {
       </Cont>
     </Main> :
     <Main>
-      <Cont isMobile={isMobile}>
+      <Cont isMobile={isMobile} style={{height:'450px', marginTop:'50px'}}>
         <Header>SIGN IN</Header>
-        <InputCont>
+        <InputCont style={{ height: "300px" }}>          
+          <Column isMobile={isMobile}>
+            <StyledInput
+              type='text'
+              style={{width: '100%'}}
+              placeholder="이름"
+              value={name}
+              onChange={e => setName(e.target.value)}
+            />
+          </Column>
+          <Column isMobile={isMobile}>
+            <StyledInput
+              type='number'
+              style={{width: '100%'}}
+              placeholder="나이"
+              value={age || undefined}
+              onChange={e => setAge(parseInt(e.target.value))}
+            />
+          </Column>                        
           <Column isMobile={isMobile}>
             <StyledInput
               type='text'
@@ -226,7 +242,14 @@ const MyPage: FC = () => {
             />
           </Column>
         </InputCont>
-        <Button>SIGN IN</Button>
+        <Button
+          style={{ margin: "0" }}
+          onClick={() => {            
+            postSignin({ id: signID, pw: signPW, name: name, age: age });
+          }}  
+        >
+          SIGN IN
+        </Button>
         <GotoSignin onClick={() => setIsSignin(!isSignin)}>login</GotoSignin>
       </Cont>
     </Main>
