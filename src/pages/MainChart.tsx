@@ -34,7 +34,8 @@ const MainChart: FC = () => {
   return (
     <Main isMobile={isMobile}>
       <button onClick={() => dispatch(getUserDataThunk('test123'))} />
-      <button onClick={() => console.log(data)}/>
+      <div></div>
+      <button onClick={() => console.log(data![0])}/>
       <BulletsChart storeData={storeData} />      
       <CalendarChart storeData={storeData} />
     </Main>

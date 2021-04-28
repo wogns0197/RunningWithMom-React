@@ -4,6 +4,7 @@ import { Record, Strength, Weather } from '../types/index';
 import { IC_ARROW } from '../assets/Images';
 import { SelectStrength } from '../uis/SelectStrength';
 import { SelectWeather } from '../uis/SelectWeather';
+import axios from 'axios';
 import { inputData } from '../store/Store';
 import styled from 'styled-components';
 import { useDispatch } from 'react-redux';
@@ -75,7 +76,11 @@ const SubmitButton = styled.button`
   font-size: 14pt;
 `;
 
-
+export const pushUserData = async (data: Record): Promise<void> => {
+  await axios.post('http://localhost:5000/api/inputdata', { ...data })
+    .then(res => console.log(res))
+    .catch(err => console.log(err))
+}
 
 const getLastDate = (year: number, month: number): number => {
   return new Date(year, month, 0).getDate();
@@ -195,7 +200,8 @@ export const InputInfo: FC = () => {
                 weather: weather,
                 strength: strength,
             };              
-              dispatch(inputData(input));              
+            dispatch(inputData(input));
+            pushUserData(input);
             }}
           >등록</SubmitButton>        
       </div>

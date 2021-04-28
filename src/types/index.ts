@@ -22,6 +22,7 @@ export enum TFN {
 export interface Record {
   key: string[],
   _id?: string,
+  // userid: string,
   year: number,
   month: number,
   day: number,
@@ -30,7 +31,7 @@ export interface Record {
   weather: Weather,
   strength: Strength,
   memo?: string,
-  _v?: string,
+  __v?: number,
 };
 
 export interface IsMobile {
