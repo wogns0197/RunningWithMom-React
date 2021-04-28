@@ -28,14 +28,12 @@ const MainChart: FC = () => {
   const storeData = useSelector((state: RootState) => state.UserData);
   const isMobile = useMediaQuery({query : "(max-width:500px)"});
   
-  const { data, loading, error } = useSelector((state: RootState) => state.DBStore.userData);
-  const dispatch = useDispatch();
 
   return (
     <Main isMobile={isMobile}>
-      <button onClick={() => dispatch(getUserDataThunk('test123'))} />
+      {/* <button onClick={() => dispatch(getUserDataThunk('test123'))} />
       <div></div>
-      <button onClick={() => console.log(data![0])}/>
+      <button onClick={() => console.log(data)}/> */}
       <BulletsChart storeData={storeData} />      
       <CalendarChart storeData={storeData} />
     </Main>

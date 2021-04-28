@@ -18,64 +18,69 @@ export const removeData = (idx: string[]) => ({ type: REMOVE_DATA, idx});
 
 
 const UserDataInitialState: Record[] = [ // DUMMY DATA
-  {
-    key: ['2021', '4', '21', '오후 4:30:55'],
-    year: 2021,
-    month: 4,
-    day: 21,
-    goal: 10,
-    records: 8,
-    weather: Weather.CLOUD,
-    strength: Strength.EASY,
-    memo: "!!",
-  },
-  {
-    key: ['2021', '4', '20', '오후 4:30:55'],
-    year: 2021,
-    month: 4,
-    day: 20,
-    goal: 3,
-    records: 2,
-    weather: Weather.SNOW,
-    strength: Strength.HARD,
-    memo: "!!",
-  },
-  {
-    key: ['2021', '4', '19', '오후 4:30:55'],
-    year: 2021,
-    month: 4,
-    day: 19,
-    goal: 9,
-    records: 5,
-    weather: Weather.SUNNY,
-    strength: Strength.NORMAL,
-    memo: "!!",
-  },
-  {
-    key: ['2021', '4', '18', '오후 4:30:55'],
-    year: 2021,
-    month: 4,
-    day: 18,
-    goal: 10,
-    records: 10,
-    weather: Weather.SUNNY,
-    strength: Strength.EASY,
-    memo: "!!",
-  },
-  {
-    key: ['2021', '4', '17', '오후 4:30:55'],
-    year: 2021,
-    month: 4,
-    day: 17,
-    goal: 5,
-    records: 8,
-    weather: Weather.FOGGY,
-    strength: Strength.NORMAL,
-    memo: "!!",
-  },
+  // {
+  //   key: ['2021', '4', '21', '오후 4:30:55'],
+  //   userid:'jjahoo',
+  //   year: 2021,
+  //   month: 4,
+  //   day: 21,
+  //   goal: 10,
+  //   records: 8,
+  //   weather: Weather.CLOUD,
+  //   strength: Strength.EASY,
+  //   memo: "!!",
+  // },
+  // {
+  //   key: ['2021', '4', '20', '오후 4:30:55'],
+  //   userid:'jjahoo',
+  //   year: 2021,
+  //   month: 4,
+  //   day: 20,
+  //   goal: 3,
+  //   records: 2,
+  //   weather: Weather.SNOW,
+  //   strength: Strength.HARD,
+  //   memo: "!!",
+  // },
+  // {
+  //   key: ['2021', '4', '19', '오후 4:30:55'],
+  //   userid:'jjahoo',
+  //   year: 2021,
+  //   month: 4,
+  //   day: 19,
+  //   goal: 9,
+  //   records: 5,
+  //   weather: Weather.SUNNY,
+  //   strength: Strength.NORMAL,
+  //   memo: "!!",
+  // },
+  // {
+  //   key: ['2021', '4', '18', '오후 4:30:55'],
+  //   userid:'wogns0197',
+  //   year: 2021,
+  //   month: 4,
+  //   day: 18,
+  //   goal: 10,
+  //   records: 10,
+  //   weather: Weather.SUNNY,
+  //   strength: Strength.EASY,
+  //   memo: "!!",
+  // },
+  // {
+  //   key: ['2021', '4', '17', '오후 4:30:55'],
+  //   userid:'wogns0197',
+  //   year: 2021,
+  //   month: 4,
+  //   day: 17,
+  //   goal: 5,
+  //   records: 8,
+  //   weather: Weather.FOGGY,
+  //   strength: Strength.NORMAL,
+  //   memo: "!!",
+  // },
 ];
 
-const reducer = (
+const UserData = (
   state: Record[] = UserDataInitialState,
   action: ReduxType
   ): Record[] => {
@@ -92,4 +97,4 @@ const reducer = (
   }
 };
 
-export default reducer;
+export default UserData;

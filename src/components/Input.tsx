@@ -2,6 +2,7 @@ import React, { FC, useState } from 'react';
 import { Record, Strength, Weather } from '../types/index';
 
 import { IC_ARROW } from '../assets/Images';
+import { RootState } from '../store';
 import { SelectStrength } from '../uis/SelectStrength';
 import { SelectWeather } from '../uis/SelectWeather';
 import axios from 'axios';
@@ -9,9 +10,10 @@ import { inputData } from '../store/userDataReducer';
 import styled from 'styled-components';
 import { useDispatch } from 'react-redux';
 import { useMediaQuery } from "react-responsive";
+import { useSelector } from 'react-redux';
 
 const Cont = styled.div`
-  margin-top: 20px;
+  margin-top: 5px;
   height: 300px;
   /* width: 100%; */
   border: 3px solid ${({ theme }) => theme.colors.pastelgreen};
@@ -96,7 +98,9 @@ export const InputInfo: FC = () => {
   const [weather, setWeather] = useState<Weather>(Weather.SUNNY);
   const [strength, setStrength] = useState<Strength>(Strength.EASY);  
   const dispatch = useDispatch();
-  const isMobile = useMediaQuery({query : "(max-width:500px)"});
+  const isMobile = useMediaQuery({ query: "(max-width:500px)" });
+  const loginData = useSelector((state: RootState) => state.userinfo);
+
   const calMonth = (year: number, month: number, day: number) => {
     if (getLastDate(year, month) < day + 1) {
       setDay(1)
@@ -191,6 +195,7 @@ export const InputInfo: FC = () => {
             onClick={() => {              
               const input: Record = {
                 key: today.toLocaleString().split(". "),
+                userid: loginData.id,
                 year: year,
                 month: month,
                 day: day,

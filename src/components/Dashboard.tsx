@@ -1,13 +1,14 @@
 import { ICON_BACK, IC_EDIT } from '../assets/Images';
 import { Mobile, PC } from '../style/MediaQuery';
-import React, { FC, useState } from 'react';
+import React, { FC, useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 
-import { Record } from '../types/index';
+import { Record } from '../types';
 import RecordsRenderer from '../components/RecordsRenderer';
 import { RootState } from '../store';
+import { getUserDataThunk } from '../store/DBStore';
 import styled from 'styled-components';
 import { useMediaQuery } from "react-responsive";
-import { useSelector } from 'react-redux';
 
 const DashBoardMain = styled.div`
   position: relative;
@@ -22,10 +23,16 @@ const DashBoardMain = styled.div`
 `;
 
 const IDView = styled.div`
-  position: absolute;
-  color: ${({theme}) => theme.colors.white};
-  right: 10px;
-  top: 10px;
+  position: absolute;  
+  color: ${({ theme }) => theme.colors.darkgreen};
+  background-color: ${({ theme }) => theme.colors.mediumseagreen};
+  border: 2px solid ${({ theme }) => theme.colors.darkgreen};
+  border-radius: 20px;
+  right: 5px;
+  top: 10px;    
+  padding: 2px 12px 2px 12px;
+  /* font-size: 10pt; */
+    
 `;
 
 const Cont = styled.div`
@@ -66,12 +73,19 @@ const EditButton = styled.img`
 `;
 
 const Dashboard: FC = () => {
+  
   const isMobile = useMediaQuery({ query: "(max-width:500px)" });
-  const storeData = useSelector((state: RootState) => state.UserData);
   const loginData = useSelector((state: RootState) => state.userinfo);
   const [moveLeft, setMoveLeft] = useState<number>(0);
   const [isEdit, setIsEdit] = useState<boolean>(false);
-  
+  // const storeData = useSelector((state: RootState) => state.UserData);
+  const storeData = useSelector((state: RootState) => state.DBStore.userData).data || [];
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(getUserDataThunk('jjahoo'));
+  }, [dispatch]);
+  console.log(storeData);
   const moveCard = (isLeft: number): void => {
     storeData.length % 2 !== 0 ?
       (isLeft * moveLeft) < storeData.length / 2 - 1 && setMoveLeft(moveLeft + isLeft) : (
@@ -84,9 +98,9 @@ const Dashboard: FC = () => {
   
 
   return (
-    <DashBoardMain style={isMobile ? { height: '40vh' } : {}}>
-      <div style={storeData.length % 2 === 0 ? { marginLeft: '212px' } : {}}>
-        <IDView>{loginData.id}</IDView>
+    <DashBoardMain style={isMobile ? { height: '45vh' } : {}}>
+      <div style={storeData?.length % 2 === 0 ? { marginLeft: '212px' } : {}}>
+        {loginData.id && (<IDView>{loginData.id}</IDView>)}
         <Cont style={{marginLeft: moveLeft * 420 + 'px'}}>        
           {          
             storeData.map((el: Record, idx: number) => {
