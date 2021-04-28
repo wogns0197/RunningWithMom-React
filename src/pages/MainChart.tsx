@@ -1,4 +1,4 @@
-import React, { FC } from 'react';
+import React, { FC, useEffect } from 'react';
 import styled, { css } from 'styled-components';
 import { useDispatch, useSelector } from 'react-redux';
 
@@ -25,7 +25,13 @@ const Mobilestyled = css`
 `;
 
 const MainChart: FC = () => {  
-  const storeData = useSelector((state: RootState) => state.UserData);
+  const storeData = useSelector((state: RootState) => state.DBStore.userData).data || [];
+  const loginData = useSelector((state: RootState) => state.userinfo);
+  const dispatch = useDispatch();
+  
+  useEffect(() => {
+    dispatch(getUserDataThunk(loginData.id));    
+  }, [dispatch, loginData.id]);
   const isMobile = useMediaQuery({query : "(max-width:500px)"});
   
 

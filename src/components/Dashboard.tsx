@@ -1,4 +1,4 @@
-import { ICON_BACK, IC_EDIT } from '../assets/Images';
+import { ICON_BACK, IC_EDIT, IC_RESET } from '../assets/Images';
 import { Mobile, PC } from '../style/MediaQuery';
 import React, { FC, useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
@@ -22,6 +22,17 @@ const DashBoardMain = styled.div`
   align-items: center;
 `;
 
+const ResetIcon = styled.img`
+  position: absolute;
+  left: 10px;
+  top: 10px;
+  width: 20px;
+  height: 20px;
+  z-index: 999;
+  filter: invert(100%);
+  cursor: pointer;
+`;
+
 const IDView = styled.div`
   position: absolute;  
   color: ${({ theme }) => theme.colors.darkgreen};
@@ -31,8 +42,6 @@ const IDView = styled.div`
   right: 5px;
   top: 10px;    
   padding: 2px 12px 2px 12px;
-  /* font-size: 10pt; */
-    
 `;
 
 const Cont = styled.div`
@@ -83,9 +92,9 @@ const Dashboard: FC = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(getUserDataThunk('jjahoo'));
-  }, [dispatch]);
-  console.log(storeData);
+    dispatch(getUserDataThunk(loginData.id));    
+  }, [dispatch, loginData.id]);
+  
   const moveCard = (isLeft: number): void => {
     storeData.length % 2 !== 0 ?
       (isLeft * moveLeft) < storeData.length / 2 - 1 && setMoveLeft(moveLeft + isLeft) : (
@@ -100,6 +109,7 @@ const Dashboard: FC = () => {
   return (
     <DashBoardMain style={isMobile ? { height: '45vh' } : {}}>
       <div style={storeData?.length % 2 === 0 ? { marginLeft: '212px' } : {}}>
+        <ResetIcon src={IC_RESET} onClick={() => dispatch(getUserDataThunk(loginData.id)) }/>
         {loginData.id && (<IDView>{loginData.id}</IDView>)}
         <Cont style={{marginLeft: moveLeft * 420 + 'px'}}>        
           {          

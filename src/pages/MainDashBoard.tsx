@@ -12,8 +12,6 @@ const Main = styled.div`
 `;
 
 const MainDashBoard = (): ReactElement => {
-  document.title = "RUNNER";
-  
   return (
     <Main>
       <Dashboard />

@@ -10,6 +10,7 @@ import cancle from '../assets/cancel.png';
 import edit from '../assets/edit.png';
 import favicon from '../assets/exercise.png';
 import negative from '../assets/negative.png';
+import reset from '../assets/reset.png';
 import runningGIF from '../assets/runningGIF.gif';
 
 export const ICON_FAVICON = favicon;
@@ -19,6 +20,7 @@ export const IC_ARROW = arrow;
 export const IC_CANCLE = cancle;
 export const IC_EDIT = edit;
 export const IC_NEGATIVE = negative;
+export const IC_RESET = reset;
 export const ICON_WEATHER: { [key: string]: string } = {
   SUNNY: IC_SUNNY,
   CLOUD: IC_CLOUD,

@@ -6,6 +6,7 @@ import { RootState } from '../store';
 import { SelectStrength } from '../uis/SelectStrength';
 import { SelectWeather } from '../uis/SelectWeather';
 import axios from 'axios';
+import { getUserDataThunk } from '../store/DBStore';
 import { inputData } from '../store/userDataReducer';
 import styled from 'styled-components';
 import { useDispatch } from 'react-redux';
@@ -76,6 +77,7 @@ const SubmitButton = styled.button`
   height: 30px;  
   font-weight: bold;
   font-size: 14pt;
+  cursor: pointer;
 `;
 
 export const pushUserData = async (data: Record): Promise<void> => {
@@ -189,9 +191,7 @@ export const InputInfo: FC = () => {
           <SelectWeather setWeather={setWeather} />
           <SelectStrength setStrength={setStrength} />             
         </Form>
-        <SubmitButton
-            // onSubmit={(event) => event.preventDefault()}
-            // type="submit"            
+        <SubmitButton            
             onClick={() => {              
               const input: Record = {
                 key: today.toLocaleString().split(". "),
@@ -207,6 +207,7 @@ export const InputInfo: FC = () => {
             };              
             dispatch(inputData(input));
             pushUserData(input);
+            setTimeout(() => dispatch(getUserDataThunk(loginData.id)),100);            
             }}
           >등록</SubmitButton>        
       </div>

@@ -2,9 +2,8 @@ import { Record } from '../../types';
 import axios from 'axios';
 
 export const getUserData = async (userid: string): Promise<Record[]> => {
-  const res = await axios.get('http://192.168.1.101:5000/api/getdata');
+  const res = await axios.post('http://192.168.1.101:5000/api/getdata', {userid});
   return res.data;
-    
 };
 
 export const pushUserData = async (data: Record): Promise<void> => {

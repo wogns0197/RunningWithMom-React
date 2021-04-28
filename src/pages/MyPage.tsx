@@ -1,13 +1,11 @@
 import { IsMobile, TFN, UserInfo } from '../types/index';
 import React, { FC, useState } from 'react';
 import styled, { css } from 'styled-components';
-import { useDispatch, useSelector } from 'react-redux';
 
-import { RootState } from '../store';
 import axios from 'axios';
 import { login } from '../store/userInfoReducer';
 import theme from '../style/theme';
-import { tmpdir } from 'node:os';
+import { useDispatch } from 'react-redux';
 import { useMediaQuery } from "react-responsive";
 
 interface isPwValid {

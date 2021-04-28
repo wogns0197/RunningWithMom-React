@@ -1,4 +1,4 @@
-import { Record, Strength, Weather } from '../types';
+import { Record } from '../types';
 
 type ReduxType = 
   | ReturnType<typeof inputData>  
