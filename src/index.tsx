@@ -11,7 +11,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { ThemeProvider } from "styled-components";
 import reportWebVitals from './reportWebVitals';
-import store  from './store/Store';
+import store  from './store';
 import theme from './style/theme';
 
 document.title = "RUNNER";

@@ -5,7 +5,7 @@ import { IC_ARROW } from '../assets/Images';
 import { SelectStrength } from '../uis/SelectStrength';
 import { SelectWeather } from '../uis/SelectWeather';
 import axios from 'axios';
-import { inputData } from '../store/Store';
+import { inputData } from '../store/userDataReducer';
 import styled from 'styled-components';
 import { useDispatch } from 'react-redux';
 import { useMediaQuery } from "react-responsive";

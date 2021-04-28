@@ -5,7 +5,7 @@ import styled, {css} from 'styled-components';
 import { Record } from '../types/index';
 import RunningGage from '../uis/RunningGage';
 import StrengthUI from '../uis/StrengthUI';
-import { removeData } from '../store/Store';
+import { removeData } from '../store/userDataReducer';
 import theme from '../style/theme';
 import { useDispatch } from 'react-redux';
 import { useMediaQuery } from "react-responsive";

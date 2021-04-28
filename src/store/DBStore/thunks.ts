@@ -1,6 +1,6 @@
 import { action_getUserData, action_getUserDataFail, action_getUserDataSuccess } from './actions';
 
-import { RootState } from '../Store';
+import { RootState } from '../../store';
 import { ThunkAction } from 'redux-thunk';
 import { getDataAction } from './types';
 import { getUserData } from './api';

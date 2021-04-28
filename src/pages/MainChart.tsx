@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import BulletsChart from '../components/BulletsChart';
 import CalendarChart from '../components/MonthlyChart';
 import { IsMobile } from '../types/index';
-import { RootState } from '../store/Store';
+import { RootState } from '../store';
 import { getUserDataThunk } from '../store/DBStore';
 import { useMediaQuery } from "react-responsive";
 
@@ -25,7 +25,7 @@ const Mobilestyled = css`
 `;
 
 const MainChart: FC = () => {  
-  const storeData = useSelector((state: RootState) => state.reducer);
+  const storeData = useSelector((state: RootState) => state.UserData);
   const isMobile = useMediaQuery({query : "(max-width:500px)"});
   
   const { data, loading, error } = useSelector((state: RootState) => state.DBStore.userData);

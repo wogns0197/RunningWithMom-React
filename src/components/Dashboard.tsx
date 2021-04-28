@@ -4,7 +4,7 @@ import React, { FC, useState } from 'react';
 
 import { Record } from '../types/index';
 import RecordsRenderer from '../components/RecordsRenderer';
-import { RootState } from '../store/Store';
+import { RootState } from '../store';
 import styled from 'styled-components';
 import { useMediaQuery } from "react-responsive";
 import { useSelector } from 'react-redux';
@@ -60,7 +60,7 @@ const EditButton = styled.img`
 
 const Dashboard: FC = () => {
   const isMobile = useMediaQuery({ query: "(max-width:500px)" });
-  const storeData = useSelector((state: RootState) => state.reducer);
+  const storeData = useSelector((state: RootState) => state.UserData);
   const [moveLeft, setMoveLeft] = useState<number>(0);
   const [isEdit, setIsEdit] = useState<boolean>(false);
   
