@@ -23,6 +23,7 @@ const DashBoardMain = styled.div`
 
 const IDView = styled.div`
   position: absolute;
+  color: ${({theme}) => theme.colors.white};
   right: 10px;
   top: 10px;
 `;
