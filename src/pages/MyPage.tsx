@@ -1,9 +1,13 @@
 import { IsMobile, TFN, UserInfo } from '../types/index';
 import React, { FC, useState } from 'react';
 import styled, { css } from 'styled-components';
+import { useDispatch, useSelector } from 'react-redux';
 
+import { RootState } from '../store';
 import axios from 'axios';
+import { login } from '../store/userInfoReducer';
 import theme from '../style/theme';
+import { tmpdir } from 'node:os';
 import { useMediaQuery } from "react-responsive";
 
 interface isPwValid {
@@ -124,7 +128,7 @@ const GotoSignin = styled.p`
 `
 
 const postSignin = async (data: UserInfo) => {
-  await axios.post('http://localhost:5000/api/signin', {...data})
+  await axios.post('http://192.168.1.101:5000/api/signin', {...data})
     .then(res => {
       console.log(res);
     })
@@ -132,6 +136,7 @@ const postSignin = async (data: UserInfo) => {
       console.log(err);
     })
 };
+
 
 
 const MyPage: FC = () => {
@@ -143,15 +148,25 @@ const MyPage: FC = () => {
   const [isValid, setIsValid] = useState<boolean>(false);
   const [pwValid, setPwValid] = useState<TFN>(TFN.NA);
   
+  const dispatch = useDispatch();
+  // const loginData = useSelector((state: RootState) => state.UserInfoReducer);
+  // console.log(loginData);
+  
   const postLogin = async (id: string, pw: string) => {
-    await axios.post('http://localhost:5000/api/getLogin', { id: id, pw: pw })
-      .then(async res => {
-        // return res.data.length >= 1 ? true : setIsValid(true);
-        return (res.data.length >= 1) && (res.data[0].pw === pw) ? alert("LOGIN!") : setIsValid(true);
+    
+    await axios.post('http://192.168.1.101:5000/api/getLogin', { id: id, pw: pw })
+      .then(async res => {        
+        return (res.data.length >= 1) && (res.data[0].pw === pw) ? 
+        accessLogin({ isLogin:true, id: id, pw: pw, name, age }) : setIsValid(true);
       })
       .catch(err => {
         console.log(err);
       })
+    
+  };
+
+  const accessLogin = (data: UserInfo) => {    
+    dispatch(login({...data}));
   };
 
   return (
@@ -179,7 +194,9 @@ const MyPage: FC = () => {
         </InputCont>
         {isValid && (<Invalid>등록되지 않은 ID이거나 잘못된 PW입니다.</Invalid>)}
         <Button
-          onClick={() => postLogin(id, pw)}>
+            onClick={async () => {              
+              postLogin(id, pw);
+            }}>
           LOGIN
         </Button>
         <GotoSignin onClick={() => setIsSignin(!isSignin)}>sign in</GotoSignin>

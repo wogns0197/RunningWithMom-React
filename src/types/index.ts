@@ -64,6 +64,7 @@ export interface CalendarDayData {
 };
 
 export interface UserInfo {
+  isLogin?: boolean,
   id: string,
   pw: string,
   name: string,

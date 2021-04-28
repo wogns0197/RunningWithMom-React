@@ -3,16 +3,19 @@ import { UserInfo } from '../types';
 type ReduxType =
   | ReturnType<typeof getUserInfo>
   | ReturnType<typeof logout>
+  | ReturnType<typeof login>
 ;
 
+const LOGIN = 'LOGIN' as const;
+const LOGOUT = 'LOGOUT' as const;
+const GET_INFO = 'GET_INFO' as const;
 
-const GET_INFO = 'GET_INFO' as const; // as const for not being 'string', also real value
-const LOGOUT = 'LOGOUT' as const
-
-export const getUserInfo = () => ({ type: GET_INFO });
+export const login = (data: UserInfo) => ({ type: LOGIN, data: data });
 export const logout = () => ({ type: LOGOUT });
+export const getUserInfo = () => ({ type: GET_INFO });
 
 const UserInfoInitialState: UserInfo = {
+  isLogin: false,
   id: '',
   pw: '',
   name: '',
@@ -24,6 +27,8 @@ const UserInfoReducer = (
   action: ReduxType
   ) => {
   switch (action.type) {
+    case (LOGIN):
+      return action.data;
     case (GET_INFO):
       return state;
     case (LOGOUT):

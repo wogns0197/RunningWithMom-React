@@ -21,6 +21,12 @@ const DashBoardMain = styled.div`
   align-items: center;
 `;
 
+const IDView = styled.div`
+  position: absolute;
+  right: 10px;
+  top: 10px;
+`;
+
 const Cont = styled.div`
   display: flex;
   justify-content: center;
@@ -61,6 +67,7 @@ const EditButton = styled.img`
 const Dashboard: FC = () => {
   const isMobile = useMediaQuery({ query: "(max-width:500px)" });
   const storeData = useSelector((state: RootState) => state.UserData);
+  const loginData = useSelector((state: RootState) => state.UserInfoReducer);
   const [moveLeft, setMoveLeft] = useState<number>(0);
   const [isEdit, setIsEdit] = useState<boolean>(false);
   
@@ -77,7 +84,8 @@ const Dashboard: FC = () => {
 
   return (
     <DashBoardMain style={isMobile ? { height: '40vh' } : {}}>
-      <div style={ storeData.length%2===0 ?{marginLeft:'212px'}:{}}>
+      <div style={storeData.length % 2 === 0 ? { marginLeft: '212px' } : {}}>
+        <IDView>{loginData.id}</IDView>
         <Cont style={{marginLeft: moveLeft * 420 + 'px'}}>        
           {          
             storeData.map((el: Record, idx: number) => {
