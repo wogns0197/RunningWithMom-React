@@ -1,5 +1,6 @@
 import React, { FC, useState } from 'react';
-import { Record, Strength, Weather } from '../types/index';
+import { Record, Strength, Weather } from '../types';
+import { useDispatch, useSelector } from 'react-redux';
 
 import { IC_ARROW } from '../assets/Images';
 import { RootState } from '../store';
@@ -9,9 +10,7 @@ import axios from 'axios';
 import { getUserDataThunk } from '../store/DBStore';
 import { inputData } from '../store/userDataReducer';
 import styled from 'styled-components';
-import { useDispatch } from 'react-redux';
 import { useMediaQuery } from "react-responsive";
-import { useSelector } from 'react-redux';
 
 const Cont = styled.div`
   margin-top: 5px;

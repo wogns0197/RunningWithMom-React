@@ -31,7 +31,7 @@ const UserInfoReducer = (
       return action.data;
     case (GET_INFO):
       return state;
-    case (LOGOUT):
+    case (LOGOUT):      
       return UserInfoInitialState;
     default:
       return state;
