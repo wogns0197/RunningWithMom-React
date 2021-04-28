@@ -1,5 +1,5 @@
+import { Record } from '../../types';
 import axios from 'axios';
-
 // export const getDatum = () => async dispatch => {
 //   dispatch({ type: GET_USERDATA });
 //   try {
@@ -12,12 +12,8 @@ import axios from 'axios';
 // }
 
 
-export const getUserData = async (userID: string) => {
-  await axios.get('http://localhost:5000/api/getdata')
-    .then(res => {
-      return res.data;
-    })
-    .catch(err => {
-      console.log(err);
-    })
+export const getUserData = async (userID: string): Promise<Record[]> => {
+  const res = await axios.get('http://localhost:5000/api/getdata');
+  return res.data;
+    
 };

@@ -1,13 +1,13 @@
 import React, { FC } from 'react';
 import styled, { css } from 'styled-components';
+import { useDispatch, useSelector } from 'react-redux';
 
 import BulletsChart from '../components/BulletsChart';
 import CalendarChart from '../components/MonthlyChart';
 import { IsMobile } from '../types/index';
 import { RootState } from '../store/Store';
-import { useDispatch } from 'react-redux';
+import { getUserDataThunk } from '../store/DBStore';
 import { useMediaQuery } from "react-responsive";
-import { useSelector } from 'react-redux';
 
 const Main = styled.div`
   width: 100%;
@@ -27,10 +27,14 @@ const Mobilestyled = css`
 const MainChart: FC = () => {  
   const storeData = useSelector((state: RootState) => state.reducer);
   const isMobile = useMediaQuery({query : "(max-width:500px)"});
+  
+  const { data, loading, error } = useSelector((state: RootState) => state.DBStore.userData);
   const dispatch = useDispatch();
 
   return (
     <Main isMobile={isMobile}>
+      <button onClick={() => dispatch(getUserDataThunk('test123'))} />
+      <button onClick={() => console.log(data)}/>
       <BulletsChart storeData={storeData} />      
       <CalendarChart storeData={storeData} />
     </Main>

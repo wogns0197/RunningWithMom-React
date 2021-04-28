@@ -1,7 +1,7 @@
 import * as actions from './actions';
 
 import { ActionType } from 'typesafe-actions';
-import { Record } from '../types';
+import { Record } from '../../types';
 
 export type getDataAction = ActionType<typeof actions>;
 

@@ -1,6 +1,7 @@
 import { Record, Strength, Weather } from '../types/index';
 import { applyMiddleware, combineReducers, compose, createStore } from 'redux';
 
+import DBStore from './DBStore';
 import thunk from 'redux-thunk';
 
 type ReduxType = 
@@ -101,6 +102,7 @@ const reducer = (
 
 const rootReducer = combineReducers({
   reducer,
+  DBStore,
 });
 
 const store = createStore(rootReducer, compose(applyMiddleware(thunk)));

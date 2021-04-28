@@ -1,5 +1,5 @@
 import { AxiosError } from 'axios';
-import { Record } from '../types';
+import { Record } from '../../types';
 import { createAction } from 'typesafe-actions';
 
 export const GET_USERDATA = 'GET_USERDATA' as const;
