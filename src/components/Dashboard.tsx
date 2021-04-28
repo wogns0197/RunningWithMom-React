@@ -68,7 +68,7 @@ const EditButton = styled.img`
 const Dashboard: FC = () => {
   const isMobile = useMediaQuery({ query: "(max-width:500px)" });
   const storeData = useSelector((state: RootState) => state.UserData);
-  const loginData = useSelector((state: RootState) => state.UserInfoReducer);
+  const loginData = useSelector((state: RootState) => state.userinfo);
   const [moveLeft, setMoveLeft] = useState<number>(0);
   const [isEdit, setIsEdit] = useState<boolean>(false);
   

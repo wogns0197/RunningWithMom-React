@@ -9,13 +9,14 @@ import thunk from 'redux-thunk';
 
 const rootReducer = combineReducers({
   UserData,
-  UserInfoReducer,
+  userinfo : UserInfoReducer, // for whitelist ( only persist login data )
   DBStore,
 });
 
 const persistConfig = {
   key: 'root',
-  storage
+  storage: storage,
+  whitelist: ['userinfo'],
 }
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);
