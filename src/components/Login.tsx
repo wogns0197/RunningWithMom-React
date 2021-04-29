@@ -150,8 +150,7 @@ const Login: FC = () => {
   // const loginData = useSelector((state: RootState) => state.UserInfoReducer);
   // console.log(loginData);
   
-  const postLogin = async (id: string, pw: string) => {
-    
+  const postLogin = async (id: string, pw: string) => {    
     await axios.post('http://192.168.1.101:5000/api/getLogin', { id: id, pw: pw })
       .then(async res => {        
         return (res.data.length >= 1) && (res.data[0].pw === pw) ? 
@@ -159,8 +158,7 @@ const Login: FC = () => {
       })
       .catch(err => {
         console.log(err);
-      })
-    
+      })    
   };
 
   const accessLogin = (data: UserInfo) => {    

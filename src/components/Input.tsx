@@ -9,6 +9,7 @@ import { SelectWeather } from '../uis/SelectWeather';
 import axios from 'axios';
 import { getUserDataThunk } from '../store/DBStore';
 import { inputData } from '../store/userDataReducer';
+import { pushUserData } from '../store/DBStore/api';
 import styled from 'styled-components';
 import { useMediaQuery } from "react-responsive";
 
@@ -78,12 +79,6 @@ const SubmitButton = styled.button`
   font-size: 14pt;
   cursor: pointer;
 `;
-
-export const pushUserData = async (data: Record): Promise<void> => {
-  await axios.post('http://localhost:5000/api/inputdata', { ...data })
-    .then(res => console.log(res))
-    .catch(err => console.log(err))
-}
 
 const getLastDate = (year: number, month: number): number => {
   return new Date(year, month, 0).getDate();
@@ -206,7 +201,7 @@ export const InputInfo: FC = () => {
             };              
             dispatch(inputData(input));
             pushUserData(input);
-            setTimeout(() => dispatch(getUserDataThunk(loginData.id)),100);            
+            setTimeout(() => dispatch(getUserDataThunk(loginData.id)),100);
             }}
           >등록</SubmitButton>        
       </div>

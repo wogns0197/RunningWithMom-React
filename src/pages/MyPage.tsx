@@ -1,10 +1,13 @@
-import React, { FC } from 'react';
+import { Header, HeaderIcon } from '../pages/MainPage';
+import React, { FC, useState } from 'react';
 import styled, {css} from 'styled-components';
-import { useDispatch, useSelector } from 'react-redux';
 
+import { HamburgerMenu } from '../uis/HamburgerMenu';
 import Login from '../components/Login';
+import MenuModal from '../uis/MenuModal';
 import { RootState } from '../store';
-import { logout } from '../store/userInfoReducer';
+import theme from '../style/theme';
+import { useSelector } from 'react-redux';
 
 const FLEX = css`
   display: flex;
@@ -18,18 +21,30 @@ const Main = styled.div`
   height: 100vh;  
 `;
 
-
 const MyPage: FC = () => {
-  const loginData = useSelector((state: RootState) => state.userinfo);
-  const dispatch = useDispatch();
+  const [toggleMenu, setToggleMenu] = useState<boolean>(false);
+  const loginData = useSelector((state: RootState) => state.userinfo);  
 
   return (
     <Main>
       {!loginData.id ? (<Login />) :
         (
           <>
-            <button onClick={() => dispatch(logout())} />
-            {loginData.id}
+            <MenuModal istoggle={toggleMenu}/>
+            <Header>
+              <HeaderIcon />
+              <div style={{
+                  fontSize: '30pt',
+                  cursor: 'pointer',
+                  }}>          
+                  MY PAGE
+              </div>
+              <HamburgerMenu
+                barColor={theme.colors.forestgreen}
+                setToggle={setToggleMenu}
+                isToggled={toggleMenu}
+              />
+            </Header>
           </>
         )
       }      

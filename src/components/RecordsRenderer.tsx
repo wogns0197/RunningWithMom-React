@@ -1,13 +1,15 @@
 import { ICON_WEATHER, IC_NEGATIVE } from '../assets/Images';
 import React, { FC } from 'react';
 import styled, {css} from 'styled-components';
+import { useDispatch, useSelector } from 'react-redux';
 
 import { Record } from '../types/index';
+import { RootState } from '../store';
 import RunningGage from '../uis/RunningGage';
 import StrengthUI from '../uis/StrengthUI';
-import { removeData } from '../store/userDataReducer';
+import { getUserDataThunk } from '../store/DBStore';
+import { removeUserData } from '../store/DBStore/api';
 import theme from '../style/theme';
-import { useDispatch } from 'react-redux';
 import { useMediaQuery } from "react-responsive";
 
 const Flex = css`
@@ -108,6 +110,7 @@ type Props = {
 const Records: FC<Props> = ({ props, idx, arrLength, focus, isEdit }) => {
   const { year, month, day, weather, goal, records, memo, strength } = props;
   const pivot = arrLength % 2 === 0 ? Math.floor(arrLength / 2) - 1 - focus : Math.floor(arrLength / 2) - focus;
+  const loginData = useSelector((state: RootState) => state.userinfo);
   const dispatch = useDispatch();
   const isMobile = useMediaQuery({
     query : "(max-width:767px)",
@@ -130,8 +133,9 @@ const Records: FC<Props> = ({ props, idx, arrLength, focus, isEdit }) => {
         { (isEdit && idx === pivot) &&
           (<RemoveButton
           src={IC_NEGATIVE}
-          onClick={() => {            
-            dispatch(removeData(props.key));
+          onClick={() => {
+            removeUserData(props);
+            setTimeout(() => dispatch(getUserDataThunk(loginData.id)),100);
           }}
           />)
         }

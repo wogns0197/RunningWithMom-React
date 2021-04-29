@@ -17,7 +17,7 @@ const Main = styled.div`
   height: 100vh;
 `;
 
-const Header = styled.div`
+export const Header = styled.div`
   width: 100vw;
   height: 60px;
   // eslint-disable-next-line @typescript-eslint/no-shadow  
@@ -33,7 +33,7 @@ const Header = styled.div`
   align-items: center;
 `;
 
-const HeaderIcon = styled.img`
+export const HeaderIcon = styled.img`
   width: 40px;
   margin: 5px -10px 0 10px;
   cursor: pointer;

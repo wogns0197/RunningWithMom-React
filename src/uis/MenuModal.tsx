@@ -1,6 +1,9 @@
 import React, { FC } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 
 import { Link }from 'react-router-dom';
+import { RootState } from '../store';
+import { logout } from '../store/userInfoReducer';
 import styled from 'styled-components';
 
 const MenuTab = styled.div`  
@@ -25,7 +28,9 @@ type Props = {
   istoggle : boolean
 }
 
-const MenuModal: FC<Props> = ({istoggle}) => {
+const MenuModal: FC<Props> = ({ istoggle }) => {
+  const loginData = useSelector((state: RootState) => state.userinfo);
+  const dispatch = useDispatch();
   return (
     <MenuTab style={{
       // display: istoggle ? 'inline' : 'none',
@@ -41,6 +46,7 @@ const MenuModal: FC<Props> = ({istoggle}) => {
         <Menu>VIEW</Menu>
       </Link>
       <Menu>INFORMAION</Menu>
+      { loginData.id && (<Menu onClick={()=> dispatch(logout())}>LOG OUT</Menu>)}
     </MenuTab>
   );
 };
