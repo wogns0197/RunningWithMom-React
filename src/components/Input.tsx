@@ -1,5 +1,6 @@
 import React, { FC, useState } from 'react';
 import { Record, Strength, Weather } from '../types';
+import { isExistedData, pushUserData } from '../store/DBStore/api';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { IC_ARROW } from '../assets/Images';
@@ -8,7 +9,6 @@ import { SelectStrength } from '../uis/SelectStrength';
 import { SelectWeather } from '../uis/SelectWeather';
 import { getUserDataThunk } from '../store/DBStore';
 import { inputData } from '../store/userDataReducer';
-import { pushUserData } from '../store/DBStore/api';
 import styled from 'styled-components';
 import { useMediaQuery } from "react-responsive";
 
@@ -83,8 +83,7 @@ const getLastDate = (year: number, month: number): number => {
   return new Date(year, month, 0).getDate();
 };
 
-export const InputInfo: FC = () => {
-  // const inputRef = useRef();
+export const InputInfo: FC = () => {  
   const today = new Date();
   const [year, [month, setMonth], [day,setDay] ] = [today.getFullYear(), useState<number>(today.getMonth()+1), useState<number>(today.getDate())];
   const [goal, setGoal] = useState<number>(0);
@@ -105,7 +104,13 @@ export const InputInfo: FC = () => {
       setDay(getLastDate(year, month - 1))
       setMonth(month - 1)
     }
-  };  
+  };
+
+  const postData = (input: Record) => {
+    dispatch(inputData(input));
+    pushUserData(input);
+    setTimeout(() => dispatch(getUserDataThunk(loginData.id)),100);
+  }
 
   return (
     <Cont>      
@@ -151,7 +156,6 @@ export const InputInfo: FC = () => {
                 setRecords(parseFloat(e.target.value)) : setRecords(0)}
             />
             <StyledInput
-              // ref={inputRef}
               style={{
                 width: '60px',
                 fontWeight: 'bold',
@@ -185,24 +189,22 @@ export const InputInfo: FC = () => {
           <SelectStrength setStrength={setStrength} />             
         </Form>
         <SubmitButton            
-            onClick={() => {              
-              const input: Record = {
-                key: today.toLocaleString().split(". "),
-                userid: loginData.id,
-                year: year,
-                month: month,
-                day: day,
-                goal: goal,
-                records: records,
-                memo: memo,
-                weather: weather,
-                strength: strength,
-            };              
-            dispatch(inputData(input));
-            pushUserData(input);
-            setTimeout(() => dispatch(getUserDataThunk(loginData.id)),100);
-            }}
-          >등록</SubmitButton>        
+          onClick={async() => {              
+            const input: Record = {
+              key: today.toLocaleString().split(". "),
+              userid: loginData.id,
+              year: year,
+              month: month,
+              day: day,
+              goal: goal,
+              records: records,
+              memo: memo,
+              weather: weather,
+              strength: strength,
+            };
+            await isExistedData(loginData.id, month, day) ? alert("이미 데이터가 존재하는 날짜입니다!"): postData(input) ;            
+          }}
+        >등록</SubmitButton>        
       </div>
     </Cont>
   );
