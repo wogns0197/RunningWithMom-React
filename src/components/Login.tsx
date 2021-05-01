@@ -6,6 +6,7 @@ import axios from 'axios';
 import { login } from '../store/userInfoReducer';
 import theme from '../style/theme';
 import { useDispatch } from 'react-redux';
+import { useHistory }from 'react-router-dom';
 import { useMediaQuery } from "react-responsive";
 
 interface isPwValid {
@@ -125,16 +126,6 @@ const GotoSignin = styled.p`
   cursor: pointer;
 `
 
-const postSignin = async (data: UserInfo) => {
-  await axios.post('http://35.221.122.58:5000/api/signin', {...data})
-    .then(res => {
-      console.log(res);
-    })
-    .catch(err => {
-      console.log(err);
-    })
-};
-
 
 
 const Login: FC = () => {
@@ -145,13 +136,29 @@ const Login: FC = () => {
   const [isSignin, setIsSignin] = useState<boolean>(false);
   const [isValid, setIsValid] = useState<boolean>(false);
   const [pwValid, setPwValid] = useState<TFN>(TFN.NA);
-  
+  const history = useHistory();
   const dispatch = useDispatch();
   // const loginData = useSelector((state: RootState) => state.UserInfoReducer);
-  // console.log(loginData);
-  
+  // console.log(loginData);  
+
+  const postSignin = async (data: UserInfo) => {
+    // await axios.post('http://35.221.122.58:5000/api/signin', {...data})
+    await axios.post('http://192.168.1.101:5000/api/signin', {...data})
+      .then(res => {
+        console.log(res);
+      })
+      .catch(err => {
+        console.log(err);
+      })
+    postLogin(data.id, data.pw); // auto login after new signin
+    setTimeout(() => {
+      history.push('/');
+    },500)
+  };
+
   const postLogin = async (id: string, pw: string) => {    
-    await axios.post('http://35.221.122.58:5000/api/getLogin', { id: id, pw: pw })
+    // await axios.post('http://35.221.122.58:5000/api/getLogin', { id: id, pw: pw })
+    await axios.post('http://192.168.1.101:5000/api/getLogin', { id: id, pw: pw })
       .then(async res => {        
         return (res.data.length >= 1) && (res.data[0].pw === pw) ? 
         accessLogin({ isLogin:true, id: id, pw: pw, name, age }) : setIsValid(true);
@@ -257,8 +264,9 @@ const Login: FC = () => {
         </InputCont>
         <Button
           style={{ margin: "0" }}
-          onClick={() => {            
-            postSignin({ id: signID, pw: signPW, name: name, age: age });
+          onClick={() => {
+            (signID && signPW && name) ?
+              postSignin({ id: signID, pw: signPW, name: name, age: age }) : alert("빠짐없이 입력해주세요!");            
           }}  
         >
           SIGN IN
