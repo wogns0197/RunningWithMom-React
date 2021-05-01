@@ -15,6 +15,7 @@ const MenuTab = styled.div`
   display: flex;
   align-items: center;
   flex-direction: column;
+  /* z-index: -999; */
 `;
 
 const Menu = styled.div`

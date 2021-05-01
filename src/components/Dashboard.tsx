@@ -28,7 +28,7 @@ const ResetIcon = styled.img`
   top: 10px;
   width: 20px;
   height: 20px;
-  z-index: 999;
+  z-index: 9999;
   filter: invert(100%);
   cursor: pointer;
 `;
@@ -114,7 +114,6 @@ const Dashboard: FC = () => {
         <Cont style={{marginLeft: moveLeft * 420 + 'px'}}>        
           {          
             storeData.map((el: Record, idx: number) => {
-              // console.log(el);
               return (
                 <RecordsRenderer
                   props={el}

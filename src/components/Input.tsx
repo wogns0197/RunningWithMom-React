@@ -6,7 +6,6 @@ import { IC_ARROW } from '../assets/Images';
 import { RootState } from '../store';
 import { SelectStrength } from '../uis/SelectStrength';
 import { SelectWeather } from '../uis/SelectWeather';
-import axios from 'axios';
 import { getUserDataThunk } from '../store/DBStore';
 import { inputData } from '../store/userDataReducer';
 import { pushUserData } from '../store/DBStore/api';

@@ -75,9 +75,9 @@ type Props = {
 const BulletsChart: FC<Props> = ({ storeData }) => {
   const isMobile = useMediaQuery({query : "(max-width:500px)"});
   const [month, setMonth] = useState<number>(4);
-  const parsedData: ChartDataType[] = [];
-
+  const parsedData: ChartDataType[] = [];  
   storeData.map((el) => {
+    console.log(el);
     if (el.month === month) {
       const parsingData = {
         id: el.month + '/' + el.day,
