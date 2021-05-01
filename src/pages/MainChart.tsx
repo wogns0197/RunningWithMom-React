@@ -7,6 +7,7 @@ import CalendarChart from '../components/MonthlyChart';
 import { IsMobile } from '../types/index';
 import { RootState } from '../store';
 import { getUserDataThunk } from '../store/DBStore';
+import { useHistory }from 'react-router-dom';
 import { useMediaQuery } from "react-responsive";
 
 const Main = styled.div`
@@ -28,12 +29,14 @@ const MainChart: FC = () => {
   const storeData = useSelector((state: RootState) => state.DBStore.userData).data || [];
   const loginData = useSelector((state: RootState) => state.userinfo);
   const dispatch = useDispatch();
-  
+  const history = useHistory();
+
   useEffect(() => {
     dispatch(getUserDataThunk(loginData.id));    
   }, [dispatch, loginData.id]);
   const isMobile = useMediaQuery({query : "(max-width:500px)"});
   
+  !loginData.id && history.push("MyPage");
 
   return (
     <Main isMobile={isMobile}>      
