@@ -143,7 +143,7 @@ const Login: FC = () => {
 
   const postSignin = async (data: UserInfo) => {
     // await axios.post('http://35.221.122.58:5000/api/signin', {...data})
-    await axios.post('http://192.168.1.101:5000/api/signin', {...data})
+    await axios.post('http://localhost:5000/api/signin', {...data})
       .then(res => {
         console.log(res);
       })
@@ -158,7 +158,7 @@ const Login: FC = () => {
 
   const postLogin = async (id: string, pw: string) => {    
     // await axios.post('http://35.221.122.58:5000/api/getLogin', { id: id, pw: pw })
-    await axios.post('http://192.168.1.101:5000/api/getLogin', { id: id, pw: pw })
+    await axios.post('http://localhost:5000/api/getLogin', { id: id, pw: pw })
       .then(async res => {        
         return (res.data.length >= 1) && (res.data[0].pw === pw) ? 
         accessLogin({ isLogin:true, id: id, pw: pw, name, age }) : setIsValid(true);
@@ -199,6 +199,7 @@ const Login: FC = () => {
         <Button
             onClick={async () => {              
               postLogin(id, pw);
+              history.push('/');
             }}>
           LOGIN
         </Button>

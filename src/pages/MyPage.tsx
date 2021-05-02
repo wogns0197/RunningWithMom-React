@@ -7,6 +7,7 @@ import Login from '../components/Login';
 import MenuModal from '../uis/MenuModal';
 import { RootState } from '../store';
 import theme from '../style/theme';
+import { useHistory }from 'react-router-dom';
 import { useSelector } from 'react-redux';
 
 const FLEX = css`
@@ -37,31 +38,26 @@ const UserID = styled.div`
 
 const MyPage: FC = () => {
   const [toggleMenu, setToggleMenu] = useState<boolean>(false);
-  const loginData = useSelector((state: RootState) => state.userinfo);  
-
+  const loginData = useSelector((state: RootState) => state.userinfo);
+  const history = useHistory();
+  !loginData.id && history.push('Login');
   return (
     <Main>
-      {!loginData.id ? (<Login />) :
-        (
-          <>
-            <MenuModal istoggle={toggleMenu}/>
-            <Header>
-              <UserID>{loginData.id}</UserID>
-              <div style={{
-                  fontSize: '30pt',
-                  cursor: 'pointer',
-                  }}>          
-                  MY PAGE
-              </div>
-              <HamburgerMenu
-                barColor={theme.colors.forestgreen}
-                setToggle={setToggleMenu}
-                isToggled={toggleMenu}
-              />
-            </Header>
-          </>
-        )
-      }      
+      <MenuModal istoggle={toggleMenu}/>
+      <Header>
+        <UserID>{loginData.id}</UserID>
+        <div style={{
+            fontSize: '30pt',
+            cursor: 'pointer',
+            }}>          
+            MY PAGE
+        </div>
+        <HamburgerMenu
+          barColor={theme.colors.forestgreen}
+          setToggle={setToggleMenu}
+          isToggled={toggleMenu}
+        />
+      </Header>             
     </Main>
   );
 }

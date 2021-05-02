@@ -36,7 +36,7 @@ const MainChart: FC = () => {
   }, [dispatch, loginData.id]);
   const isMobile = useMediaQuery({query : "(max-width:500px)"});
   
-  !loginData.id && history.push("MyPage");
+  !loginData.id && history.push("Login");
 
   return (
     <Main isMobile={isMobile}>      

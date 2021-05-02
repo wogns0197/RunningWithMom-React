@@ -18,7 +18,7 @@ const MainDashBoard = (): ReactElement => {
   const loginData = useSelector((state: RootState) => state.userinfo);
   const history = useHistory();
 
-  !loginData.id && history.push('MyPage');
+  !loginData.id && history.push('Login');
   return (  
     <Main>
       <Dashboard />

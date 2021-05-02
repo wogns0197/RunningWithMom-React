@@ -3,6 +3,7 @@ import './index.css';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import store, { persistor } from './store';
 
+import Login from './components/Login';
 import MainChart from './pages/MainChart';
 import MainDashBoard from './pages/MainDashBoard';
 import MainPage from './pages/MainPage';
@@ -29,6 +30,7 @@ ReactDOM.render(
             <Route path="/Dashboard" component={MainDashBoard} />
             <Route path="/MainChart" component={MainChart} />
             <Route path="/MyPage" component={MyPage} />
+            <Route path="/Login" component={Login} />
           </Switch>
           </BrowserRouter>
         </ThemeProvider>
