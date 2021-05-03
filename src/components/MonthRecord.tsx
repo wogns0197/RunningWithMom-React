@@ -1,8 +1,8 @@
 import React, { FC } from 'react';
 import styled, { css } from 'styled-components';
 
+import MonthlyList from '../components/MonthlyList';
 import { Record } from '../types';
-import RecordSum from '../uis/RecordSum';
 
 const FLEX = css`
   display: flex;
@@ -12,7 +12,7 @@ const FLEX = css`
 `;
 
 const Main = styled.div`  
-  width: 100%;
+  width: 100vw;
   height: 50vh;  
   ${FLEX};
 `;
@@ -25,14 +25,12 @@ type Props = {
   storeData: Record[],
 }
 
-const MonthRecord: FC<Props> = ({storeData}) => {
-  
-  console.log(storeData);
-  const sumOfRecords =  ( storeData.length > 1 && storeData.map((el: Record) => { return el.records }).reduce((sum, current) => sum + current)) || 0;
+const MonthRecord: FC<Props> = ({storeData}) => {  
+  console.log(storeData);  
   return (
     <Main>
       <Title>5월 총 달린 거리</Title>
-      <RecordSum recordsum={sumOfRecords}/>
+      <MonthlyList storeData={storeData} />
     </Main>
   );
 }
