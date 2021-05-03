@@ -86,15 +86,14 @@ const Dashboard: FC = () => {
   const isMobile = useMediaQuery({ query: "(max-width:500px)" });
   const loginData = useSelector((state: RootState) => state.userinfo);
   const [moveLeft, setMoveLeft] = useState<number>(0);
-  const [isEdit, setIsEdit] = useState<boolean>(false);
-  // const storeData = useSelector((state: RootState) => state.UserData);
+  const [isEdit, setIsEdit] = useState<boolean>(false);  
   const storeData = useSelector((state: RootState) => state.DBStore.userData).data || [];
   const dispatch = useDispatch();
 
   useEffect(() => {
     dispatch(getUserDataThunk(loginData.id));    
-  }, [dispatch, loginData.id]);
-  
+  }, [dispatch, loginData.id]);  
+
   const moveCard = (isLeft: number): void => {
     storeData.length % 2 !== 0 ?
       (isLeft * moveLeft) < storeData.length / 2 - 1 && setMoveLeft(moveLeft + isLeft) : (

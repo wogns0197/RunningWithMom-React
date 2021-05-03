@@ -1,14 +1,15 @@
-import React, { FC, useState } from 'react';
+import React, { FC, useEffect, useState } from 'react';
 import styled, {css} from 'styled-components';
+import { useDispatch, useSelector } from 'react-redux';
 
 import { HamburgerMenu } from '../uis/HamburgerMenu';
 import { Header } from '../pages/MainPage';
-import Login from '../components/Login';
 import MenuModal from '../uis/MenuModal';
+import MonthRecord from '../components/MonthRecord';
 import { RootState } from '../store';
+import { getUserDataThunk } from '../store/DBStore';
 import theme from '../style/theme';
 import { useHistory }from 'react-router-dom';
-import { useSelector } from 'react-redux';
 
 const FLEX = css`
   display: flex;
@@ -38,9 +39,17 @@ const UserID = styled.div`
 
 const MyPage: FC = () => {
   const [toggleMenu, setToggleMenu] = useState<boolean>(false);
+  const storeData = useSelector((state: RootState) => state.DBStore.userData).data || [];
   const loginData = useSelector((state: RootState) => state.userinfo);
   const history = useHistory();
+  const dispatch = useDispatch();
   !loginData.id && history.push('Login');
+  
+  useEffect(() => {
+    dispatch(getUserDataThunk(loginData.id));
+  }, [dispatch, loginData.id]);  
+  
+  console.log(storeData);
   return (
     <Main>
       <MenuModal istoggle={toggleMenu}/>
@@ -57,7 +66,8 @@ const MyPage: FC = () => {
           setToggle={setToggleMenu}
           isToggled={toggleMenu}
         />
-      </Header>             
+      </Header>
+      <MonthRecord storeData={storeData}/>
     </Main>
   );
 }
