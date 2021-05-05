@@ -10,6 +10,7 @@ interface Length {
 }
 
 const Main = styled.div`
+  margin: 20px 0 20px 0;
   width: 80%;
   height: 100px;
   border: 1px solid ${({ theme }) => theme.colors.darkseagreen};

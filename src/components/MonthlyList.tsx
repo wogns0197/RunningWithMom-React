@@ -1,11 +1,26 @@
 import React, { FC } from 'react';
+import styled, {css} from 'styled-components';
 
 import { Record } from '../types';
 import RecordSum from '../uis/RecordSum';
-import styled from 'styled-components';
+
+const FLEX = css`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+`;
 
 const Main = styled.div`
-  width: 600px;
+  width: 100%;
+  ${FLEX};  
+`;
+
+const Cont = styled.div`  
+  width: 70%;
+  height: 400px;
+  border: 1px solid red;
+  overflow-y: scroll;
 `;
 
 type Props = {
@@ -24,8 +39,12 @@ const MonthlyList: FC<Props> = ({ storeData }) => {
   
   return (
     <Main>
-      <RecordSum recordsum={sumOfMonth(5, storeData)} />
-      <RecordSum recordsum={sumOfMonth(4, storeData)} />
+      <Cont>
+        <RecordSum recordsum={sumOfMonth(4, storeData)} />
+        <RecordSum recordsum={sumOfMonth(4, storeData)} />
+        <RecordSum recordsum={sumOfMonth(5, storeData)} />
+        <RecordSum recordsum={sumOfMonth(6, storeData)} />
+      </Cont>
     </Main>
   );
 }

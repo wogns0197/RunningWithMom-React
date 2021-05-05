@@ -29,7 +29,7 @@ const MonthRecord: FC<Props> = ({storeData}) => {
   console.log(storeData);  
   return (
     <Main>
-      <Title>5월 총 달린 거리</Title>
+      {/* <Title>5월 총 달린 거리</Title> */}
       <MonthlyList storeData={storeData} />
     </Main>
   );
