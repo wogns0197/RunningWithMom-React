@@ -16,11 +16,13 @@ const Main = styled.div`
   ${FLEX};  
 `;
 
-const Cont = styled.div`  
+const Cont = styled.div`
   width: 70%;
   height: 400px;
   border: 1px solid red;
   overflow-y: scroll;
+  display: flex;
+  flex-direction: column;
 `;
 
 type Props = {
