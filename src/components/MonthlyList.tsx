@@ -23,6 +23,7 @@ const Cont = styled.div`
   overflow-y: scroll;
   display: flex;
   flex-direction: column;
+  align-items: center;
 `;
 
 type Props = {
