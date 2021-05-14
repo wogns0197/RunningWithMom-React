@@ -1,4 +1,4 @@
-import React, { FC } from 'react';
+import React, { FC, useState } from 'react';
 import styled, {css} from 'styled-components';
 
 import { Record } from '../types';
@@ -39,9 +39,16 @@ const sumOfMonth = (month: number, data: Record[]): number => {
 }
 
 const MonthlyList: FC<Props> = ({ storeData }) => {
-  
+  const [scrollY, setScrollY] = useState<number>(window.pageYOffset);
+  console.log(scrollY);
   return (
     <Main>
+      <button style={{ width: '40px', height: '50px' }}
+        onClick={() => {
+          setScrollY(window.pageYOffset);
+          console.log(scrollY);
+        }}
+      />
       <Cont>
         <RecordSum recordsum={sumOfMonth(4, storeData)} />
         <RecordSum recordsum={sumOfMonth(4, storeData)} />

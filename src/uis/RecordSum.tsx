@@ -12,7 +12,7 @@ interface Length {
 const Main = styled.div`
   margin: 20px 0 20px 0;
   width: 80%;
-  min-height: 100px;
+  min-height: 80px;
   border: 1px solid ${({ theme }) => theme.colors.darkseagreen};
   border-radius: 5px;
   display: flex;
@@ -37,7 +37,7 @@ const Gage = styled.div`
   position :relative;
   height: 50%;
   width: ${(props: Length) => props.length * 100 / MAX_RECORD + "%"};
-  transition: width .5s ease;
+  transition: width 1s ease;
   /* background-color: ${({ theme }) => theme.colors.darkseagreen}; */
   color: ${({ theme }) => theme.colors.darkgreen};
   font-weight: bold;
